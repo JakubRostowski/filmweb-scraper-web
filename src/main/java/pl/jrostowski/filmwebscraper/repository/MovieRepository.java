@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -114,49 +114,38 @@ public class MovieRepository {
         }
     }
 
+    @Transactional
     public void addMovie(Movie movie) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         em.persist(movie);
-        transaction.commit();
     }
 
     public boolean checkIfEmpty() {
         Query query = em.createNativeQuery("SELECT COUNT(*) FROM movie");
         String result = query.getResultList().get(0).toString();
         return result.equals("0");
-
     }
 
+    @Transactional
     public void deleteMovie(Movie movie) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         em.remove(movie);
-        transaction.commit();
     }
 
+    @Transactional
     public void updateChangedMovie(Movie oldMovie, Movie newMovie) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         oldMovie.setPosition(newMovie.getPosition());
         oldMovie.setRate(newMovie.getRate());
         oldMovie.setCriticsRate(newMovie.getCriticsRate());
         oldMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
-        transaction.commit();
     }
 
+    @Transactional
     public void updatePositionToUnused(Movie movie) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         movie.setPosition(-1);
-        transaction.commit();
     }
 
+    @Transactional
     public void updateTimeOfModification(Movie checkedMovie) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         checkedMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
-        transaction.commit();
     }
 
     public void exportToExcel(Map<Integer, Movie> map, boolean IsNewExcelFormat) throws IOException {
