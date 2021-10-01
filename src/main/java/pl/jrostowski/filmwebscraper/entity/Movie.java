@@ -32,7 +32,7 @@ public class Movie {
     @NonNull private String countryOfOrigin;
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
-    @OneToMany(mappedBy="movieId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="movieId")
     private List<ArchivedMovie> archivedMovies = new ArrayList<>();
 
 
