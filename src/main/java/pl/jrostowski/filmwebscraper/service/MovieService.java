@@ -62,7 +62,7 @@ public class MovieService {
         }
     }
 
-    public List<Movie> getDatabaseContent() {
+    public List<Movie> getMovieContent() {
         return movieRepository.getMoviesFromDatabase();
     }
 

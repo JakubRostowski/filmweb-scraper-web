@@ -35,8 +35,8 @@ public class MovieController {
         System.out.println("Done!");
     }
 
-    @GetMapping("/database")
-    public List<Movie> displayDatabaseContent(){
-        return service.getDatabaseContent();
+    @GetMapping("/movies")
+    public List<Movie> displayMovieContent(){
+        return service.getMovieContent();
     }
 }
