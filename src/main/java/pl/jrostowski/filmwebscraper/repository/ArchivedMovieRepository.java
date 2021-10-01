@@ -11,7 +11,7 @@ import javax.persistence.EntityTransaction;
 @Repository
 public class ArchivedMovieRepository {
 
-    private EntityManager em;
+    private final EntityManager em;
 
     @Autowired
     public ArchivedMovieRepository(EntityManager em) {
