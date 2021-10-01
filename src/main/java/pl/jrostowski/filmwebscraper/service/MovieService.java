@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.repository.ArchivedMovieRepository;
+import pl.jrostowski.filmwebscraper.repository.FilmwebRepository;
 import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
 import javax.persistence.EntityManager;
@@ -23,10 +24,11 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
     private final ArchivedMovieRepository archivedMovieRepository;
+    private final FilmwebRepository filmwebRepository;
 
     public Map<Integer, Movie> downloadData() throws IOException {
         System.out.println("Downloading the data from Filmweb.pl...");
-        return movieRepository.getTopList();
+        return filmwebRepository.getTopList();
     }
 
     public boolean isDatabaseEmpty() {
