@@ -3,6 +3,7 @@ package pl.jrostowski.filmwebscraper.entity;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Setter
 public class ArchivedMovie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
