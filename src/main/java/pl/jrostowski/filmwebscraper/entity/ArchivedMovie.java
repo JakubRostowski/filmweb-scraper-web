@@ -1,5 +1,7 @@
 package pl.jrostowski.filmwebscraper.entity;
 
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -7,6 +9,7 @@ import java.sql.Timestamp;
 
 @Entity
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class ArchivedMovie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +20,11 @@ public class ArchivedMovie {
     @JoinColumn(name="movieId")
     private Movie movieId;
 
-    private int position;
-    private String title;
-    private double rate;
-    private double criticsRate;
-    private Timestamp timeOfCreation;
+    @NonNull private int position;
+    @NonNull private String title;
+    @NonNull private double rate;
+    @NonNull private double criticsRate;
+    @NonNull private Timestamp timeOfCreation;
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 
     @Override
