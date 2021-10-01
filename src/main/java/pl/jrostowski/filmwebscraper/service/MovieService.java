@@ -59,6 +59,10 @@ public class MovieService {
         }
     }
 
+    public List<Movie> getDatabaseContent() {
+        return movieRepository.getMoviesFromDatabase();
+    }
+
     Optional<Movie> getUniqueMovieByPosition(List<Movie> list, int position) {
         return list.stream()
                 .filter(movie -> movie.getPosition() == position)
