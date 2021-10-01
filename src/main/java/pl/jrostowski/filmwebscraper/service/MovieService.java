@@ -33,8 +33,8 @@ public class MovieService {
         return filmwebRepository.getTopList();
     }
 
-    public boolean isDatabaseEmpty() {
-        return movieRepository.checkIfEmpty();
+    public int countMovies() {
+        return movieRepository.getMovieCount();
     }
 
     @Transactional

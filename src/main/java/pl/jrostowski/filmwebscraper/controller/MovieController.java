@@ -25,7 +25,7 @@ public class MovieController {
 
     @GetMapping("/updateDatabase")
     public void updateDatabase() throws IOException {
-        if (service.isDatabaseEmpty()) {
+        if (service.countMovies() == 0) {
             System.out.println("Database is empty.");
             service.populateDatabase(service.downloadData());
         } else {

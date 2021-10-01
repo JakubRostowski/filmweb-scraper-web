@@ -34,10 +34,10 @@ public class MovieRepository {
         em.persist(movie);
     }
 
-    public boolean checkIfEmpty() {
+    public int getMovieCount() {
         Query query = em.createNativeQuery("SELECT COUNT(*) FROM movie");
-        String result = query.getResultList().get(0).toString();
-        return result.equals("0");
+        int result = (int) query.getResultList().get(0);
+        return result;
     }
 
     @Transactional
