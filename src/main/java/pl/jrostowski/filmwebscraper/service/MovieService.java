@@ -8,6 +8,7 @@ import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +33,12 @@ public class MovieService {
         return movieRepository.checkIfEmpty();
     }
 
+    @Transactional
     public void populateDatabase(Map<Integer, Movie> movieMap) {
         movieRepository.createDatabase(movieMap);
     }
 
+    @Transactional
     public void checkDifferences(Map<Integer, Movie> movieMap) {
         System.out.println("Looking for differences...");
 
