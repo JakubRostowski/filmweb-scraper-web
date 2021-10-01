@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.repository.ArchivedMovieRepository;
+import pl.jrostowski.filmwebscraper.repository.ExcelRepository;
 import pl.jrostowski.filmwebscraper.repository.FilmwebRepository;
 import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
@@ -25,6 +26,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final ArchivedMovieRepository archivedMovieRepository;
     private final FilmwebRepository filmwebRepository;
+    private final ExcelRepository excelRepository;
 
     public Map<Integer, Movie> downloadData() throws IOException {
         System.out.println("Downloading the data from Filmweb.pl...");
@@ -76,6 +78,6 @@ public class MovieService {
 
     public void ExportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
         System.out.println("Exporting the data to excel format...");
-        movieRepository.exportToExcel(movieMap, newExcelFormat);
+        excelRepository.exportToExcel(movieMap, newExcelFormat);
     }
 }
