@@ -1,6 +1,5 @@
 package pl.jrostowski.filmwebscraper.entity;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import java.sql.Timestamp;
 
 @Entity
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class ArchivedMovie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
