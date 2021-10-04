@@ -36,8 +36,7 @@ public class MovieRepository {
 
     public int getMovieCount() {
         Query query = em.createNativeQuery("SELECT COUNT(*) FROM movie");
-        int result = (int) query.getResultList().get(0);
-        return result;
+        return (int) query.getResultList().get(0);
     }
 
     @Transactional
