@@ -1,6 +1,5 @@
 package pl.jrostowski.filmwebscraper.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.jrostowski.filmwebscraper.entity.ArchivedMovie;
 import pl.jrostowski.filmwebscraper.entity.Movie;
