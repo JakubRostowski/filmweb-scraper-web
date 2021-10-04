@@ -13,7 +13,6 @@ public class ArchivedMovieRepository {
 
     private final EntityManager em;
 
-    @Autowired
     public ArchivedMovieRepository(EntityManager em) {
         this.em = em;
     }
