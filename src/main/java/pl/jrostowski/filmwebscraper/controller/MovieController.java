@@ -1,5 +1,6 @@
 package pl.jrostowski.filmwebscraper.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jrostowski.filmwebscraper.entity.Movie;
@@ -10,12 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class MovieController {
 
     private final MovieService service;
 
-    public MovieController(MovieService service) {
-        this.service = service;
+    @GetMapping("/")
+    public String home() {
+        return "Homepage";
     }
 
     @GetMapping("/display")
