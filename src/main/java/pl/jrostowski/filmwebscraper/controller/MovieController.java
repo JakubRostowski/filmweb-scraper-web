@@ -21,7 +21,7 @@ public class MovieController {
         return "Homepage";
     }
 
-    @GetMapping("/display")
+    @GetMapping("/download")
     public Map<Integer, Movie> displayFilmwebData() throws IOException {
         return service.downloadData();
     }
