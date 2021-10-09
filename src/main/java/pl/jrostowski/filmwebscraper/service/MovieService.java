@@ -20,9 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MovieService {
 
-    @PersistenceContext
-    private EntityManager em;
-
     private final MovieRepository movieRepository;
     private final ArchivedMovieRepository archivedMovieRepository;
     private final FilmwebRepository filmwebRepository;
