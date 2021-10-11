@@ -45,7 +45,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{movieId}")
-    public Movie getMovie(@PathVariable int movieId) {
+    public Movie getMovieById(@PathVariable int movieId) {
         Movie movie = service.findById(movieId);
         if (movie == null) {
             throw new RuntimeException("Movie id (" + movieId + ") not found.");
