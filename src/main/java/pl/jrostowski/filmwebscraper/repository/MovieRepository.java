@@ -6,7 +6,6 @@ import pl.jrostowski.filmwebscraper.entity.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,6 @@ public class MovieRepository {
         }
     }
 
-    @Transactional
     public void addMovie(Movie movie) {
         em.persist(movie);
     }
@@ -39,12 +37,10 @@ public class MovieRepository {
         return intValue(query.getResultList().get(0));
     }
 
-    @Transactional
     public void deleteMovie(Movie movie) {
         em.remove(movie);
     }
 
-    @Transactional
     public void updateChangedMovie(Movie oldMovie, Movie newMovie) {
         oldMovie.setPosition(newMovie.getPosition());
         oldMovie.setRate(newMovie.getRate());
@@ -52,15 +48,11 @@ public class MovieRepository {
         oldMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
     }
 
-    @Transactional
     public void updatePositionToUnused(Movie movie) {
         movie.setPosition(-1);
     }
 
-    @Transactional
     public void updateTimeOfModification(Movie checkedMovie) {
         checkedMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
     }
-
-
 }
