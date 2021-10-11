@@ -8,8 +8,6 @@ import pl.jrostowski.filmwebscraper.repository.ExcelRepository;
 import pl.jrostowski.filmwebscraper.repository.FilmwebRepository;
 import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
