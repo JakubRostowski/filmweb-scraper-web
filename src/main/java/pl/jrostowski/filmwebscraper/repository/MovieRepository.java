@@ -22,6 +22,10 @@ public class MovieRepository {
         return em.createQuery("from Movie").getResultList();
     }
 
+    public Movie findById(int movieId) {
+        return (Movie) em.createQuery("from Movie where id=" + movieId).getSingleResult();
+    }
+
     public void createDatabase(Map<Integer, Movie> movies) {
         for (Map.Entry<Integer, Movie> movie : movies.entrySet()) {
             addMovie(movie.getValue());

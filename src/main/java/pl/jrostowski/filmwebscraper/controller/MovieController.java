@@ -2,6 +2,7 @@ package pl.jrostowski.filmwebscraper.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.service.MovieService;
@@ -42,4 +43,14 @@ public class MovieController {
     public List<Movie> displayMovieContent(){
         return service.getMovieContent();
     }
+
+    @GetMapping("/movies/{movieId}")
+    public Movie getMovie(@PathVariable int movieId) {
+        Movie movie = service.findById(movieId);
+        if (movie == null) {
+            throw new RuntimeException("Movie id (" + movieId + ") not found.");
+        }
+        return movie;
+    }
+
 }

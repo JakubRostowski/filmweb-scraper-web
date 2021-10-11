@@ -75,4 +75,8 @@ public class MovieService {
         System.out.println("Exporting the data to excel format...");
         excelRepository.exportToExcel(movieMap, newExcelFormat);
     }
+
+    public Movie findById(int movieId) {
+        return movieRepository.findById(movieId);
+    }
 }
