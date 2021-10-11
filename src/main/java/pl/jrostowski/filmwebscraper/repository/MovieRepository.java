@@ -10,10 +10,12 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import static org.aspectj.runtime.internal.Conversions.intValue;
+
 @Repository
 public class MovieRepository {
 
-    private static EntityManager em;
+    private final EntityManager em;
 
     public MovieRepository(EntityManager em) {
         MovieRepository.em = em;
@@ -36,7 +38,7 @@ public class MovieRepository {
 
     public int getMovieCount() {
         Query query = em.createNativeQuery("SELECT COUNT(*) FROM movie");
-        return (int) query.getResultList().get(0);
+        return intValue(query.getResultList().get(0));
     }
 
     @Transactional
