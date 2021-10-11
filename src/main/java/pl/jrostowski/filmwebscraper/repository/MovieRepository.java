@@ -1,5 +1,6 @@
 package pl.jrostowski.filmwebscraper.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 
@@ -13,13 +14,10 @@ import java.util.Map;
 import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Repository
+@RequiredArgsConstructor
 public class MovieRepository {
 
     private final EntityManager em;
-
-    public MovieRepository(EntityManager em) {
-        MovieRepository.em = em;
-    }
 
     public List getMoviesFromDatabase() {
         return em.createQuery("from Movie").getResultList();
