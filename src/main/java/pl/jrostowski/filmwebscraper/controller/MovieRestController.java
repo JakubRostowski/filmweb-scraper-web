@@ -3,6 +3,7 @@ package pl.jrostowski.filmwebscraper.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.service.MovieService;
@@ -13,7 +14,8 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class RESTMovieController {
+@RequestMapping("/api")
+public class MovieRestController {
 
     private final MovieService service;
 
