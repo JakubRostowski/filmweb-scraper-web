@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class MovieController {
+public class RESTMovieController {
 
     private final MovieService service;
 
