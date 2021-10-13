@@ -12,16 +12,16 @@
 <table>
     <thead>
     <tr>
-        <th>Position</th>
-        <th>Title</th>
-        <th>Year</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="movie : ${movies}">
-        <td th:text="${movie.position}"/>
-        <td th:text="${movie.title}"/>
-        <td th:text="${movie.year}"/>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"/>
+        <td th:text="${user.name}"/>
+        <td th:text="${user.email}"/>
     </tr>
     </tbody>
 </table>
