@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add User View</title>
+
 </head>
 <body>
-$END$
+
+<form action="#" th:action="@{/users/save}" th:object="${user}" method="post">
+    <input type="text" th:field="*{name}" placeholder="Name">
+    <input type="text" th:field="*{email}" placeholder="Email">
+    <input type="text" th:field="*{password}" placeholder="Password">
+    <button type="submit">Save</button>
+</form>
+
 </body>
 </html>
