@@ -1,9 +1,6 @@
 package pl.jrostowski.filmwebscraper.entity;
 
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,6 +9,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Setter
+@ToString
 public class ArchivedMovie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,17 +27,4 @@ public class ArchivedMovie {
     @NonNull private Timestamp timeOfCreation;
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 
-    @Override
-    public String toString() {
-        return "ArchivedMovie{" +
-                "archivedMovieId=" + archivedMovieId +
-                ", movieId=" + movieId +
-                ", position=" + position +
-                ", title='" + title + '\'' +
-                ", rate=" + rate +
-                ", criticsRate=" + criticsRate +
-                ", timeOfCreation=" + timeOfCreation +
-                ", timeOfModification=" + timeOfModification +
-                '}';
-    }
 }
