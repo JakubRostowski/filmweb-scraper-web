@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/users")
-    public String showDatabaseMovies(Model model) {
+    public String getUsers(Model model) {
         List<User> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "usersList";
