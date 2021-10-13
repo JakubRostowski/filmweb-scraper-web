@@ -13,11 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieController {
 
-    private final MovieService service;
+    private final MovieService movieService;
 
     @GetMapping("/movies")
     public String showDatabaseMovies(Model model) {
-        List<Movie> movies = service.getMovieContent();
+        List<Movie> movies = movieService.getMovieContent();
         model.addAttribute("movies", movies);
         return "moviesList";
     }

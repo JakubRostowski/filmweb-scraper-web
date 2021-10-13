@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class MovieRestController {
 
-    private final MovieService service;
+    private final MovieService movieService;
 
     @GetMapping("/")
     public String home() {
@@ -26,29 +26,29 @@ public class MovieRestController {
 
     @GetMapping("/download")
     public Map<Integer, Movie> displayFilmwebData() throws IOException {
-        return service.downloadData();
+        return movieService.downloadData();
     }
 
     @GetMapping("/updateDatabase")
     public void updateDatabase() throws IOException {
-        if (service.countMovies() == 0) {
+        if (movieService.countMovies() == 0) {
             System.out.println("Database is empty.");
-            service.populateDatabase(service.downloadData());
+            movieService.populateDatabase(movieService.downloadData());
         } else {
             System.out.println("Database is NOT empty.");
-            service.checkDifferences(service.downloadData());
+            movieService.checkDifferences(movieService.downloadData());
         }
         System.out.println("Done!");
     }
 
     @GetMapping("/movies")
     public List<Movie> displayMovieContent(){
-        return service.getMovieContent();
+        return movieService.getMovieContent();
     }
 
     @GetMapping("/movies/{movieId}")
     public Movie getMovieById(@PathVariable int movieId) {
-        Movie movie = service.findById(movieId);
+        Movie movie = movieService.findById(movieId);
         if (movie == null) {
             throw new RuntimeException("Movie id (" + movieId + ") not found.");
         }
