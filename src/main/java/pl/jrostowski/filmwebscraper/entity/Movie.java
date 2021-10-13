@@ -13,6 +13,7 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,24 +54,4 @@ public class Movie {
         return Objects.hash(getPosition(), getTitle(), getRate(), getCriticsRate());
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieId=" + movieId +
-                ", position=" + position +
-                ", title='" + title + '\'' +
-                ", year=" + year +
-                ", originalTitle='" + originalTitle + '\'' +
-                ", rate=" + rate +
-                ", criticsRate=" + criticsRate +
-                ", length='" + length + '\'' +
-                ", director='" + director + '\'' +
-                ", screenwriter='" + screenwriter + '\'' +
-                ", genre='" + genre + '\'' +
-                ", countryOfOrigin='" + countryOfOrigin + '\'' +
-                ", timeOfCreation=" + timeOfCreation +
-                ", timeOfModification=" + timeOfModification +
-                ", archivedMovies=" + archivedMovies +
-                '}';
-    }
 }
