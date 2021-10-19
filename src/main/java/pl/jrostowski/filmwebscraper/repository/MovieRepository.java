@@ -19,11 +19,13 @@ public class MovieRepository {
     private final EntityManager em;
 
     public List getAllMovies() {
-        return em.createQuery("from Movie").getResultList();
+        return em.createQuery("select distinct m from Movie m " +
+                "left join fetch m.archivedMovies").getResultList();
     }
 
     public List getActiveMovies() {
-        return em.createQuery("from Movie where position > 0 order by position").getResultList();
+        return em.createQuery("select distinct m from Movie m " +
+                "left join fetch m.archivedMovies where m.position > 0 order by m.position").getResultList();
     }
 
     public Movie findById(int movieId) {
