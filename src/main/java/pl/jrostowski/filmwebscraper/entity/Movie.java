@@ -34,7 +34,7 @@ public class Movie {
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
     @OneToMany(fetch = FetchType.EAGER, mappedBy="movieId")
-    private List<ArchivedMovie> archivedMovies = new ArrayList<>();
+    private List<ArchivedMovie> archivedMovies;
 
 
     public ArchivedMovie getArchivedMovieObject() {
