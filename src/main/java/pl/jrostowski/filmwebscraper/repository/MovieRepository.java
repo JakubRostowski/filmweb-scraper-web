@@ -47,10 +47,6 @@ public class MovieRepository {
         return intValue(query.getResultList().get(0));
     }
 
-    public void deleteMovie(Movie movie) {
-        em.remove(movie);
-    }
-
     public void updateChangedMovie(Movie oldMovie, Movie newMovie) {
         oldMovie.setPosition(newMovie.getPosition());
         oldMovie.setRate(newMovie.getRate());
