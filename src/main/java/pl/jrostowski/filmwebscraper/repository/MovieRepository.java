@@ -18,8 +18,12 @@ public class MovieRepository {
 
     private final EntityManager em;
 
-    public List getMoviesFromDatabase() {
+    public List getAllMovies() {
         return em.createQuery("from Movie").getResultList();
+    }
+
+    public List getActiveMovies() {
+        return em.createQuery("from Movie where position > 0 order by position").getResultList();
     }
 
     public Movie findById(int movieId) {

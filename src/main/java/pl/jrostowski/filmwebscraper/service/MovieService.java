@@ -41,7 +41,7 @@ public class MovieService {
     public void checkDifferences(Map<Integer, Movie> movieMap) {
         System.out.println("Looking for differences...");
 
-        List<Movie> databaseMovies = movieRepository.getMoviesFromDatabase();
+        List<Movie> databaseMovies = movieRepository.getAllMovies();
 
         for (Map.Entry<Integer, Movie> movie : movieMap.entrySet()) {
             Movie checkedMovie = getUniqueMovieByPosition(databaseMovies, movie.getValue().getPosition()).get();
@@ -62,7 +62,11 @@ public class MovieService {
     }
 
     public List<Movie> getMovieContent() {
-        return movieRepository.getMoviesFromDatabase();
+        return movieRepository.getAllMovies();
+    }
+
+    public List<Movie> getToplistMovies() {
+        return movieRepository.getActiveMovies();
     }
 
     Optional<Movie> getUniqueMovieByPosition(List<Movie> list, int position) {

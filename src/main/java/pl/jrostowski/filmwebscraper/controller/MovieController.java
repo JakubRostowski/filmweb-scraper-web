@@ -21,4 +21,11 @@ public class MovieController {
         model.addAttribute("movies", movies);
         return "moviesList";
     }
+
+    @GetMapping("/toplist")
+    public String showCurrentToplist(Model model) {
+        List<Movie> movies = movieService.getToplistMovies();
+        model.addAttribute("movies", movies);
+        return "moviesList";
+    }
 }
