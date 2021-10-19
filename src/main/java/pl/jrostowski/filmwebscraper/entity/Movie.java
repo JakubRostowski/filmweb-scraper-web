@@ -1,10 +1,10 @@
 package pl.jrostowski.filmwebscraper.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,11 +33,12 @@ public class Movie {
     @NonNull private String countryOfOrigin;
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="movieId")
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy= "movie")
     private List<ArchivedMovie> archivedMovies;
 
-
-    public ArchivedMovie getArchivedMovieObject() {
+    public ArchivedMovie toArchivedMovie() {
         return new ArchivedMovie(getPosition(), getTitle(), getRate(), getCriticsRate(), getTimeOfCreation());
     }
 

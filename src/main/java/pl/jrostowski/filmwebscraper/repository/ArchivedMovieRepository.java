@@ -14,8 +14,8 @@ public class ArchivedMovieRepository {
     private final EntityManager em;
 
     public void addArchivedMovie(Movie movieData) {
-        ArchivedMovie movie = movieData.getArchivedMovieObject();
-        movie.setMovieId(movieData);
+        ArchivedMovie movie = movieData.toArchivedMovie();
+        movie.setMovie(movieData);
         em.persist(movie);
     }
 }

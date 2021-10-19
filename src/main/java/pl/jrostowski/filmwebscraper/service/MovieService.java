@@ -52,7 +52,7 @@ public class MovieService {
                 archivedMovieRepository.addArchivedMovie(checkedMovie);
                 if (movie.getValue().getTitle().equals(checkedMovie.getTitle())) {
                     movieRepository.updateChangedMovie(checkedMovie, movie.getValue());
-                    checkedMovie.getArchivedMovies().add(movie.getValue().getArchivedMovieObject());
+                    checkedMovie.getArchivedMovies().add(movie.getValue().toArchivedMovie());
                 } else {
                     movieRepository.addMovie(movie.getValue());
                     movieRepository.updatePositionToUnused(checkedMovie);

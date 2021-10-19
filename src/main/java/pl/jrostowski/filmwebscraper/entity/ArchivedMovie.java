@@ -1,5 +1,6 @@
 package pl.jrostowski.filmwebscraper.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,9 +18,9 @@ public class ArchivedMovie {
     @Column(name = "id", nullable = false)
     private Long archivedMovieId;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "movieId") // to delete??? (https://bykowski.pl/zwiazki-miedzy-relacjami/)
-    private Movie movieId;
+    private Movie movie;
 
     @NonNull private int position;
     @NonNull private String title;
