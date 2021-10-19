@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Getter
 @Setter
 @ToString
 public class ArchivedMovie {
@@ -17,7 +18,7 @@ public class ArchivedMovie {
     private Long archivedMovieId;
 
     @ManyToOne
-    @JoinColumn(name="movieId")
+    @JoinColumn(name = "movieId") // to delete??? (https://bykowski.pl/zwiazki-miedzy-relacjami/)
     private Movie movieId;
 
     @NonNull private int position;
