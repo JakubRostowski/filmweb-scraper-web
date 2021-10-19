@@ -29,7 +29,7 @@ public class MovieRestController {
         return movieService.downloadData();
     }
 
-    @GetMapping("/updateDatabase")
+    @GetMapping("/update")
     public void updateDatabase() throws IOException {
         if (movieService.countMovies() == 0) {
             System.out.println("Database is empty.");
