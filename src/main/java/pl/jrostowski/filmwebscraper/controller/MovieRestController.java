@@ -19,11 +19,6 @@ public class MovieRestController {
 
     private final MovieService movieService;
 
-    @GetMapping("/")
-    public String home() {
-        return "Homepage";
-    }
-
     @GetMapping("/download")
     public Map<Integer, Movie> displayFilmwebData() throws IOException {
         return movieService.downloadData();
