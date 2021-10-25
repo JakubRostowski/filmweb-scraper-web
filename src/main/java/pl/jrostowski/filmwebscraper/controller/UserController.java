@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/users/add")
-    public String getAddUserForm(Model model) {
+    public String getRegisterForm(Model model) {
         UserForm userForm = new UserForm();
         model.addAttribute("user", userForm);
         return "register";
