@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<div th:if="${registrationError}">
+    <span th:text="${registrationError}"></span>
+</div>
+
 <form action="#" th:action="@{/users/save}" th:object="${user}" method="post">
     <input type="text" th:field="*{username}" placeholder="Name">
     <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>

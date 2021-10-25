@@ -36,10 +36,19 @@ public class UserController {
     }
 
     @PostMapping("users/save")
-    public String saveUser(@Valid @ModelAttribute("user") UserForm userForm, Errors errors) {
+    public String saveUser(@Valid @ModelAttribute("user") UserForm userForm, Errors errors, Model model) {
         if (errors.hasErrors()) {
             return "register";
         }
+        if (userService.findByUsername(userForm.getUsername()) != null) {
+            model.addAttribute("registrationError", "Username already exists.");
+            return "register";
+        }
+        if (userService.findByEmail(userForm.getEmail()) != null) {
+            model.addAttribute("registrationError", "Email already exists.");
+            return "register";
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(userForm.getPassword());
         userForm.setPassword(encodedPassword);
