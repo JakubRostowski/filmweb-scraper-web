@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.jrostowski.filmwebscraper.entity.User;
+import pl.jrostowski.filmwebscraper.forms.UserForm;
 import pl.jrostowski.filmwebscraper.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,16 +30,20 @@ public class UserController {
 
     @GetMapping("/users/add")
     public String getAddUserForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "userAddForm";
+        UserForm userForm = new UserForm();
+        model.addAttribute("user", userForm);
+        return "register";
     }
 
     @PostMapping("users/save")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@Valid @ModelAttribute("user") UserForm userForm, Errors errors) {
+        if (errors.hasErrors()) {
+            return "register";
+        }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(userForm.getPassword());
+        userForm.setPassword(encodedPassword);
+        User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
         userService.save(user);
         return "redirect:/users/";
     }
