@@ -9,7 +9,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.jrostowski.filmwebscraper.entity.User;
+import pl.jrostowski.filmwebscraper.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @Configuration
@@ -18,6 +21,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final UserService userService;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,12 +33,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .successHandler((request, response, authentication) -> {
+                    String username = authentication.getName();
+                    User user = userService.findByUsername(username);
+
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+
+                    response.sendRedirect(request.getContextPath() + "/");
+                })
+                .permitAll()
                 .and()
-                .logout().permitAll();
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Override

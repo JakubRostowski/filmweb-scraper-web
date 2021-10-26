@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+
+<form th:action="@{/authenticateTheUser}"
+      method="POST">
+
+    <div>
+        <div th:if="${param.error}">
+            Invalid username or password.
+        </div>
+
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+    </div>
+
+    <div>
+        <input type="text" name="username" placeholder="username">
+    </div>
+    <div>
+        <input type="password" name="password" placeholder="password">
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+
+</form>
+
+</body>
+</html>
