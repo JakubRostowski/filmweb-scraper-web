@@ -57,7 +57,7 @@ public class UserController {
         return "redirect:/users/";
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String showMyLoginPage() {
         return "login";
     }
