@@ -33,13 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateTheUser")
+                .failureForwardUrl("/login")
                 .successHandler((request, response, authentication) -> {
                     String username = authentication.getName();
                     User user = userService.findByUsername(username);
@@ -53,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
                 .permitAll();
     }
