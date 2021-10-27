@@ -15,12 +15,12 @@
     <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
 </div>
 
-<form th:if="${session.user == null}" th:action="@{/login}" method="POST">
-    <input type="submit" value="Login"/>
-</form>
+<div th:if="${session.user == null}">
+    <a href="/login">Login</a>
+</div>
 
 <form th:if="${session.user}" th:action="@{/logout}" method="POST">
-    <input type="submit" value="Logout"/>
+    <button type="submit">Login</button>
 </form>
 
 </body>
