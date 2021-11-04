@@ -1,6 +1,8 @@
 package pl.jrostowski.filmwebscraper.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,15 @@ public class RegisterController {
     private final UserService userService;
 
     @GetMapping("/register")
-    public String getRegisterForm(Model model) {
+    public String getRegisterForm(Model model, Authentication authentication) {
         UserForm userForm = new UserForm();
         model.addAttribute("user", userForm);
-        return "register";
+
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "register";
+        } else {
+            return "index";
+        }
     }
 
     @PostMapping("register/save")

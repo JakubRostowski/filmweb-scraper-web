@@ -17,6 +17,9 @@
 
 <div th:if="${session.user == null}">
     <a href="/login">Login</a>
+    <form th:action="@{/register}">
+        <input type="submit" value="Register" />
+    </form>
 </div>
 
 <form th:if="${session.user}" th:action="@{/logout}" method="POST">
