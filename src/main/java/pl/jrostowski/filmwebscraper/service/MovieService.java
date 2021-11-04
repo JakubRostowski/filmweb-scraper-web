@@ -40,23 +40,22 @@ public class MovieService {
     @Transactional
     public void checkDifferences(Map<Integer, Movie> movieMap) {
         System.out.println("Looking for differences...");
-
         List<Movie> databaseMovies = movieRepository.getAllMovies();
 
-        for (Map.Entry<Integer, Movie> movie : movieMap.entrySet()) {
-            Movie checkedMovie = getUniqueMovieByPosition(databaseMovies, movie.getValue().getPosition()).get();
-            if (movie.getValue().hashCode() == checkedMovie.hashCode()) {
-                movieRepository.updateTimeOfModification(checkedMovie);
-            } else {
-                System.out.println(checkedMovie.getPosition() + ". " + checkedMovie.getTitle() + " changed.");
-                archivedMovieRepository.addArchivedMovie(checkedMovie);
-                if (movie.getValue().getTitle().equals(checkedMovie.getTitle())) {
-                    movieRepository.updateChangedMovie(checkedMovie, movie.getValue());
-                    checkedMovie.getArchivedMovies().add(movie.getValue().toArchivedMovie());
+        for (Movie databaseMovie : databaseMovies) {
+            Optional<Movie> checkedMovie = getUniqueMovieByTitle(movieMap, databaseMovie.getTitle());
+            if (checkedMovie.isPresent()) {
+                if (databaseMovie.hashCode() == checkedMovie.get().hashCode()) {
+                    movieRepository.updateTimeOfModification(checkedMovie.get());
                 } else {
-                    movieRepository.addMovie(movie.getValue());
-                    movieRepository.updatePositionToUnused(checkedMovie);
+                    System.out.println(checkedMovie.get().getPosition() + ". " + checkedMovie.get().getTitle() + " changed.");
+                    databaseMovie.getArchivedMovies().add(checkedMovie.get().toArchivedMovie());
+                    archivedMovieRepository.addArchivedMovie(databaseMovie);
+                    movieRepository.updateChangedMovie(databaseMovie, checkedMovie.get());
                 }
+            } else {
+                movieRepository.addMovie(checkedMovie.get()); // nieosiągalne
+                movieRepository.updatePositionToUnused(databaseMovie);
             }
         }
     }
@@ -69,10 +68,12 @@ public class MovieService {
         return movieRepository.getActiveMovies();
     }
 
-    Optional<Movie> getUniqueMovieByPosition(List<Movie> list, int position) {
-        return list.stream()
-                .filter(movie -> movie.getPosition() == position)
-                .findFirst();
+    Optional<Movie> getUniqueMovieByTitle(Map<Integer, Movie> movieMap, String title) {
+        return Optional.of(movieMap.entrySet().stream()
+                .filter(movie -> movie.getValue().getTitle().equals(title))
+                .findFirst()
+                .get()
+                .getValue());
     }
 
     public void ExportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
