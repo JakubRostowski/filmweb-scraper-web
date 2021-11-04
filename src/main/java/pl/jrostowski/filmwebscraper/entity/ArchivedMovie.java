@@ -22,11 +22,16 @@ public class ArchivedMovie {
     @ManyToOne
     private Movie movie;
 
-    @NonNull private int position;
-    @NonNull private String title;
-    @NonNull private double rate;
-    @NonNull private double criticsRate;
-    @NonNull private Timestamp timeOfCreation;
+    @NonNull
+    private int position;
+    @NonNull
+    private String title;
+    @NonNull
+    private double rate;
+    @NonNull
+    private double criticsRate;
+    @NonNull
+    private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 
 }

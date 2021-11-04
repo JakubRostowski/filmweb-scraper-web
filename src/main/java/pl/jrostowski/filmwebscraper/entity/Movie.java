@@ -20,26 +20,37 @@ public class Movie {
     @Column(name = "id", nullable = false)
     private Long movieId;
 
-    @NonNull private int position;
-    @NonNull private String title;
-    @NonNull private int year;
-    @NonNull private String originalTitle;
-    @NonNull private double rate;
-    @NonNull private double criticsRate;
-    @NonNull private String length;
-    @NonNull private String director;
-    @NonNull private String screenwriter;
-    @NonNull private String genre;
-    @NonNull private String countryOfOrigin;
+    @NonNull
+    private int position;
+    @NonNull
+    private String title;
+    @NonNull
+    private int year;
+    @NonNull
+    private String originalTitle;
+    @NonNull
+    private double rate;
+    @NonNull
+    private double criticsRate;
+    @NonNull
+    private String length;
+    @NonNull
+    private String director;
+    @NonNull
+    private String screenwriter;
+    @NonNull
+    private String genre;
+    @NonNull
+    private String countryOfOrigin;
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.EAGER, mappedBy= "movie")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie")
     private List<ArchivedMovie> archivedMovies;
 
     public ArchivedMovie toArchivedMovie() {
-        return new ArchivedMovie(getPosition(), getTitle(), getRate(), getCriticsRate(), getTimeOfCreation());
+        return new ArchivedMovie(getPosition(), getTitle(), getRate(), getCriticsRate());
     }
 
     @Override
