@@ -43,19 +43,28 @@ public class MovieService {
         List<Movie> databaseMovies = movieRepository.getAllMovies();
 
         for (Movie databaseMovie : databaseMovies) {
-            Optional<Movie> checkedMovie = getUniqueMovieByTitle(movieMap, databaseMovie.getTitle());
+            Optional<Movie> checkedMovie =
+                    getUniqueMovieByTitleAndYear(movieMap, databaseMovie.getTitle(), databaseMovie.getYear());
             if (checkedMovie.isPresent()) {
                 if (databaseMovie.hashCode() == checkedMovie.get().hashCode()) {
                     movieRepository.updateTimeOfModification(checkedMovie.get());
                 } else {
-                    System.out.println(checkedMovie.get().getPosition() + ". " + checkedMovie.get().getTitle() + " changed.");
+                    System.out.println(checkedMovie.get().getPosition() + ". " +
+                            checkedMovie.get().getTitle() + " changed.");
                     databaseMovie.getArchivedMovies().add(checkedMovie.get().toArchivedMovie());
                     archivedMovieRepository.addArchivedMovie(databaseMovie);
                     movieRepository.updateChangedMovie(databaseMovie, checkedMovie.get());
                 }
             } else {
-                movieRepository.addMovie(checkedMovie.get()); // nieosiągalne
+                System.out.println(databaseMovie.getTitle() + " set to inactive.");
                 movieRepository.updatePositionToUnused(databaseMovie);
+            }
+        }
+        // nadal wypierdala wyjątek
+        for (Map.Entry<Integer, Movie> movie : movieMap.entrySet()) {
+            if (!(movie.getValue().hashCode() ==
+                    getUniqueMovieByPosition(databaseMovies, movie.getValue().getPosition()).hashCode())) {
+                movieRepository.addMovie(movie.getValue());
             }
         }
     }
@@ -68,12 +77,20 @@ public class MovieService {
         return movieRepository.getActiveMovies();
     }
 
-    Optional<Movie> getUniqueMovieByTitle(Map<Integer, Movie> movieMap, String title) {
+    Optional<Movie> getUniqueMovieByTitleAndYear(Map<Integer, Movie> movieMap, String title, int year) {
         return Optional.of(movieMap.entrySet().stream()
                 .filter(movie -> movie.getValue().getTitle().equals(title))
+                .filter(movie -> movie.getValue().getYear() == year)
                 .findFirst()
                 .get()
                 .getValue());
+    }
+
+    Optional<Movie> getUniqueMovieByPosition(List<Movie> movieList, int position) {
+        return Optional.of(movieList.stream()
+                .filter(movie -> movie.getPosition() == position)
+                .findFirst()
+                .get());
     }
 
     public void ExportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
