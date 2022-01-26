@@ -60,7 +60,7 @@ public class MovieService {
                 movieRepository.updatePositionToUnused(databaseMovie);
             }
         }
-        // nadal wypierdala wyjątek
+        // nadal wyrzuca wyjątek
         for (Map.Entry<Integer, Movie> movie : movieMap.entrySet()) {
             if (!(movie.getValue().hashCode() ==
                     getUniqueMovieByPosition(databaseMovies, movie.getValue().getPosition()).hashCode())) {
