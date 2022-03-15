@@ -59,9 +59,9 @@ public class FilmwebRepository {
         Connection connectMovie = Jsoup.connect(URL + href.attr("href"));
         Document documentMovie = connectMovie.get();
 
-        String title = documentMovie.select(".filmCoverSection__title > span:nth-child(1)").text();
-        int year = Integer.parseInt(documentMovie.select(".filmCoverSection__year").text());
-        String originalTitle = documentMovie.select(".filmCoverSection__orginalTitle").text();
+        String title = documentMovie.select(".fP__title").text();
+        int year = Integer.parseInt(documentMovie.select(".fP__year").text());
+        String originalTitle = documentMovie.select(".fP__originalTitle").text();
         double rate = Double.parseDouble(documentMovie.select("span.filmRating__rateValue:nth-child(2)").text().replaceAll(",", "."));
         double criticsRate;
         if (documentMovie.select("span.filmRating__rateValue:nth-child(1)").text().contains(",")) {
@@ -69,7 +69,7 @@ public class FilmwebRepository {
         } else {
             criticsRate = -1;
         }
-        String length = documentMovie.select(".filmCoverSection__filmTime").text().replaceAll("godz.", "h").replaceAll("min.", "min");
+        String length = documentMovie.select(".fP__duration").text().replaceAll("godz.", "h").replaceAll("min.", "min");
         String director = documentMovie.select("div.filmInfo__info:nth-child(3)").text().replaceAll("więcej", "");
         String screenwriter;
         String genre;
