@@ -1,47 +1,46 @@
 create table if not exists movie
 (
-    id                   bigint auto_increment
+    id                   bigserial
         primary key,
-    country_of_origin    varchar(255) null,
-    critics_rate         double not null,
-    director             varchar(255) null,
-    genre                varchar(255) null,
-    length               varchar(255) null,
-    original_title       varchar(255) null,
-    position             int    not null,
-    rate                 double not null,
-    screenwriter         varchar(255) null,
-    time_of_creation     datetime(6) null,
-    time_of_modification datetime(6) null,
-    title                varchar(255) null,
-    year                 int    not null
+    country_of_origin    varchar(255),
+    critics_rate         double precision not null,
+    director             varchar(255),
+    genre                varchar(255),
+    length               varchar(255),
+    original_title       varchar(255),
+    position             integer          not null,
+    rate                 double precision not null,
+    screenwriter         varchar(255),
+    time_of_creation     timestamp,
+    time_of_modification timestamp,
+    title                varchar(255),
+    year                 integer          not null
 );
 
 create table if not exists archived_movie
 (
-    id                   bigint auto_increment
+    id                   bigserial
         primary key,
-    critics_rate         double not null,
-    position             int    not null,
-    rate                 double not null,
-    time_of_creation     datetime(6) null,
-    time_of_modification datetime(6) null,
-    title                varchar(255) null,
-    movie_id             bigint null,
-    constraint FKlm351ufo3i4a17l6vsuu6q4cj
-        foreign key (movie_id) references movie (id)
+    critics_rate         double precision not null,
+    position             integer          not null,
+    rate                 double precision not null,
+    time_of_creation     timestamp,
+    time_of_modification timestamp,
+    title                varchar(255),
+    movie_id             bigint
+        constraint fklm351ufo3i4a17l6vsuu6q4cj
+            references movie
 );
 
 create table if not exists users
 (
-    id                   bigint auto_increment
+    id                   bigserial
         primary key,
-    email                varchar(255) null,
-    enabled              int not null,
-    password             varchar(255) null,
-    role                 varchar(255) null,
-    time_of_creation     datetime(6) null,
-    time_of_modification datetime(6) null,
-    username             varchar(255) null
+    email                varchar(255),
+    enabled              integer not null,
+    password             varchar(255),
+    role                 varchar(255),
+    time_of_creation     timestamp,
+    time_of_modification timestamp,
+    username             varchar(255)
 );
-
