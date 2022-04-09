@@ -21,7 +21,7 @@ public class User {
     @NonNull private String username;
     @NonNull private String email;
     @NonNull private String password;
-    @NonNull private int enabled = 1;
+    @NonNull private boolean enabled = true;
     @NonNull private String role = "ROLE_USER";
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());

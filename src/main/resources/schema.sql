@@ -37,7 +37,7 @@ create table if not exists users
     id                   bigserial
         primary key,
     email                varchar(255),
-    enabled              integer not null,
+    enabled              boolean not null,
     password             varchar(255),
     role                 varchar(255),
     time_of_creation     timestamp,
