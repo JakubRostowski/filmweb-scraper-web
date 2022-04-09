@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,6 +14,10 @@
 
 <div th:if="${session.user}">
     <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
+</div>
+
+<div sec:authorize="hasRole('ADMIN')">
+    <a href="/users">User List</a>
 </div>
 
 <div th:if="${session.user == null}">
