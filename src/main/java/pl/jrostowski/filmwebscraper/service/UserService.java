@@ -20,6 +20,10 @@ public class UserService {
         return result;
     }
 
+    public List<User> findAllByOrderByIdAsc() {
+        return userRepository.findAllByOrderByUserIdAsc();
+    }
+
     public User findByUsername(String username) {
         return userRepository.findFirstByUsername(username);
     }
