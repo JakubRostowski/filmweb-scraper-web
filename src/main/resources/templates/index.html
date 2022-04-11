@@ -6,31 +6,34 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
     <title>Homepage</title>
 </head>
 <body>
-<h1>This is homepage!</h1>
+<div th:include="header :: header"></div>
+<main>
+    <h1>This is homepage!</h1>
 
-<div th:if="${session.user}">
-    <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
-</div>
+    <div th:if="${session.user}">
+        <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
+    </div>
 
-<div sec:authorize="hasRole('ADMIN')">
-    <a href="/users">User List</a>
-</div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <a href="/users">User List</a>
+    </div>
 
-<div th:if="${session.user == null}">
-    <a href="/login">Login</a>
-    <form th:action="@{/register}">
-        <input type="submit" value="Register" />
+    <div th:if="${session.user == null}">
+        <a href="/login">Login</a>
+        <form th:action="@{/register}">
+            <input type="submit" value="Register"/>
+        </form>
+    </div>
+
+    <form th:if="${session.user}" th:action="@{/logout}" method="POST">
+        <button type="submit">Logout</button>
     </form>
-</div>
-
-<form th:if="${session.user}" th:action="@{/logout}" method="POST">
-    <button type="submit">Logout</button>
-</form>
-
-<div th:include="footer :: footer" class="footer"></div>
+</main>
+<div th:include="footer :: footer"></div>
 </body>
 </html>

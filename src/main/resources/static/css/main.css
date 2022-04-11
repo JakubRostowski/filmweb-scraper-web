@@ -8,18 +8,32 @@
 }
 
 body {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: auto;
     min-height: 100vh;
     font-family: 'Roboto Condensed', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: var(--colour-grey);
+    color: var(--colour-green-light);
+}
+
+.header .fa-solid .fa-bars {
+    font-size: 30px;
 }
 
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:auto;
+    margin-top: auto;
     height: 40px;
     font-size: 20px;
     background: var(--colour-grey);
