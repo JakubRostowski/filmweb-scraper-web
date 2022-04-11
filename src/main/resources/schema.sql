@@ -1,6 +1,6 @@
 create table if not exists movie
 (
-    id                   bigserial
+    id                   integer generated always as identity
         primary key,
     country_of_origin    varchar(255),
     critics_rate         double precision not null,
@@ -19,7 +19,7 @@ create table if not exists movie
 
 create table if not exists archived_movie
 (
-    id                   bigserial
+    id                   integer generated always as identity
         primary key,
     critics_rate         double precision not null,
     position             integer          not null,
@@ -34,7 +34,7 @@ create table if not exists archived_movie
 
 create table if not exists users
 (
-    id                   bigserial
+    id                   integer generated always as identity
         primary key,
     email                varchar(255),
     enabled              boolean not null,
