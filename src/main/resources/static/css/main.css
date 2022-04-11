@@ -25,7 +25,7 @@ body {
     color: var(--colour-green-light);
 }
 
-.header .fa-solid .fa-bars {
+.header .menu-icon {
     font-size: 30px;
 }
 
