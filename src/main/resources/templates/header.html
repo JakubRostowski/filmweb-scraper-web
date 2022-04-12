@@ -7,14 +7,12 @@
 </head>
 <body>
 
-<div th:fragment="header">
-    <div class="header">
-        <a th:href="@{/}">
-            <img class="logo" th:src="@{/img/logo_light_border_gradient.png}" alt="logo" />
-        </a>
-        <i class="fa-solid fa-bars menu-icon"></i>
-    </div>
-</div>
+<header th:fragment="header">
+    <a th:href="@{/}">
+        <img class="logo" th:src="@{/img/logo_light_border_gradient.png}" alt="logo"/>
+    </a>
+    <i class="fa-solid fa-bars menu-icon"></i>
+</header>
 
 </body>
 </html>
