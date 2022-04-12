@@ -13,6 +13,7 @@ body {
     justify-content: space-between;
     margin: auto;
     min-height: 100vh;
+    background-color: var(--colour-silver);
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -20,9 +21,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 25px 10px 15px;
     background: var(--colour-grey);
     color: var(--colour-green-light);
+}
+
+.header .logo {
+    max-width: 35%;
+    height: auto;
 }
 
 .header .menu-icon {
