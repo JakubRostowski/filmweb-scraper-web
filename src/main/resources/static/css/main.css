@@ -21,18 +21,20 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 25px 10px 15px;
+    max-height: 10vh;
+    padding: 10px 15px;
     background: var(--colour-grey);
     color: var(--colour-green-light);
 }
 
 .header .logo {
-    max-width: 35%;
-    height: auto;
+    max-width: 100%;
+    max-height: 8vh;
 }
 
 .header .menu-icon {
     font-size: 30px;
+    margin-right: 10px;
 }
 
 .footer {
