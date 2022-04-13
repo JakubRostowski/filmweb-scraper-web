@@ -11,7 +11,7 @@
     <title>Homepage</title>
 </head>
 <body>
-<header th:include="header :: header" th:remove="tag"></header>
+<header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
     <h1>This is homepage!</h1>
 
@@ -34,7 +34,8 @@
         <button type="submit">Logout</button>
     </form>
 </main>
-<aside th:include="menu :: menu" th:remove="tag"></aside>
-<footer th:include="footer :: footer" th:remove="tag"></footer>
+<aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
+<footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
+<script th:src="@{/scripts/script.js}"></script>
 </html>

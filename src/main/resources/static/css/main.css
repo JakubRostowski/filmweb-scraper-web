@@ -35,6 +35,12 @@ body {
 .header .menu-icon {
     font-size: 30px;
     margin-right: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.header .menu-icon .active {
+
 }
 
 .main {
@@ -53,4 +59,20 @@ body {
     font-size: 20px;
     background: var(--colour-grey);
     color: var(--colour-green-light);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 100vw;
+    background-color: var(--colour-grey-ligth);
+    transition: .3s ease-in-out;
+}
+
+.menu.active {
+    left: 0;
 }
