@@ -1,17 +1,14 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <header th:fragment="header">
-    <a th:href="@{/}">
-        <img class="logo" th:src="@{/img/logo_light_border_gradient.png}" alt="logo"/>
-    </a>
-    <i class="fa-solid fa-bars menu-icon"></i>
+    <header th:class="header">
+        <a th:href="@{/}">
+            <img class="logo" th:src="@{/img/logo_light_border_gradient.png}" alt="logo"/>
+        </a>
+        <i class="fa-solid fa-bars menu-icon"></i>
+    </header>
 </header>
 
 </body>

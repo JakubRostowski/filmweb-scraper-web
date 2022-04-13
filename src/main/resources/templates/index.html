@@ -11,8 +11,8 @@
     <title>Homepage</title>
 </head>
 <body>
-<header th:include="header :: header"></header>
-<main>
+<header th:include="header :: header" th:remove="tag"></header>
+<main th:class="main">
     <h1>This is homepage!</h1>
 
     <div th:if="${session.user}">
@@ -34,6 +34,7 @@
         <button type="submit">Logout</button>
     </form>
 </main>
-<footer th:include="footer :: footer"></footer>
+<aside th:include="menu :: menu" th:remove="tag"></aside>
+<footer th:include="footer :: footer" th:remove="tag"></footer>
 </body>
 </html>
