@@ -37,6 +37,13 @@ header .menu-icon {
     margin-right: 10px;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
 footer {
     display: flex;
     justify-content: center;
