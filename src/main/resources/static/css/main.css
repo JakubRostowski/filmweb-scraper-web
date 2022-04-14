@@ -36,6 +36,7 @@ body {
 .header .menu-icon {
     font-size: 30px;
     margin-right: 10px;
+    user-select: none;
     cursor: pointer;
     z-index: 1;
 }
