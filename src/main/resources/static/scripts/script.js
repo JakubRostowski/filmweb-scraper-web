@@ -5,4 +5,5 @@ menuOpenBtn.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
     menu.classList.toggle("active");
+    menuOpenBtn.classList.toggle("active");
 }
