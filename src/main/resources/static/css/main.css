@@ -84,8 +84,7 @@ body {
 
 .tiles {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
     align-content: center;
     flex-wrap: wrap;
     margin: 50px 25px 20px;
