@@ -15,10 +15,6 @@
 <main th:class="main">
     <h1>This is homepage!</h1>
 
-    <div th:if="${session.user}">
-        <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
-    </div>
-
     <div sec:authorize="hasRole('ADMIN')">
         <a href="/users">User List</a>
     </div>
