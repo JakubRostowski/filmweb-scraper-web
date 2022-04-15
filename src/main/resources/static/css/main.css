@@ -44,7 +44,7 @@ body {
 .header .menu-icon.active::before {
     content: "\f00d";
     font-size: 38px;
-    animation-name: btn-fade-in;
+    animation-name: fade-in;
     animation-duration: .6s;
 }
 
@@ -101,6 +101,10 @@ body {
     transition: .2s;
 }
 
+.tiles div.active {
+    animation: fade-in .5s;
+}
+
 .tiles .tile:hover {
     background-color: var(--colour-green-light);
 }
@@ -114,6 +118,7 @@ body {
 
 .tiles .tile.bug-report {
     background-color: #aa5555;
+    max-width: 40vw;
 }
 
 .tiles .tile.bug-report:hover {
