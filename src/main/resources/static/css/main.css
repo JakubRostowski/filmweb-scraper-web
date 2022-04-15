@@ -86,13 +86,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
     flex-wrap: wrap;
-    margin: auto;
+    margin: 50px 25px 20px;
+    flex: 1 1 120px;
 }
 
 .tiles * {
-    width: 120px;
-    height: 120px;
+    flex: 1 1 120px;
+    height: 17%;
     margin: 6px;
     background-color: var(--colour-green-dark);
     text-transform: capitalize;
@@ -104,7 +106,7 @@ body {
 }
 
 .tiles .tile-profile-info {
-    width: 252px;
+    flex-basis: 240px;
     background-color: var(--colour-grey-ligth);
     color: var(--colour-green-dark);
     border: solid var(--colour-green-dark) 2px;
