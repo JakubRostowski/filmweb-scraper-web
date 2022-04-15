@@ -92,7 +92,7 @@ body {
     flex: 1 1 120px;
 }
 
-.tiles * {
+.tiles div {
     flex: 1 1 120px;
     height: 17%;
     margin: 6px;
@@ -101,13 +101,21 @@ body {
     transition: .2s;
 }
 
-.tiles *:hover {
+.tiles .tile:hover {
     background-color: var(--colour-green-light);
 }
 
-.tiles .tile-profile-info {
+.tiles .tile.profile-info {
     flex-basis: 240px;
     background-color: var(--colour-grey-ligth);
     color: var(--colour-green-dark);
     border: solid var(--colour-green-dark) 2px;
+}
+
+.tiles .tile.bug-report {
+    background-color: #aa5555;
+}
+
+.tiles .tile.bug-report:hover {
+    background-color: #cc4545;
 }
