@@ -81,3 +81,31 @@ body {
 .menu.active {
     left: 0;
 }
+
+.tiles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.tiles * {
+    width: 120px;
+    height: 120px;
+    margin: 6px;
+    background-color: var(--colour-green-dark);
+    text-transform: capitalize;
+    transition: .2s;
+}
+
+.tiles *:hover {
+    background-color: var(--colour-green-light);
+}
+
+.tiles .tile-profile-info {
+    width: 252px;
+    background-color: var(--colour-grey-ligth);
+    color: var(--colour-green-dark);
+    border: solid var(--colour-green-dark) 2px;
+}
