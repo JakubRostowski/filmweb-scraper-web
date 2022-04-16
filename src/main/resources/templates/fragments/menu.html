@@ -6,16 +6,17 @@
     <aside class="menu">
         <nav class="tiles">
             <div class="tile profile-info" th:if="${session.user}">
-                <p th:text="'Username: ' + ${session.user.username} + ', Email: ' + ${session.user.email}"></p>
+                <p th:text="'Name: ' + ${session.user.username}"></p>
+                <p th:text="'Email: ' + ${session.user.email}"></p>
             </div>
-            <div th:unless="${session.user}" class="tile">login</div>
-            <div th:unless="${session.user}" class="tile">register</div>
-            <div sec:authorize="hasRole('ADMIN')" class="tile">admin panel</div>
-            <div class="tile">top 500</div>
-            <div class="tile">all movies</div>
-            <div class="tile">news</div>
-            <div class="tile">about author</div>
-            <div class="tile bug-report">report a bug</div>
+            <div th:unless="${session.user}" class="tile"><i class="fa-solid fa-user"></i>login</div>
+            <div th:unless="${session.user}" class="tile"><i class="fa-solid fa-address-card"></i>register</div>
+            <div sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin panel</div>
+            <div class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</div>
+            <div class="tile"><i class="fa-solid fa-list"></i>all movies</div>
+            <div class="tile"><i class="fa-solid fa-newspaper"></i>news</div>
+            <div class="tile"><i class="fa-solid fa-face-grin-beam"></i>about author</div>
+            <div class="tile bug-report"><i class="fa-solid fa-bug"></i>report a bug</div>
         </nav>
     </aside>
 </aside>
