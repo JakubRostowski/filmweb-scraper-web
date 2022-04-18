@@ -1,37 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <title>Login Page</title>
 </head>
 <body>
+<header th:include="fragments/header :: header" th:remove="tag"></header>
+<main th:class="main">
+    <form th:action="@{/login}" method="POST">
+        <div>
+            <div th:if="${param.error}">
+                Invalid username or password.
+            </div>
 
-<form th:action="@{/login}" method="POST">
-
-    <div>
-        <div th:if="${param.error}">
-            Invalid username or password.
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
         </div>
 
-        <div th:if="${param.logout}">
-            You have been logged out.
+        <div>
+            <input type="text" name="username" placeholder="username">
         </div>
-    </div>
-
-    <div>
-        <input type="text" name="username" placeholder="username">
-    </div>
-    <div>
-        <input type="password" name="password" placeholder="password">
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-
-</form>
-
+        <div>
+            <input type="password" name="password" placeholder="password">
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</main>
+<aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
+<footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
+<script th:src="@{/scripts/script.js}"></script>
 </html>

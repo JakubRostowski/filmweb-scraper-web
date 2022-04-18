@@ -5,31 +5,36 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add User View</title>
-
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <title>Register Form</title>
 </head>
 <body>
+<header th:include="fragments/header :: header" th:remove="tag"></header>
+<main th:class="main">
+    <div th:if="${registrationError}">
+        <span th:text="${registrationError}"></span>
+    </div>
 
-<div th:if="${registrationError}">
-    <span th:text="${registrationError}"></span>
-</div>
+    <form action="#" th:action="@{/register/save}" th:object="${user}" method="post">
+        <input type="text" th:field="*{username}" placeholder="Name">
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 
-<form action="#" th:action="@{/register/save}" th:object="${user}" method="post">
-    <input type="text" th:field="*{username}" placeholder="Name">
-    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        <input type="text" th:field="*{email}" placeholder="Email">
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
-    <input type="text" th:field="*{email}" placeholder="Email">
-    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <input type="password" th:field="*{password}" placeholder="Password">
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 
-    <input type="password" th:field="*{password}" placeholder="Password">
-    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <input type="password" th:field="*{confirmPassword}" placeholder="Confirm password">
+        <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
 
-    <input type="password" th:field="*{confirmPassword}" placeholder="Password">
-    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-
-    <button type="submit">Save</button>
-</form>
-<a th:href="@{/users}">Back to the users list</a>
-
+        <button type="submit">Save</button>
+    </form>
+    <a th:href="@{/users}">Back to the users list</a>
+</main>
+<aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
+<footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
+<script th:src="@{/scripts/script.js}"></script>
 </html>

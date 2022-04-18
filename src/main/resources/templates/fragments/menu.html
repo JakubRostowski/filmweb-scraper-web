@@ -9,14 +9,14 @@
                 <p th:text="'Name: ' + ${session.user.username}"></p>
                 <p th:text="'Email: ' + ${session.user.email}"></p>
             </div>
-            <div th:unless="${session.user}" class="tile"><i class="fa-solid fa-user"></i>login</div>
-            <div th:unless="${session.user}" class="tile"><i class="fa-solid fa-address-card"></i>register</div>
-            <div sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin panel</div>
-            <div class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</div>
-            <div class="tile"><i class="fa-solid fa-list"></i>all movies</div>
-            <div class="tile"><i class="fa-solid fa-newspaper"></i>news</div>
-            <div class="tile"><i class="fa-solid fa-face-grin-beam"></i>about author</div>
-            <div class="tile bug-report"><i class="fa-solid fa-bug"></i>report a bug</div>
+            <a th:unless="${session.user}" href="/login" class="tile"><i class="fa-solid fa-user"></i>login</a>
+            <a th:unless="${session.user}" href="/register" class="tile"><i class="fa-solid fa-address-card"></i>register</a>
+            <a sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin panel</a>
+            <a class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
+            <a class="tile"><i class="fa-solid fa-list"></i>all movies</a>
+            <a class="tile"><i class="fa-solid fa-newspaper"></i>news</a>
+            <a class="tile"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
+            <a class="tile bug-report"><i class="fa-solid fa-bug"></i>report a bug</a>
         </nav>
     </aside>
 </aside>
