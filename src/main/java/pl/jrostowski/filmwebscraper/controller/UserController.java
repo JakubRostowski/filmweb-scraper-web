@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/users")
+    @GetMapping("/admin-panel")
     public String getUsers(Model model) {
         List<User> users = userService.findAllByOrderByIdAsc();
         model.addAttribute("users", users);
@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/change-role/{id}")
     public ModelAndView changeRole(@PathVariable Long id) {
         userService.toggleRole(id);
-        return new ModelAndView("redirect:/users");
+        return new ModelAndView("redirect:/admin-panel");
     }
 
 }

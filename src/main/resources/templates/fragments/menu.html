@@ -19,7 +19,8 @@
             </div>
             <a th:unless="${session.user}" href="/login" class="tile"><i class="fa-solid fa-user"></i>login</a>
             <a th:unless="${session.user}" href="/register" class="tile"><i class="fa-solid fa-address-card"></i>register</a>
-            <a sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin
+            <a sec:authorize="hasRole('ADMIN')" href="/admin-panel" class="tile"><i
+                    class="fa-solid fa-screwdriver-wrench"></i>admin
                 panel</a>
             <a class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
             <a class="tile"><i class="fa-solid fa-list"></i>all movies</a>
