@@ -1,6 +1,5 @@
 DO
 '
-    DECLARE
     BEGIN
         IF NOT EXISTS(SELECT *
                       FROM users
