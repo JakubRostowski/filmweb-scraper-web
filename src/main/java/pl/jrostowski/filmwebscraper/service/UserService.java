@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,12 +12,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    public List<User> findAllUsers() {
-        List<User> result = new ArrayList<>();
-        userRepository.findAll().forEach(result::add);
-        return result;
-    }
 
     public List<User> findAllByOrderByIdAsc() {
         return userRepository.findAllByOrderByUserIdAsc();
