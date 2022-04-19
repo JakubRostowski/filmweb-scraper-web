@@ -19,9 +19,6 @@
         <a href="/users">User List</a>
     </div>
 
-    <form th:if="${session.user}" th:action="@{/logout}" method="POST">
-        <button type="submit">Logout</button>
-    </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>

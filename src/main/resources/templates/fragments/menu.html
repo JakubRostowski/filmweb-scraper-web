@@ -6,12 +6,21 @@
     <aside class="menu">
         <nav class="tiles">
             <div class="tile profile-info" th:if="${session.user}">
-                <p th:text="'Name: ' + ${session.user.username}"></p>
-                <p th:text="'Email: ' + ${session.user.email}"></p>
+                <div>
+                    <p th:text="'Name: ' + ${session.user.username}"></p>
+                    <p th:text="'Email: ' + ${session.user.email}"></p>
+                </div>
+                <form th:if="${session.user}" class="tile" th:action="@{/logout}" method="POST">
+                    <button type="submit">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <p>logout</p>
+                    </button>
+                </form>
             </div>
             <a th:unless="${session.user}" href="/login" class="tile"><i class="fa-solid fa-user"></i>login</a>
             <a th:unless="${session.user}" href="/register" class="tile"><i class="fa-solid fa-address-card"></i>register</a>
-            <a sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin panel</a>
+            <a sec:authorize="hasRole('ADMIN')" class="tile"><i class="fa-solid fa-screwdriver-wrench"></i>admin
+                panel</a>
             <a class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
             <a class="tile"><i class="fa-solid fa-list"></i>all movies</a>
             <a class="tile"><i class="fa-solid fa-newspaper"></i>news</a>

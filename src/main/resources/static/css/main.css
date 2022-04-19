@@ -91,7 +91,7 @@ body {
     flex: 1 1 120px;
 }
 
-.tiles a {
+.tile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,11 +108,11 @@ body {
     text-decoration: none;
 }
 
-.tiles a i {
+.tile i {
     font-size: 45px;
 }
 
-.tiles a.active {
+.tile.active {
     animation: fade-in .5s;
 }
 
@@ -121,10 +121,25 @@ body {
 }
 
 .tiles .tile.profile-info {
+    display: flex;
+    flex-direction: row;
     flex-basis: 240px;
     background-color: var(--colour-grey-ligth);
     color: var(--colour-green-dark);
     border: solid var(--colour-green-dark) 2px;
+    padding: 0 0 0 6px;
+}
+
+.tiles .tile.profile-info form {
+    height: 100%;
+    margin: 0 0 0 6px;
+}
+
+.tiles .tile.profile-info button {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
 }
 
 .tiles .tile.bug-report {
