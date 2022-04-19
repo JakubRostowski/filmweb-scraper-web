@@ -36,4 +36,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void toggleRole(Long id) {
+        User user = userRepository.findByUserId(id);
+        if (user.getRole().equals("ROLE_ADMIN")) {
+            user.setRole("ROLE_USER");
+        } else {
+            user.setRole("ROLE_ADMIN");
+        }
+        userRepository.save(user);
+    }
 }

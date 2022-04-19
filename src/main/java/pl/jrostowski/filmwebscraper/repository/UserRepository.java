@@ -12,4 +12,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findAllByOrderByUserIdAsc();
     User findFirstByUsername(String username);
     User findFirstByEmail(String email);
+    User findByUserId(Long id);
 }

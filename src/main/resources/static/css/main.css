@@ -150,3 +150,31 @@ body {
 .tiles .tile.bug-report:hover {
     background-color: #cc4545;
 }
+
+.users {
+    max-width: calc(100vw - 2 * 6px);
+    margin: 6px;
+    border: solid 1px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.users button {
+    padding: 0 3px;
+    text-transform: capitalize;
+}
+
+.users thead {
+    background-color: var(--colour-green-dark);
+}
+
+.users tr:nth-child(even) {
+    background-color: #cccccc;
+}
+
+.users td,
+.users th {
+    border: 1px solid #444;
+    padding: 2px;
+    text-align: center;
+}
