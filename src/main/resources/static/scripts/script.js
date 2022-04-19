@@ -1,6 +1,6 @@
 const menu = document.querySelector(".menu");
 const menuOpenBtn = document.querySelector(".header .menu-icon");
-const tiles = document.querySelectorAll(".tiles div");
+const tiles = document.querySelectorAll(".tile");
 
 menuOpenBtn.addEventListener("click", toggleMenu);
 
