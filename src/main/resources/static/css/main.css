@@ -68,7 +68,6 @@ body {
 
 .menu {
     display: flex;
-    flex-direction: column;
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -116,11 +115,11 @@ body {
     animation: fade-in .5s;
 }
 
-.tiles .tile:hover {
+.tile:hover {
     background-color: var(--colour-green-light);
 }
 
-.tiles .tile.profile-info {
+.tile.profile-info {
     display: flex;
     flex-direction: row;
     flex-basis: 240px;
@@ -130,12 +129,12 @@ body {
     padding: 0 0 0 6px;
 }
 
-.tiles .tile.profile-info form {
+.tile.profile-info form {
     height: 100%;
     margin: 0 0 0 6px;
 }
 
-.tiles .tile.profile-info button {
+.tile.profile-info button {
     background-color: transparent;
     border: none;
     height: 100%;
@@ -144,12 +143,12 @@ body {
     text-transform: capitalize;
 }
 
-.tiles .tile.bug-report {
+.tile.bug-report {
     background-color: #aa5555;
     max-width: 40vw;
 }
 
-.tiles .tile.bug-report:hover {
+.tile.bug-report:hover {
     background-color: #cc4545;
 }
 
