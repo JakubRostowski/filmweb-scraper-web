@@ -1,6 +1,9 @@
 package pl.jrostowski.filmwebscraper.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
@@ -15,6 +18,11 @@ public class UserService {
 
     public List<User> findAllByOrderByIdAsc() {
         return userRepository.findAllByOrderByUserIdAsc();
+    }
+
+    public Page<User> findAllByOrderByIdAsc(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        return userRepository.findAllByOrderByUserIdAsc(pageable);
     }
 
     public User findByUsername(String username) {
