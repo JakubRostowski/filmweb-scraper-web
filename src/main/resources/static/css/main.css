@@ -153,11 +153,11 @@ body {
 }
 
 .users {
-    max-width: calc(100vw - 2 * 6px);
+    width: calc(100vw - 2 * 6px);
     margin: 6px;
     border: solid 1px;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .users button {
@@ -176,6 +176,25 @@ body {
 .users td,
 .users th {
     border: 1px solid #444;
-    padding: 2px;
+    padding: 3px;
     text-align: center;
+}
+
+.page-menu {
+    display: flex;
+    width: 75vw;
+    justify-content: space-between;
+}
+
+.page-menu a {
+    color: var(--colour-green-dark);
+}
+
+.page-input {
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 20%;
+    text-align: center;
+    line-height: 20px;
 }

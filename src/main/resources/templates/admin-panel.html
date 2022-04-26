@@ -42,7 +42,7 @@
         </tbody>
     </table>
 
-    <div th:if="${totalPages > 1}">
+    <div class="page-menu" th:if="${totalPages > 1}">
 
         <a th:if="${currentPage != 1}" th:href="@{'/admin-panel/page/1'}">First</a>
         <span th:unless="${currentPage != 1}">First</span>
@@ -50,10 +50,10 @@
         <a th:if="${currentPage > 1}" th:href="@{'/admin-panel/page/' + ${currentPage - 1}}">Previous</a>
         <span th:unless="${currentPage > 1}">Previous</span>
 
-        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-            <a th:if="${currentPage != i}" th:href="@{'/admin-panel/page/' + ${i}}">[[${i}]]</a>
-            <span th:unless="${currentPage != i}">[[${i}]]</span>
-        </span>
+        <div>
+            <span>Page <input class="page-input" type="number" th:value="${currentPage}"> of</span>
+            <span th:text="${totalPages}" class="page-max"></span>
+        </div>
 
         <a th:if="${currentPage < totalPages}" th:href="@{'/admin-panel/page/' + ${currentPage + 1}}">Next</a>
         <span th:unless="${currentPage < totalPages}">Next</span>
@@ -66,5 +66,6 @@
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
-<script th:src="@{/scripts/script.js}"></script>
+<script th:src="@{/scripts/menu.js}"></script>
+<script th:src="@{/scripts/page-menu.js}"></script>
 </html>
