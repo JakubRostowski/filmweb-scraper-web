@@ -10,7 +10,7 @@ function redirectIfCorrect(e) {
         } else if (input.value > maxPage) {
             input.value = parseInt(maxPage);
         } else if (e.key === 'Enter') {
-            location.href = 'http://localhost:8080/admin-panel/page/' + input.value;
+            location.replace(location.origin + '/admin-panel/page/' + input.value);
         }
     }
 }
