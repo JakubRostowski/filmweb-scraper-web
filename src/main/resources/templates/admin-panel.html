@@ -42,25 +42,7 @@
         </tbody>
     </table>
 
-    <div class="page-menu" th:if="${totalPages > 1}">
-
-        <a th:if="${currentPage != 1}" th:href="@{'/admin-panel/page/1'}">First</a>
-        <span th:unless="${currentPage != 1}">First</span>
-
-        <a th:if="${currentPage > 1}" th:href="@{'/admin-panel/page/' + ${currentPage - 1}}">Previous</a>
-        <span th:unless="${currentPage > 1}">Previous</span>
-
-        <div>
-            <span>Page <input class="page-input" type="number" th:value="${currentPage}"> of</span>
-            <span th:text="${totalPages}" class="page-max"></span>
-        </div>
-
-        <a th:if="${currentPage < totalPages}" th:href="@{'/admin-panel/page/' + ${currentPage + 1}}">Next</a>
-        <span th:unless="${currentPage < totalPages}">Next</span>
-
-        <a th:if="${currentPage < totalPages}" th:href="@{'/admin-panel/page/' + ${totalPages}}">Last</a>
-        <span th:unless="${currentPage < totalPages}">Last</span>
-    </div>
+    <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>

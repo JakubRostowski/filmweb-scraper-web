@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="page-menu">
+    <div class="page-menu" th:if="${totalPages > 1}">
+
+        <a th:if="${currentPage != 1}" th:href="@{${url} + 1}">First</a>
+        <span th:unless="${currentPage != 1}">First</span>
+
+        <a th:if="${currentPage > 1}" th:href="@{${url} + ${currentPage - 1}}">Previous</a>
+        <span th:unless="${currentPage > 1}">Previous</span>
+
+        <div>
+            <span>Page <input class="page-input" type="number" th:value="${currentPage}"> of</span>
+            <span th:text="${totalPages}" class="page-max"></span>
+        </div>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{${url} + ${currentPage + 1}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{${url} + ${totalPages}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+
+        <script th:inline="javascript">
+            const url = [[${url}]];
+        </script>
+    </div>
+</div>
+
+</body>
+</html>
