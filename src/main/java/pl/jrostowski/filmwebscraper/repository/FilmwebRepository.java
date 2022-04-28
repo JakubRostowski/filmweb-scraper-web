@@ -70,19 +70,19 @@ public class FilmwebRepository {
             criticsRate = -1;
         }
         String length = documentMovie.select(".fP__duration").text().replaceAll("godz.", "h").replaceAll("min.", "min");
-        String director = documentMovie.select("div.filmInfo__info:nth-child(3)").text().replaceAll("więcej", "");
+        String director = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(4)").text().replaceAll("więcej", "");
         String screenwriter;
         String genre;
         String countryOfOrigin;
         if (director.isEmpty()) {
-            director = documentMovie.select(".filmPosterSection__info > div:nth-child(4)").text().replaceAll("więcej", "");
-            screenwriter = documentMovie.select("div.filmInfo__info:nth-child(6)").text().replaceAll("więcej", "");
-            genre = documentMovie.select("div.filmInfo__info:nth-child(8)").text();
-            countryOfOrigin = documentMovie.select("div.filmInfo__info:nth-child(10)").text();
+            director = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(5)").text().replaceAll("więcej", "");
+            screenwriter = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(7)").text().replaceAll("więcej", "");
+            genre = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(9)").text();
+            countryOfOrigin = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(11)").text();
         } else {
-            screenwriter = documentMovie.select("div.filmInfo__info:nth-child(5)").text().replaceAll("więcej", "");
-            genre = documentMovie.select("div.filmInfo__info:nth-child(7)").text();
-            countryOfOrigin = documentMovie.select("div.filmInfo__info:nth-child(9)").text();
+            screenwriter = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(6)").text().replaceAll("więcej", "");
+            genre = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(8)").text();
+            countryOfOrigin = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(10)").text();
         }
         return new Movie(rank, title, year, originalTitle, rate, criticsRate, length, director, screenwriter, genre, countryOfOrigin);
     }
