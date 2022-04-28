@@ -2,6 +2,7 @@ package pl.jrostowski.filmwebscraper.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.jrostowski.filmwebscraper.entity.ArchivedMovie;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.repository.ArchivedMovieRepository;
 import pl.jrostowski.filmwebscraper.repository.ExcelRepository;
@@ -10,6 +11,7 @@ import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,20 +32,19 @@ public class MovieService {
     }
 
     public int countMovies() {
-        return movieRepository.getMovieCount();
+        return (int) movieRepository.count();
     }
 
     @Transactional
     public void populateDatabase(Map<Integer, Movie> movieMap) {
-        movieRepository.createDatabase(movieMap);
+        movieRepository.saveAll(movieMap.values());
     }
 
     @Transactional
     public void checkDifferences(Map<Integer, Movie> movieMap) {
         System.out.println("Looking for differences...");
         List<Movie> databaseMovies = movieRepository.getAllMovies();
-        List<Integer> newMoviesPositions = new ArrayList<>() {
-        };
+        List<Integer> newMoviesPositions = new ArrayList<>();
 
         processRecognizedMovies(movieMap, databaseMovies, newMoviesPositions);
         processUnrecognizedMovies(movieMap, newMoviesPositions);
@@ -55,34 +56,51 @@ public class MovieService {
                     getUniqueMovieByTitleAndYear(movieMap, databaseMovie.getTitle(), databaseMovie.getYear());
             if (checkedMovie.isPresent()) {
                 if (databaseMovie.hashCode() == checkedMovie.get().hashCode()) {
-                    processUnchangedMovie(checkedMovie);
+                    processUnchangedMovie(checkedMovie.get(), databaseMovie.getMovieId());
                 } else {
-                    processChangedMovie(databaseMovie, checkedMovie);
+                    processChangedMovie(databaseMovie, checkedMovie.get());
                 }
             } else {
-                processUnactiveMovie(newMoviesPositions, databaseMovie);
+                processInactiveMovie(newMoviesPositions, databaseMovie);
             }
         }
     }
 
-    private void processUnchangedMovie(Optional<Movie> checkedMovie) {
-        movieRepository.updateTimeOfModification(checkedMovie.get());
+    private void processUnchangedMovie(Movie checkedMovie, Long id) {
+        checkedMovie.setMovieId(id);
+        checkedMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
+        movieRepository.save(checkedMovie);
     }
 
-    private void processChangedMovie(Movie databaseMovie, Optional<Movie> checkedMovie) {
-        System.out.println(checkedMovie.get().getPosition() + ". " +
-                checkedMovie.get().getTitle() + " changed.");
-        databaseMovie.getArchivedMovies().add(checkedMovie.get().toArchivedMovie());
-        archivedMovieRepository.addArchivedMovie(databaseMovie);
-        movieRepository.updateChangedMovie(databaseMovie, checkedMovie.get());
+    private void processChangedMovie(Movie databaseMovie, Movie checkedMovie) {
+        System.out.println(checkedMovie.getPosition() + ". " +
+                checkedMovie.getTitle() + " changed.");
+        databaseMovie.getArchivedMovies().add(checkedMovie.toArchivedMovie());
+        addArchivedMovie(databaseMovie);
+        updateChangedMovie(databaseMovie, checkedMovie);
     }
 
-    private void processUnactiveMovie(List<Integer> newMoviesPositions, Movie databaseMovie) {
+    private void addArchivedMovie(Movie movieData) {
+        ArchivedMovie archivedMovie = movieData.toArchivedMovie();
+        archivedMovie.setMovie(movieData);
+        archivedMovieRepository.save(archivedMovie);
+    }
+
+    private void updateChangedMovie(Movie oldMovie, Movie newMovie) {
+        oldMovie.setPosition(newMovie.getPosition());
+        oldMovie.setRate(newMovie.getRate());
+        oldMovie.setCriticsRate(newMovie.getCriticsRate());
+        oldMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
+        movieRepository.save(oldMovie);
+    }
+
+    private void processInactiveMovie(List<Integer> newMoviesPositions, Movie databaseMovie) {
         if(databaseMovie.getPosition() != -1) {
             newMoviesPositions.add(databaseMovie.getPosition());
         }
-        movieRepository.updatePositionToUnused(databaseMovie);
-        movieRepository.updateTimeOfModification(databaseMovie);
+        databaseMovie.setPosition(-1);
+        databaseMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
+        movieRepository.save(databaseMovie);
         System.out.println(databaseMovie.getTitle() + " set to inactive.");
     }
 
@@ -92,7 +110,7 @@ public class MovieService {
                     .stream()
                     .filter(movie -> movie.getValue().getPosition() == positionToBeReplaced).findFirst();
             if (foundMovie.isPresent()) {
-                movieRepository.addMovie(foundMovie.get().getValue());
+                movieRepository.save(foundMovie.get().getValue());
                 System.out.println(positionToBeReplaced + " added successfully.");
             } else {
                 System.out.println("Movie position" + positionToBeReplaced + "has not been found.");
@@ -118,13 +136,6 @@ public class MovieService {
         } else {
             return Optional.empty();
         }
-    }
-
-    Optional<Movie> getUniqueMovieByPosition(List<Movie> movieList, int position) {
-        return Optional.of(movieList.stream()
-                .filter(movie -> movie.getPosition() == position)
-                .findFirst()
-                .get());
     }
 
     public void ExportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
