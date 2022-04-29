@@ -8,17 +8,11 @@ import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
-    public List<User> findAllByOrderByIdAsc() {
-        return userRepository.findAllByOrderByUserIdAsc();
-    }
 
     public Page<User> findAllByOrderByIdAsc(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);

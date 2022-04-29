@@ -11,10 +11,10 @@ import java.util.List;
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
 
     @Query("select distinct m from Movie m left join fetch m.archivedMovies")
-    List getAllMovies();
+    List<Movie> getAllMovies();
 
     @Query("select distinct m from Movie m left join fetch m.archivedMovies where m.position > 0 order by m.position")
-    List getActiveMovies();
+    List<Movie> getActiveMovies();
 
     @Query("select m from Movie m where m.movieId = ?1")
     Movie findById(int movieId);
