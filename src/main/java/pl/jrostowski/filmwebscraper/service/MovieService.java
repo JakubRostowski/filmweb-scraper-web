@@ -101,7 +101,6 @@ public class MovieService {
         databaseMovie.setPosition(-1);
         databaseMovie.setTimeOfModification(new Timestamp(System.currentTimeMillis()));
         movieRepository.save(databaseMovie);
-        System.out.println(databaseMovie.getTitle() + " set to inactive.");
     }
 
     private void processUnrecognizedMovies(Map<Integer, Movie> movieMap, List<Integer> newMoviesPositions) {
