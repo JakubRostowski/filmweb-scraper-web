@@ -13,7 +13,7 @@ public class LoginController {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "login";
         } else {
-            return "index";
+            return "redirect:/";
         }
     }
 }
