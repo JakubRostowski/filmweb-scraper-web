@@ -114,3 +114,21 @@ body {
     text-align: center;
     line-height: 20px;
 }
+
+.movie-summary {
+    display: flex;
+    padding: 10px 5px;
+    border-top: solid 2px var(--colour-grey-ligth);
+    border-bottom: solid 2px var(--colour-grey-ligth);
+}
+
+.movie-summary img {
+    max-width: 35%;
+}
+
+.movie-summary-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 10px;
+}

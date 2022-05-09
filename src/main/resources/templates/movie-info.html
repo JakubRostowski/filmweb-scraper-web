@@ -12,8 +12,17 @@
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main class="main movie-info">
-    <h1 th:text="${movie.title}"></h1>
+    <div class="movie-summary">
+        <img th:src="${movie.poster}" alt="movie poster">
+        <div class="movie-summary-data">
+            <h1 th:text="${movie.title}"></h1>
+            <h2 th:text="'(' + ${movie.year} + ')'"></h2>
+            <h3 th:text="${movie.originalTitle}"></h3>
+        </div>
+    </div>
+    <div class="movie-details">
 
+    </div>
 
 
 </main>
