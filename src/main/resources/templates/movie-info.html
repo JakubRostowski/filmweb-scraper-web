@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/movie-info.css}" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title th:text="${movie.title}"></title>
@@ -75,6 +76,5 @@
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
 <script th:src="@{/scripts/menu.js}"></script>
-
 <script th:src="@{/scripts/chart.js}"></script>
 </html>
