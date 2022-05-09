@@ -123,12 +123,31 @@ body {
 }
 
 .movie-summary img {
-    max-width: 35%;
+    max-width: 40%;
 }
 
 .movie-summary-data {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     margin: 0 10px;
+}
+
+.movie-details {
+    width: 90%;
+    margin: 5px;
+    text-align: center;
+}
+
+.movie-details h2 {
+    margin-bottom: 5px;
+}
+
+.movie-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.movie-details tr {
+    height: 25px;
+    border-bottom: solid 1px var(--colour-grey-ligth);
 }

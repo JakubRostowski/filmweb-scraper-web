@@ -21,7 +21,14 @@
         </div>
     </div>
     <div class="movie-details">
-
+        <h2>Details</h2>
+        <table>
+            <tbody>
+            <tr><th>Director:</th><td th:text="${movie.director}"></td></tr>
+            <tr><th>Screenwriter:</th><td th:text="${movie.screenwriter}"></td></tr>
+            <tr><th>Country of Origin:</th><td th:text="${movie.countryOfOrigin}"></td></tr>
+            </tbody>
+        </table>
     </div>
 
 
