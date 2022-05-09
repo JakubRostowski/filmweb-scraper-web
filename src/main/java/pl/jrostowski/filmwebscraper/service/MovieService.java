@@ -111,12 +111,7 @@ public class MovieService {
             Optional<Map.Entry<Integer, Movie>> foundMovie = movieMap.entrySet()
                     .stream()
                     .filter(movie -> movie.getValue().getPosition() == positionToBeReplaced).findFirst();
-            if (foundMovie.isPresent()) {
-                movieRepository.save(foundMovie.get().getValue());
-                System.out.println(positionToBeReplaced + " added successfully.");
-            } else {
-                System.out.println("Movie position" + positionToBeReplaced + "has not been found.");
-            }
+            foundMovie.ifPresent(integerMovieEntry -> movieRepository.save(integerMovieEntry.getValue()));
         }
     }
 
