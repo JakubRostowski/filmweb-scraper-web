@@ -11,10 +11,11 @@
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
-<main class="main movie-info">
+<main class="main">
     <div class="movie-summary">
         <img th:src="${movie.poster}" alt="movie poster">
         <div class="movie-summary-data">
+            <h1 th:text="${movie.position} + '.'"></h1>
             <h1 th:text="${movie.title}"></h1>
             <h2 th:text="'(' + ${movie.year} + ')'"></h2>
             <h3 th:text="${movie.originalTitle}"></h3>
@@ -24,13 +25,44 @@
         <h2>Details</h2>
         <table>
             <tbody>
-            <tr><th>Director:</th><td th:text="${movie.director}"></td></tr>
-            <tr><th>Screenwriter:</th><td th:text="${movie.screenwriter}"></td></tr>
-            <tr><th>Country of Origin:</th><td th:text="${movie.countryOfOrigin}"></td></tr>
+            <tr>
+                <th>Director:</th>
+                <td th:text="${movie.director}"></td>
+            </tr>
+            <tr>
+                <th>Screenwriter:</th>
+                <td th:text="${movie.screenwriter}"></td>
+            </tr>
+            <tr>
+                <th>Country of Origin:</th>
+                <td th:text="${movie.countryOfOrigin}"></td>
+            </tr>
+            <tr>
+                <th>Duration:</th>
+                <td th:text="${movie.length}"></td>
+            </tr>
+            <tr>
+                <th>Genre:</th>
+                <td th:text="${movie.genre}"></td>
+            </tr>
             </tbody>
         </table>
-    </div>
 
+        <h2>Rating</h2>
+        <table>
+            <tbody>
+            <tr>
+                <th>Overall:</th>
+                <td th:text="${movie.rate}"></td>
+            </tr>
+            <tr>
+                <th>Critics Only:</th>
+                <td th:text="${movie.criticsRate}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
 
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
