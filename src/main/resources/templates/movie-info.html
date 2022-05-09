@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title th:text="${movie.title}"></title>
 </head>
 <body>
@@ -49,18 +50,23 @@
         </table>
 
         <h2>Rating</h2>
-        <table>
+        <table class="table-with-charts">
             <tbody>
             <tr>
                 <th>Overall:</th>
-                <td th:text="${movie.rate}"></td>
+                <td>
+                    <span class="rate-value" th:text="${movie.rate}"></span>
+                    <canvas class="chart-rate rate"></canvas>
+                </td>
             </tr>
-            <tr>
+            <tr th:unless="${movie.criticsRate} == -1">
                 <th>Critics Only:</th>
-                <td th:text="${movie.criticsRate}"></td>
+                <td>
+                    <span class="critics-rate-value" th:text="${movie.criticsRate}"></span>
+                    <canvas class="chart-rate critics-rate"></canvas>
+                </td>
             </tr>
             </tbody>
-
         </table>
     </div>
 
@@ -69,4 +75,6 @@
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
 <script th:src="@{/scripts/menu.js}"></script>
+
+<script th:src="@{/scripts/chart.js}"></script>
 </html>
