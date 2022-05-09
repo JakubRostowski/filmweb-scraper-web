@@ -2,7 +2,7 @@ function generateChart(valueSelector, chartSelector) {
     const rate = parseInt(document.querySelector(valueSelector).textContent);
     const data = {
         datasets: [{
-            backgroundColor: ['rgb(25, 255, 25)', 'rgba(25, 255, 25, 0)'],
+            backgroundColor: ['rgb(30, 230, 30)', 'transparent'],
             borderColor: ['black', 'black'],
             borderWidth: [1, 0],
             data: [rate, 10 - rate],
