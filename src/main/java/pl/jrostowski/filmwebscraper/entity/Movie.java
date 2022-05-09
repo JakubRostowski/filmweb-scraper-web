@@ -42,6 +42,8 @@ public class Movie {
     private String genre;
     @NonNull
     private String countryOfOrigin;
+    @NonNull
+    private String poster;
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 

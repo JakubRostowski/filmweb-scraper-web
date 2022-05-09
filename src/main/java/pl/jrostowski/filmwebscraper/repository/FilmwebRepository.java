@@ -59,9 +59,9 @@ public class FilmwebRepository {
         Connection connectMovie = Jsoup.connect(URL + href.attr("href"));
         Document documentMovie = connectMovie.get();
 
-        String title = documentMovie.select(".fP__title").text();
-        int year = Integer.parseInt(documentMovie.select(".fP__year").text());
-        String originalTitle = documentMovie.select(".fP__originalTitle").text();
+        String title = documentMovie.select(".filmCoverSection__title").text();
+        int year = Integer.parseInt(documentMovie.select(".filmCoverSection__year").text());
+        String originalTitle = documentMovie.select(".filmCoverSection__originalTitle").text();
         double rate = Double.parseDouble(documentMovie.select("span.filmRating__rateValue:nth-child(2)").text().replaceAll(",", "."));
         double criticsRate;
         if (documentMovie.select("span.filmRating__rateValue:nth-child(1)").text().contains(",")) {
@@ -69,7 +69,7 @@ public class FilmwebRepository {
         } else {
             criticsRate = -1;
         }
-        String length = documentMovie.select(".fP__duration").text().replaceAll("godz.", "h").replaceAll("min.", "min");
+        String length = documentMovie.select(".filmCoverSection__duration").text().replaceAll("godz.", "h").replaceAll("min.", "min");
         String director = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(4)").text().replaceAll("więcej", "");
         String screenwriter;
         String genre;
@@ -84,6 +84,7 @@ public class FilmwebRepository {
             genre = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(8)").text();
             countryOfOrigin = documentMovie.select(".filmPosterSection__info.filmInfo > div:nth-child(10)").text();
         }
-        return new Movie(rank, title, year, originalTitle, rate, criticsRate, length, director, screenwriter, genre, countryOfOrigin);
+        String poster = documentMovie.select("#filmPoster").attr("src");
+        return new Movie(rank, title, year, originalTitle, rate, criticsRate, length, director, screenwriter, genre, countryOfOrigin, poster);
     }
 }

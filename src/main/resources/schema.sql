@@ -14,7 +14,8 @@ create table if not exists movie
     time_of_creation     timestamp,
     time_of_modification timestamp,
     title                varchar(255),
-    year                 integer          not null
+    year                 integer          not null,
+    poster               varchar(255)
 );
 
 create table if not exists archived_movie
