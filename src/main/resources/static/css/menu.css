@@ -39,16 +39,20 @@
     text-decoration: none;
 }
 
-.tile i {
-    font-size: 45px;
-}
-
 .tile.active {
     animation: fade-in .5s;
 }
 
 .tile:hover {
     background-color: var(--colour-green-light);
+}
+
+.tile .icons {
+    display: flex;
+}
+
+.tile i {
+    font-size: 45px;
 }
 
 .tile.profile-info {

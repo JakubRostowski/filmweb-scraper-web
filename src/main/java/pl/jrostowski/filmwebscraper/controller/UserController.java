@@ -27,7 +27,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin-panel/page/{pageNumber}")
-    public String getPaginatedUsers(@PathVariable int pageNumber, Model model) {
+    public String getUserView(@PathVariable int pageNumber, Model model) {
         Page<User> page = userService.findAllByOrderByIdAsc(pageNumber, 15);
         model.addAttribute("users", page.getContent());
         model.addAttribute("currentPage", pageNumber);
@@ -38,7 +38,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin-panel")
-    public ModelAndView getUsers() {
+    public ModelAndView redirect() {
         return new ModelAndView("redirect:/admin-panel/page/1");
     }
 

@@ -11,6 +11,7 @@ import pl.jrostowski.filmwebscraper.service.MovieService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,12 +43,13 @@ public class MovieRestController {
     }
 
     @GetMapping("/movies/{movieId}")
-    public Movie getMovieById(@PathVariable int movieId) {
-        Movie movie = movieService.findById(movieId);
-        if (movie == null) {
+    public Movie getMovieById(@PathVariable Long movieId) {
+        Optional<Movie> movie = movieService.findById(movieId);
+        if (movie.isPresent()) {
+            return movie.get();
+        } else {
             throw new RuntimeException("Movie id (" + movieId + ") not found.");
         }
-        return movie;
     }
 
 }

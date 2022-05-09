@@ -22,8 +22,13 @@
             <a sec:authorize="hasRole('ADMIN')" href="/admin-panel" class="tile"><i
                     class="fa-solid fa-screwdriver-wrench"></i>admin
                 panel</a>
-            <a class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
-            <a class="tile"><i class="fa-solid fa-list"></i>all movies</a>
+            <a href="/top500" class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
+            <a href="/inactive-movies" class="tile"><i class="fa-solid fa-list"></i>all movies</a>
+            <a href="/polish-movies" class="tile">
+                <div class="icons">
+                    <i class="fa-solid fa-p"></i><i class="fa-solid fa-l"></i>
+                </div>
+            polish movies</a>
             <a class="tile"><i class="fa-solid fa-newspaper"></i>news</a>
             <a class="tile"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
             <a class="tile bug-report"><i class="fa-solid fa-bug"></i>report a bug</a>

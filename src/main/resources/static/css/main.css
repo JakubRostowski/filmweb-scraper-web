@@ -68,7 +68,7 @@ body {
     color: var(--colour-green-light);
 }
 
-.users {
+.table {
     width: calc(100vw - 2 * 6px);
     margin: 6px;
     border: solid 1px;
@@ -76,21 +76,21 @@ body {
     font-size: 13px;
 }
 
-.users button {
+.table button {
     padding: 0 3px;
     text-transform: capitalize;
 }
 
-.users thead {
+.table thead {
     background-color: var(--colour-green-dark);
 }
 
-.users tr:nth-child(even) {
+.table tr:nth-child(even) {
     background-color: #cccccc;
 }
 
-.users td,
-.users th {
+.table td,
+.table th {
     border: 1px solid #444;
     padding: 3px;
     text-align: center;

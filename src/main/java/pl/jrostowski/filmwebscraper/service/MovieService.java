@@ -1,6 +1,9 @@
 package pl.jrostowski.filmwebscraper.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.ArchivedMovie;
 import pl.jrostowski.filmwebscraper.entity.Movie;
@@ -121,8 +124,9 @@ public class MovieService {
         return movieRepository.getAllMovies();
     }
 
-    public List<Movie> getToplistMovies() {
-        return movieRepository.getActiveMovies();
+    public Page<Movie> getToplistMovies(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        return movieRepository.getActiveMovies(pageable);
     }
 
     Optional<Movie> getUniqueMovieByTitleAndYear(Map<Integer, Movie> movieMap, String title, int year) {
@@ -137,12 +141,12 @@ public class MovieService {
         }
     }
 
-    public void ExportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
+    public void exportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
         System.out.println("Exporting the data to excel format...");
         excelRepository.exportToExcel(movieMap, newExcelFormat);
     }
 
-    public Movie findById(int movieId) {
+    public Optional<Movie> findById(Long movieId) {
         return movieRepository.findById(movieId);
     }
 }
