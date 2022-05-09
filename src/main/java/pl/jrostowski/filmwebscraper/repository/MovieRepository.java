@@ -13,13 +13,13 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
 
-    @Query("select distinct m from Movie m left join fetch m.archivedMovies")
+    @Query("select m from Movie m left join fetch m.archivedMovies")
     List<Movie> getAllMovies();
 
-    @Query("select distinct m from Movie m left join fetch m.archivedMovies where m.position > 0 order by m.position")
+    @Query("select m from Movie m left join fetch m.archivedMovies where m.position > 0 order by m.position")
     List<Movie> getActiveMovies();
 
-    @Query(value = "select distinct m from Movie m where m.position > 0 order by m.position")
+    @Query(value = "select m from Movie m where m.position > 0 order by m.position")
     Page<Movie> getActiveMovies(Pageable pageable);
 
     @Query("select m from Movie m where m.movieId = ?1")
