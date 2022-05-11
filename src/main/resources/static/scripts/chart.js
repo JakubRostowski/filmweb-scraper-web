@@ -45,7 +45,6 @@ function generateLineChart(chartSelector, timestamps) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            events: [],
             plugins: {
                 legend: {
                     display: false
@@ -57,7 +56,9 @@ function generateLineChart(chartSelector, timestamps) {
             },
             scales: {
                 y: {
-                    reverse: true
+                    reverse: true,
+                    min: 1,
+                    max: 500
                 }
             }
         }
