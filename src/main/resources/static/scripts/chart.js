@@ -10,8 +10,12 @@ function generateDoughnutChart(valueSelector, chartSelector) {
     };
 
     const config = {
-        type: 'doughnut', data: data, options: {
-            responsive: false, events: [], plugins: {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: false,
+            events: [],
+            plugins: {
                 legend: {
                     display: false
                 }
@@ -19,28 +23,39 @@ function generateDoughnutChart(valueSelector, chartSelector) {
         }
     };
 
-    return new Chart(document.querySelector(chartSelector), config);
+    return new Chart(
+        document.querySelector(chartSelector),
+        config
+    );
 }
 
 function generateLineChart(chartSelector, timestamps) {
     const data = {
-        labels: timestamps, datasets: [{
-            label: 'Rank', data: getRanks(), fill: false, borderColor: 'rgb(80, 220, 80)'
+        labels: timestamps,
+        datasets: [{
+            label: 'Rank',
+            data: getRanks(),
+            fill: false,
+            borderColor: 'rgb(80, 220, 80)'
         }]
     };
     const config = {
-        type: 'line', data: data, options: {
-            responsive: true, maintainAspectRatio: false, events: [], plugins: {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            events: [],
+            plugins: {
                 legend: {
                     display: false
-                }, title: {
-                    display: true, text: 'Rank'
-                }, datalabels: {
-                    anchor: 'end', align: 'top', formatter: Math.round, font: {
-                        weight: 'bold'
-                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Rank'
                 }
-            }, scales: {
+            },
+            scales: {
                 y: {
                     reverse: true
                 }
@@ -48,11 +63,14 @@ function generateLineChart(chartSelector, timestamps) {
         }
     };
 
-    return new Chart(document.querySelector(chartSelector), config);
+    return new Chart(
+        document.querySelector(chartSelector),
+        config
+    );
 }
 
 function formatTo2Digits(month) {
-    return (month.toString().length = 1) ? '0' + month : month
+    return (month.toString().length = 1) ? '0' + month : month;
 }
 
 function getTimestamps() {
