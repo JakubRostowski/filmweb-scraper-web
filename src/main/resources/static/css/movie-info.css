@@ -21,7 +21,7 @@
 }
 
 .movie-details {
-    width: 90%;
+    width: 100%;
     text-align: center;
 }
 
@@ -30,7 +30,8 @@
 }
 
 .movie-details table {
-    width: 100%;
+    width: 90%;
+    margin: auto;
     border-collapse: collapse;
 }
 
@@ -58,4 +59,8 @@
     max-width: 24px;
     max-height: 24px;
     margin-left: 5px;
+}
+
+.chart-container {
+    height: 225px;
 }
