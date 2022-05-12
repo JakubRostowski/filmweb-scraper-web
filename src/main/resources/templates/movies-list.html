@@ -37,6 +37,7 @@
         </tr>
         </tbody>
     </table>
+    <h2 th:if="${movies.isEmpty()}">No data at the moment.</h2>
 
     <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 </main>
