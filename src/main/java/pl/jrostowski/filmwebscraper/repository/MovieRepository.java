@@ -22,6 +22,9 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     @Query(value = "select m from Movie m where m.position > 0 order by m.position")
     Page<Movie> getActiveMovies(Pageable pageable);
 
+    @Query(value = "select m from Movie m where m.position = -1 order by m.title")
+    Page<Movie> getInactiveMovies(Pageable pageable);
+
     @Query("select m from Movie m where m.movieId = ?1")
     Optional<Movie> findById(Long movieId);
 }

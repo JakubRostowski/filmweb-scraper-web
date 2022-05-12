@@ -40,16 +40,26 @@ public class MovieController {
     }
 
     @GetMapping("/top500")
-    public ModelAndView redirect() {
+    public ModelAndView redirectTop500() {
         return new ModelAndView("redirect:/top500/page/1");
     }
 
-    //    @GetMapping("/inactive-movies")
-//    public String showAllMovies(Model model) {
-//        List<Movie> movies = movieService.getMovieContent();
-//        model.addAttribute("movies", movies);
-//        return "movies-list";
-//    }
+    @GetMapping("/inactive-movies/page/{pageNumber}")
+    public String showInactiveMovies(@PathVariable int pageNumber, Model model) {
+        Page<Movie> page = movieService.getInactiveMovies(pageNumber, 15);
+        model.addAttribute("movies", page.getContent());
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("url", "/inactive-movies/page/");
+        model.addAttribute("webpageTitle", "Inactive Movies");
+        return "movies-list";
+    }
+
+    @GetMapping("/inactive-movies")
+    public ModelAndView redirectInactiveMovies() {
+        return new ModelAndView("redirect:/inactive-movies/page/1");
+    }
+
 
 //    @GetMapping("/polish-movies")
 //    public String showPolishMovies(Model model) {

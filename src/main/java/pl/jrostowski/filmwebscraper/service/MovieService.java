@@ -124,6 +124,11 @@ public class MovieService {
         return movieRepository.getActiveMovies(pageable);
     }
 
+    public Page<Movie> getInactiveMovies(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        return movieRepository.getInactiveMovies(pageable);
+    }
+
     Optional<Movie> getUniqueMovieByTitleAndYear(Map<Integer, Movie> movieMap, String title, int year) {
         Optional<Map.Entry<Integer, Movie>> searchedMovie = movieMap.entrySet().stream()
                 .filter(movie -> movie.getValue().getTitle().equals(title))
