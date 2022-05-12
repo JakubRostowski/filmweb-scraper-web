@@ -75,25 +75,27 @@ function formatTo2Digits(month) {
 }
 
 function getTimestamps() {
-    const timestamps = [new Date(Date.parse(movie.timeOfModification))];
+    const timestamps = [];
     movie.archivedMovies.forEach(movie => timestamps.push(new Date(Date.parse(movie.timeOfModification))));
+    timestamps.push(new Date(Date.parse(movie.timeOfModification)));
     timestamps.forEach(ts => {
         const index = timestamps.indexOf(ts);
         timestamps[index] = ts.getDate() + '.' + formatTo2Digits(ts.getMonth()) + '.' + ts.getFullYear();
     })
-    return timestamps.reverse();
+    return timestamps;
 }
 
 function getRanks() {
-    const ranks = [movie.position];
-    movie.archivedMovies.forEach(movie => {
-        if (movie.position === -1) {
+    const ranks = [];
+    movie.archivedMovies.forEach(archivedMovie => {
+        if (archivedMovie.position === -1) {
             ranks.push(501);
         } else {
-            ranks.push(movie.position)
+            ranks.push(archivedMovie.position)
         }
     });
-    return ranks.reverse();
+    ranks.push(movie.position);
+    return ranks;
 }
 
 const rateChart = generateDoughnutChart('.rate-value', '.chart-rate.rate');
