@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.service.MovieService;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
