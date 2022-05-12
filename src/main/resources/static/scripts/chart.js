@@ -75,13 +75,13 @@ function generateRateLineChart(chartSelector) {
         datasets: [
             {
                 label: 'Rate',
-                data: [6.5, 7.0, 6.8, 6.5],
+                data: getRates(),
                 fill: false,
                 borderColor: 'yellow'
             },
             {
                 label: 'Critics Rate',
-                data: [6.2, 8.2, 7.3, 7.0],
+                data: getCriticsRates(),
                 fill: false,
                 borderColor: 'orange'
             }]
@@ -126,13 +126,39 @@ function getRanks() {
     const ranks = [];
     movie.archivedMovies.forEach(archivedMovie => {
         if (archivedMovie.position === -1) {
-            ranks.push(501);
+            ranks.push(null);
         } else {
             ranks.push(archivedMovie.position)
         }
     });
     ranks.push(movie.position);
     return ranks;
+}
+
+function getRates() {
+    const rates = [];
+    movie.archivedMovies.forEach(archivedMovie => {
+        if (archivedMovie.rate === -1) {
+            rates.push(null);
+        } else {
+            rates.push(archivedMovie.rate)
+        }
+    });
+    rates.push(movie.rate);
+    return rates;
+}
+
+function getCriticsRates() {
+    const rates = [];
+    movie.archivedMovies.forEach(archivedMovie => {
+        if (archivedMovie.criticsRate === -1) {
+            rates.push(null);
+        } else {
+            rates.push(archivedMovie.criticsRate)
+        }
+    });
+    rates.push(movie.criticsRate);
+    return rates;
 }
 
 const rateChart = generateDoughnutChart(movie.rate, '.chart-rate.rate');
