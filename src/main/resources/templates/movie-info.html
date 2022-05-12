@@ -71,7 +71,10 @@
         </table>
         <h2>Statistics</h2>
         <div class="chart-container">
-        <canvas class="chart-history"></canvas>
+        <canvas class="chart-history-rank"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas class="chart-history-rate"></canvas>
         </div>
         <script th:inline="javascript">
             const movie = [[${movie}]]

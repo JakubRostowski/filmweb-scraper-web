@@ -1,5 +1,4 @@
-function generateDoughnutChart(valueSelector, chartSelector) {
-    const rate = parseInt(document.querySelector(valueSelector).textContent);
+function generateDoughnutChart(rate, chartSelector) {
     const data = {
         datasets: [{
             backgroundColor: ['rgb(80, 220, 80)', 'transparent'],
@@ -29,9 +28,9 @@ function generateDoughnutChart(valueSelector, chartSelector) {
     );
 }
 
-function generateLineChart(chartSelector, timestamps) {
+function generateRankLineChart(chartSelector) {
     const data = {
-        labels: timestamps,
+        labels: getTimestamps(),
         datasets: [{
             label: 'Rank',
             data: getRanks(),
@@ -59,6 +58,44 @@ function generateLineChart(chartSelector, timestamps) {
                     reverse: true,
                     min: 1,
                     max: 500
+                }
+            }
+        }
+    };
+
+    return new Chart(
+        document.querySelector(chartSelector),
+        config
+    );
+}
+
+function generateRateLineChart(chartSelector) {
+    const data = {
+        labels: getTimestamps(),
+        datasets: [
+            {
+                label: 'Rate',
+                data: [6.5, 7.0, 6.8, 6.5],
+                fill: false,
+                borderColor: 'yellow'
+            },
+            {
+                label: 'Critics Rate',
+                data: [6.2, 8.2, 7.3, 7.0],
+                fill: false,
+                borderColor: 'orange'
+            }]
+    };
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Rating'
                 }
             }
         }
@@ -98,9 +135,10 @@ function getRanks() {
     return ranks;
 }
 
-const rateChart = generateDoughnutChart('.rate-value', '.chart-rate.rate');
-const criticsRateChart = generateDoughnutChart('.critics-rate-value', '.chart-rate.critics-rate');
-const historyChart = generateLineChart('.chart-history', getTimestamps(), getRanks());
+const rateChart = generateDoughnutChart(movie.rate, '.chart-rate.rate');
+const criticsRateChart = generateDoughnutChart(movie.criticsRate, '.chart-rate.critics-rate');
+const rankHistoryChart = generateRankLineChart('.chart-history-rank', getTimestamps());
+const rateHistoryChart = generateRateLineChart('.chart-history-rate', getTimestamps());
 
 
 
