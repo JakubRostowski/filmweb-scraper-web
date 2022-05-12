@@ -86,7 +86,13 @@ function getTimestamps() {
 
 function getRanks() {
     const ranks = [movie.position];
-    movie.archivedMovies.forEach(movie => ranks.push(movie.position));
+    movie.archivedMovies.forEach(movie => {
+        if (movie.position === -1) {
+            ranks.push(501);
+        } else {
+            ranks.push(movie.position)
+        }
+    });
     return ranks.reverse();
 }
 
