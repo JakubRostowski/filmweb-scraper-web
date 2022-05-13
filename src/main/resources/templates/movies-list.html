@@ -16,7 +16,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Rank</th>
+            <th th:unless="${webpageTitle.equals('Inactive Movies')}">Rank</th>
             <th>Title</th>
             <th>Year</th>
             <th>Director</th>
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         <tr th:each="movie : ${movies}">
-            <td th:text="${movie.position}"/>
+            <td th:unless="${webpageTitle.equals('Inactive Movies')}" th:text="${movie.position}"/>
             <td>
                 <a th:text="${movie.title}" th:href="@{/movies/__${movie.movieId}__}"></a>
             </td>

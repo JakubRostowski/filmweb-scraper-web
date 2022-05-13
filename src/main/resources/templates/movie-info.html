@@ -17,7 +17,7 @@
     <div class="movie-summary">
         <img th:src="${movie.poster}" alt="movie poster">
         <div class="movie-summary-data">
-            <h1 th:text="${movie.position} + '.'"></h1>
+            <h1 th:unless="${movie.position == -1}" th:text="${movie.position} + '.'"></h1>
             <h1 th:text="${movie.title}"></h1>
             <h2 th:text="'(' + ${movie.year} + ')'"></h2>
             <h3 th:text="${movie.originalTitle}"></h3>
