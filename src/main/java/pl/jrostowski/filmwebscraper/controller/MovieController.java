@@ -61,12 +61,21 @@ public class MovieController {
     }
 
 
-//    @GetMapping("/polish-movies")
-//    public String showPolishMovies(Model model) {
-//        List<Movie> movies = movieService.getToplistMovies();
-//        model.addAttribute("movies", movies);
-//        return "movies-list";
-//    }
+    @GetMapping("/polish-movies/page/{pageNumber}")
+    public String showPolishMovies(@PathVariable int pageNumber, Model model) {
+        Page<Movie> page = movieService.getPolishMovies(pageNumber, 15);
+        model.addAttribute("movies", page.getContent());
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("url", "/polish-movies/page/");
+        model.addAttribute("webpageTitle", "Polish Movies");
+        return "movies-list";
+    }
+
+    @GetMapping("/polish-movies")
+    public ModelAndView redirectPolishMovies() {
+        return new ModelAndView("redirect:/polish-movies/page/1");
+    }
 
 
 }
