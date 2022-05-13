@@ -45,7 +45,6 @@ public class MovieService {
 
     @Transactional
     public void checkDifferences(Map<Integer, Movie> movieMap) {
-        System.out.println("Looking for differences...");
         List<Movie> databaseMovies = movieRepository.getAllMovies();
         List<Integer> newMoviesPositions = new ArrayList<>();
 
