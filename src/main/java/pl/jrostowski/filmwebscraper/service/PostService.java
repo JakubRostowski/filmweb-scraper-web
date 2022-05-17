@@ -16,7 +16,7 @@ public class PostService {
 
     public Page<Post> getPosts(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
-        return postRepository.findAll(pageable);
+        return postRepository.findAllByOrderByPostIdDesc(pageable);
     }
 
     public void save(Post post) {
