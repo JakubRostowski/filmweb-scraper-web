@@ -2,9 +2,7 @@ package pl.jrostowski.filmwebscraper.forms;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.jrostowski.filmwebscraper.validation.PasswordMatch;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
