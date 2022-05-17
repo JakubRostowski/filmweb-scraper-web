@@ -45,3 +45,26 @@ create table if not exists users
     time_of_modification timestamp,
     username             varchar(255)
 );
+
+create table if not exists post
+(
+    id                   integer generated always as identity
+        primary key,
+    content              varchar(255),
+    time_of_creation     timestamp,
+    time_of_modification timestamp,
+    title                varchar(255),
+    author_id            bigint
+        constraint fk1mpebp1ayl0twrwm7ruiof778
+            references users
+);
+
+create table if not exists post_likes
+(
+    post_id  bigint not null
+        constraint fkmxmoc9p5ndijnsqtvsjcuoxm3
+            references post,
+    likes_id bigint not null
+        constraint fkkts60vjpkentl81j7jkvy7adt
+            references users
+);
