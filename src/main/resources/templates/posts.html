@@ -7,18 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
-    <title>Login Page</title>
+    <title>News</title>
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
-    <form th:if="${session.user}" th:action="@{/posts/save}" method="POST">
-        <div th:unless="${nullFields == null}" th:text="${nullFields}"></div>
+    <div th:if="${session.user}" th:remove="tag">
 
-        <input type="text" name="title" placeholder="title">
-        <input type="text" name="content" placeholder="content">
-        <button type="submit">Publish</button>
-    </form>
+        <h1>Add post</h1>
+        <form class="post-form" th:action="@{/posts/save}" method="POST">
+            <div th:unless="${nullFields == null}" th:text="${nullFields}"></div>
+
+            <input type="text" name="title" placeholder="title">
+            <textarea class="content-box" name="content" placeholder="content"></textarea>
+            <button type="submit">Publish</button>
+        </form>
+    </div>
+    <h1>Posts</h1>
+    <h2 th:if="${posts == null}">No data at the moment.</h2>
+
+    <div class="single-post" th:each="post : ${posts}">
+
+        <div class="post-header">
+            <div class="post-title" th:text="'#' + ${post.postId} + ' ' + ${post.title}"></div>
+            <div class="post-author" th:text="'by ' + ${post.author.username}"></div>
+        </div>
+
+        <div class="post-content">
+            <p th:text="${post.content}"></p>
+        </div>
+
+    </div>
+
+    <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>

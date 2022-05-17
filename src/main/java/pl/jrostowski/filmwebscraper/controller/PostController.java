@@ -29,13 +29,13 @@ public class PostController {
     @GetMapping("/posts/page/{pageNumber}")
     public String showPosts(@PathVariable int pageNumber, Model model) {
         Page<Post> page = postService.getPosts(pageNumber, 10);
-        model.addAttribute("movies", page.getContent());
+        model.addAttribute("posts", page.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/posts/page/");
 
         PostForm postForm = new PostForm();
-        model.addAttribute("post", postForm);
+        model.addAttribute("postForm", postForm);
 
         return "posts";
     }
@@ -50,7 +50,7 @@ public class PostController {
     public String savePost(@Valid @ModelAttribute("post") PostForm postForm, Errors errors, Model model, Authentication auth) {
         if (errors.hasErrors()) {
             model.addAttribute("nullFields", "Fields cannot be empty.");
-            return "posts";
+            return "redirect:/posts";
         }
 
         User user = userService.findByUsername(auth.getName());
