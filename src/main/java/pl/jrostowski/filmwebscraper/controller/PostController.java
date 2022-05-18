@@ -56,6 +56,6 @@ public class PostController {
         User user = userService.findByUsername(auth.getName());
         Post post = new Post(postForm.getTitle(), postForm.getContent(), user);
         postService.save(post);
-        return "posts";
+        return "redirect:/posts";
     }
 }
