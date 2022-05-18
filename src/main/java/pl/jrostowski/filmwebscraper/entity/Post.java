@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
@@ -30,4 +31,8 @@ public class Post {
 
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
+
+    public String getSimpleTimeOfCreation() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.timeOfCreation);
+    }
 }

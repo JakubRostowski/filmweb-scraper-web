@@ -14,16 +14,16 @@
 <main th:class="main">
     <div th:if="${session.user}" th:remove="tag">
 
-        <h1>Add post</h1>
+        <h1 class="news-header">Add post</h1>
         <form class="post-form" th:action="@{/posts/save}" method="POST">
             <div th:unless="${nullFields == null}" th:text="${nullFields}"></div>
 
-            <input type="text" name="title" placeholder="title">
-            <textarea class="content-box" name="content" placeholder="content"></textarea>
+            <input type="text" name="title" placeholder="Title">
+            <textarea class="content-box" name="content" placeholder="Content"></textarea>
             <button type="submit">Publish</button>
         </form>
     </div>
-    <h1>Posts</h1>
+    <h1 class="news-header">Posts</h1>
     <h2 th:if="${posts == null}">No data at the moment.</h2>
 
     <div class="single-post" th:each="post : ${posts}">
@@ -35,6 +35,13 @@
 
         <div class="post-content">
             <p th:text="${post.content}"></p>
+            <div class="post-footer">
+                <div>
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span th:text="${post.getLikes().size()}"></span>
+                </div>
+                <span class="post-time" th:text="${post.getSimpleTimeOfCreation()}"></span>
+            </div>
         </div>
 
     </div>

@@ -115,6 +115,10 @@ body {
     line-height: 20px;
 }
 
+.news-header {
+    margin: 6px;
+}
+
 .post-form input,
 .post-form textarea {
     width: 100%;
@@ -142,4 +146,10 @@ body {
     margin-bottom: 10px;
     padding: 5px;
     background-color: var(--colour-silver-dark);
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 6px;
 }
