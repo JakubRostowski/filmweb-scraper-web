@@ -53,6 +53,6 @@ public class RegisterController {
         userForm.setPassword(encodedPassword);
         User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
         userService.save(user);
-        return "redirect:/users/";
+        return "login";
     }
 }
