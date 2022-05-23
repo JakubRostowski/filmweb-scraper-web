@@ -7,7 +7,7 @@ function redirectIfCorrect(e) {
     if (input.value) {
         if (input.value < 1) {
             input.value = 1;
-        } else if (input.value > maxPage) {
+        } else if (parseInt(input.value) > parseInt(maxPage)) {
             input.value = parseInt(maxPage);
         } else if (e.key === 'Enter') {
             location.replace(location.origin + url + input.value);
