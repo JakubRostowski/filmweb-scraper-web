@@ -10,6 +10,12 @@
     box-sizing: border-box;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -152,4 +158,13 @@ body {
     display: flex;
     justify-content: space-between;
     padding-top: 6px;
+}
+
+.like-icon.active {
+    color: var(--colour-green-dark);
+}
+
+.like-icon:hover {
+    color: var(--colour-green-light);
+    cursor: pointer;
 }

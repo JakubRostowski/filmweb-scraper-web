@@ -27,12 +27,13 @@ public class PostController {
     private final UserService userService;
 
     @GetMapping("/posts/page/{pageNumber}")
-    public String showPosts(@PathVariable int pageNumber, Model model) {
+    public String showPosts(@PathVariable int pageNumber, Model model, Authentication auth) {
         Page<Post> page = postService.getPosts(pageNumber, 10);
         model.addAttribute("posts", page.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/posts/page/");
+        model.addAttribute("userName", (auth == null) ? null : auth.getName());
 
         PostForm postForm = new PostForm();
         model.addAttribute("postForm", postForm);
@@ -56,6 +57,16 @@ public class PostController {
         User user = userService.findByUsername(auth.getName());
         Post post = new Post(postForm.getTitle(), postForm.getContent(), user);
         postService.save(post);
+        return "redirect:/posts";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/posts/toggle-like/{postId}")
+    public String toggleLike(@PathVariable Long postId, Authentication auth) {
+
+        User user = userService.findByUsername(auth.getName());
+        postService.toggleLike(user, postId);
+
         return "redirect:/posts";
     }
 }

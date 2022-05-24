@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,7 +13,7 @@
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
-    <div th:if="${session.user}" th:remove="tag">
+    <div sec:authorize="hasRole('ADMIN')" th:remove="tag">
 
         <h1 class="news-header">Add post</h1>
         <form class="post-form" th:action="@{/posts/save}" method="POST">
@@ -37,8 +38,12 @@
             <p th:text="${post.content}"></p>
             <div class="post-footer">
                 <div>
-                <i class="fa-solid fa-thumbs-up"></i>
-                <span th:text="${post.getLikes().size()}"></span>
+                    <form class="like-form" th:attr="data-form-id=${post.getPostId()}" th:action="@{'/posts/toggle-like/'+ ${post.getPostId()}} " method="post">
+
+                        <i class="fa-solid fa-thumbs-up like-icon" th:attr="data-icon-id=${post.getPostId()}" th:classappend="${post.isPostLikedByUser(userName)} ? active : ''"></i>
+                        <span th:text="${post.getLikes().size()}"></span>
+                    </form>
+
                 </div>
                 <span class="post-time" th:text="${post.getSimpleTimeOfCreation()}"></span>
             </div>
@@ -46,10 +51,12 @@
 
     </div>
 
+
     <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
 </body>
 <script th:src="@{/scripts/menu.js}"></script>
+<script th:src="@{/scripts/like.js}"></script>
 </html>

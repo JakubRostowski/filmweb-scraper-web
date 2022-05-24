@@ -35,4 +35,13 @@ public class Post {
     public String getSimpleTimeOfCreation() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.timeOfCreation);
     }
+
+    public boolean isPostLikedByUser(String searchedName) {
+        for (User user : this.likes) {
+            if (user.getUsername().equals(searchedName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
