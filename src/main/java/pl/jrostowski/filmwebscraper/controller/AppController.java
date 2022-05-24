@@ -10,4 +10,9 @@ public class AppController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/about-author")
+    public String author() {
+        return "about-author";
+    }
 }
