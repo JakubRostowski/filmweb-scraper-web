@@ -168,3 +168,25 @@ body {
     color: var(--colour-green-light);
     cursor: pointer;
 }
+
+.main.author-content p {
+    margin: 2px 0;
+    text-align: justify;
+}
+
+.main.author-content h3 {
+    margin: 10px 0;
+}
+
+.socials {
+    margin: auto;
+    text-align: center;
+}
+
+.github-logo {
+    font-size: 100px;
+    color: var(--colour-green-dark);
+}
+.github-logo:hover {
+    opacity: .75;
+}
