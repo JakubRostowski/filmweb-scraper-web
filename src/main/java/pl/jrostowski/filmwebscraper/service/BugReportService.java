@@ -27,6 +27,9 @@ public class BugReportService {
 
     public void changeStatus(Long id, BugReport.Status status) {
         Optional<BugReport> bugReport = bugReportRepository.findById(id);
-        bugReport.ifPresent(report -> report.setStatus(status));
+        bugReport.ifPresent(report -> {
+            report.setStatus(status);
+            save(bugReport.get());
+        });
     }
 }
