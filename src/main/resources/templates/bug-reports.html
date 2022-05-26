@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <title>Bug Reports</title>
+</head>
+<body>
+<header th:include="fragments/header :: header" th:remove="tag"></header>
+<main th:class="main">
+
+    <h1>Report a bug</h1>
+    <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
+    <form th:action="@{/bug-reports/save}" method="POST">
+        <textarea class="content-box" name="description" placeholder="Description"></textarea>
+        <button type="submit">Report</button>
+    </form>
+
+    <div class="single-report" th:each="report : ${reports}">
+        <div class="report-header">
+            <span th:text="'Issue #' + ${report.bugReportId}"></span>
+            <form th:action="'/bug-reports/change-status/' + ${report.bugReportId}">
+                <select name="status">
+                    <option th:each="status : ${reports.get(0).getStatus().values()}"
+                            th:value="${status}" th:text="${status}"
+                            th:selected="${status.equals(report.status)}"></option>
+                </select>
+            </form>
+        </div>
+        <div class="report-content">
+            <p th:text="${report.getDescription()}"></p>
+        </div>
+        <div class="report-footer">
+            <span th:text="${report.timeOfModification}"></span>
+            <span th:text="${report.timeOfCreation}"></span>
+        </div>
+    </div>
+
+    <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
+</main>
+<aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
+<footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
+</body>
+<script th:src="@{/scripts/menu.js}"></script>
+</html>

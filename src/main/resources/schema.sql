@@ -68,3 +68,13 @@ create table if not exists post_likes
         constraint fkkts60vjpkentl81j7jkvy7adt
             references users
 );
+
+create table if not exists bug_report
+(
+    id                   integer generated always as identity
+        primary key,
+    description          varchar(255),
+    status               varchar(15),
+    time_of_creation     timestamp,
+    time_of_modification timestamp
+);
