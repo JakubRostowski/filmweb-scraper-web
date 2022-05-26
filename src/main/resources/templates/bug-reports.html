@@ -16,16 +16,17 @@
 
     <h1>Report a bug</h1>
     <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
-    <form th:action="@{/bug-reports/save}" method="POST">
-        <textarea class="content-box" name="description" placeholder="Description"></textarea>
+    <form class="bug-report-form" th:action="@{/bug-reports/save}" method="POST">
+        <textarea name="description" placeholder="Description"></textarea>
         <button type="submit">Report</button>
     </form>
 
+    <h1>Reported bugs</h1>
     <div class="single-report" th:each="report : ${reports}">
         <div class="report-header">
             <span th:text="'Issue #' + ${report.bugReportId}"></span>
-            <form th:action="'/bug-reports/change-status/' + ${report.bugReportId}">
-                <select name="status">
+            <form th:action="'/bug-reports/change-status/' + ${report.bugReportId}" method="post">
+                <select onchange="this.form.submit()" name="status">
                     <option th:each="status : ${reports.get(0).getStatus().values()}"
                             th:value="${status}" th:text="${status}"
                             th:selected="${status.equals(report.status)}"></option>

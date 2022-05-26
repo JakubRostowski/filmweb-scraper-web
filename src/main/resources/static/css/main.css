@@ -187,6 +187,38 @@ body {
     font-size: 100px;
     color: var(--colour-green-dark);
 }
+
 .github-logo:hover {
     opacity: .75;
+}
+
+.bug-report-form {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.bug-report-form * {
+    width: 100%;
+}
+
+.bug-report-form textarea {
+    min-height: 100px;
+}
+
+.single-report {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.report-header,
+.report-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 5px;
+    background-color: var(--colour-green-dark);
+}
+
+.report-content {
+    padding: 5px;
+    background-color: var(--colour-silver-dark);
 }
