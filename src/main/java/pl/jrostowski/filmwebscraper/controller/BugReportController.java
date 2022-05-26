@@ -47,7 +47,6 @@ public class BugReportController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/bug-reports/change-status/{reportId}")
     public String changeStatus(@PathVariable Long reportId, @RequestParam("status") BugReport.Status status) {
-
         bugReportService.changeStatus(reportId, status);
         return "redirect:/bug-reports";
     }
