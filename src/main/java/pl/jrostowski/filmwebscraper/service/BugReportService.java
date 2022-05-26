@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.BugReport;
-import pl.jrostowski.filmwebscraper.entity.Post;
 import pl.jrostowski.filmwebscraper.repository.BugReportRepository;
 
 import java.util.Optional;
