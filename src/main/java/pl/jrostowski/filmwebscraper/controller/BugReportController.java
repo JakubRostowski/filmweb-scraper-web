@@ -20,7 +20,7 @@ public class BugReportController {
 
     @GetMapping("/bug-reports/page/{pageNumber}")
     public String showBugReports(@PathVariable int pageNumber, Model model) {
-        Page<BugReport> page = bugReportService.getBugReports(pageNumber, 10);
+        Page<BugReport> page = bugReportService.getBugReports(pageNumber, 5);
         model.addAttribute("reports", page.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
