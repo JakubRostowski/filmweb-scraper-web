@@ -222,3 +222,14 @@ body {
     padding: 5px;
     background-color: var(--colour-silver-dark);
 }
+
+.report-success {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 28px;
+    text-align: center;
+    color: var(--colour-green-dark);
+    background-color: var(--colour-green-light);
+    border: 2px var(--colour-green-dark) solid;
+}

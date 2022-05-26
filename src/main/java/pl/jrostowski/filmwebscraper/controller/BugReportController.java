@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.jrostowski.filmwebscraper.entity.BugReport;
 import pl.jrostowski.filmwebscraper.forms.BugReportForm;
 import pl.jrostowski.filmwebscraper.service.BugReportService;
@@ -38,10 +39,11 @@ public class BugReportController {
     }
 
     @PostMapping("/bug-reports/save")
-    public String saveBugReport(@Valid @ModelAttribute("bug-report") BugReportForm bugReportForm) {
+    public String saveBugReport(@Valid @ModelAttribute("bug-report") BugReportForm bugReportForm, RedirectAttributes redirectAttributes) {
         BugReport bugReport = new BugReport(bugReportForm.getDescription());
         bugReportService.save(bugReport);
-        return "redirect:/bug-reports";
+        redirectAttributes.addFlashAttribute("success", "success");
+        return "redirect:/bug-reports/page/1";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
