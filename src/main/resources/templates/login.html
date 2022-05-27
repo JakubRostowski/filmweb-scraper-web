@@ -15,16 +15,16 @@
 <main th:class="main">
     <form method="POST" th:action="@{/login}">
 
-            <div th:if="${param.error}">
-                Invalid username or password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
+        <div th:if="${param.error}">
+            Invalid username or password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
 
-            <input name="username" placeholder="username" type="text">
-            <input name="password" placeholder="password" type="password">
-            <button type="submit">Login</button>
+        <input name="username" placeholder="username" type="text">
+        <input name="password" placeholder="password" type="password">
+        <button type="submit">Login</button>
     </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
