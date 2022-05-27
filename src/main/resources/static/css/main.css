@@ -73,6 +73,11 @@ body {
     background: var(--colour-grey);
     color: var(--colour-green-light);
 }
+.welcome-text {
+    margin: 5px 0;
+    font-size: 22px;
+    text-align: justify;
+}
 
 .table {
     width: calc(100vw - 2 * 6px);
