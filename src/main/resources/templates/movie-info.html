@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <link th:href="@{/css/movie-info.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/movie-info.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title th:text="${movie.title}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
@@ -16,9 +16,9 @@
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main class="main">
     <div class="movie-summary">
-        <img th:src="${movie.poster}" alt="movie poster">
+        <img alt="movie poster" th:src="${movie.poster}">
         <div class="movie-summary-data">
-            <h1 th:unless="${movie.position == -1}" th:text="${movie.position} + '.'"></h1>
+            <h1 th:text="${movie.position} + '.'" th:unless="${movie.position == -1}"></h1>
             <h1 th:text="${movie.title}"></h1>
             <h2 th:text="'(' + ${movie.year} + ')'"></h2>
             <h3 th:text="${movie.originalTitle}"></h3>

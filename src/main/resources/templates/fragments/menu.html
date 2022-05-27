@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <aside th:fragment="menu">
@@ -10,28 +10,28 @@
                     <p th:text="'Name: ' + ${session.user.username}"></p>
                     <p th:text="'Email: ' + ${session.user.email}"></p>
                 </div>
-                <form th:if="${session.user}" class="tile" th:action="@{/logout}" method="POST">
+                <form class="tile" method="POST" th:action="@{/logout}" th:if="${session.user}">
                     <button type="submit">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         <p>logout</p>
                     </button>
                 </form>
             </div>
-            <a th:unless="${session.user}" href="/login" class="tile"><i class="fa-solid fa-user"></i>login</a>
-            <a th:unless="${session.user}" href="/register" class="tile"><i class="fa-solid fa-address-card"></i>register</a>
-            <a sec:authorize="hasRole('ADMIN')" href="/admin-panel" class="tile"><i
+            <a class="tile" href="/login" th:unless="${session.user}"><i class="fa-solid fa-user"></i>login</a>
+            <a class="tile" href="/register" th:unless="${session.user}"><i class="fa-solid fa-address-card"></i>register</a>
+            <a class="tile" href="/admin-panel" sec:authorize="hasRole('ADMIN')"><i
                     class="fa-solid fa-screwdriver-wrench"></i>admin
                 panel</a>
-            <a href="/top500" class="tile"><i class="fa-solid fa-ranking-star"></i>top 500</a>
-            <a href="/inactive-movies" class="tile"><i class="fa-solid fa-list"></i>inactive movies</a>
-            <a href="/polish-movies" class="tile">
+            <a class="tile" href="/top500"><i class="fa-solid fa-ranking-star"></i>top 500</a>
+            <a class="tile" href="/inactive-movies"><i class="fa-solid fa-list"></i>inactive movies</a>
+            <a class="tile" href="/polish-movies">
                 <div class="icons">
                     <i class="fa-solid fa-p"></i><i class="fa-solid fa-l"></i>
                 </div>
             polish movies</a>
-            <a href="/posts" class="tile"><i class="fa-solid fa-newspaper"></i>news</a>
-            <a href="/about-author" class="tile"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
-            <a href="/bug-reports" class="tile bug-report"><i class="fa-solid fa-bug"></i>report a bug</a>
+            <a class="tile" href="/posts"><i class="fa-solid fa-newspaper"></i>news</a>
+            <a class="tile" href="/about-author"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
+            <a class="tile bug-report" href="/bug-reports"><i class="fa-solid fa-bug"></i>report a bug</a>
         </nav>
     </aside>
 </aside>

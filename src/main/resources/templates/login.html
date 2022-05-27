@@ -2,18 +2,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title>Login Page</title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
-    <form th:action="@{/login}" method="POST">
+    <form method="POST" th:action="@{/login}">
 
             <div th:if="${param.error}">
                 Invalid username or password.
@@ -22,8 +22,8 @@
                 You have been logged out.
             </div>
 
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
+            <input name="username" placeholder="username" type="text">
+            <input name="password" placeholder="password" type="password">
             <button type="submit">Login</button>
     </form>
 </main>

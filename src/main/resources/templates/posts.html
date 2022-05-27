@@ -1,13 +1,13 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title>News</title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
@@ -17,10 +17,10 @@
     <div sec:authorize="hasRole('ADMIN')" th:remove="tag">
 
         <h1 class="news-header">Add post</h1>
-        <form class="post-form" th:action="@{/posts/save}" method="POST">
-            <div th:unless="${nullFields == null}" th:text="${nullFields}"></div>
+        <form class="post-form" method="POST" th:action="@{/posts/save}">
+            <div th:text="${nullFields}" th:unless="${nullFields == null}"></div>
 
-            <input type="text" name="title" placeholder="Title">
+            <input name="title" placeholder="Title" type="text">
             <textarea class="content-box" name="content" placeholder="Content"></textarea>
             <button type="submit">Publish</button>
         </form>
@@ -39,9 +39,11 @@
             <p th:text="${post.content}"></p>
             <div class="post-footer">
                 <div>
-                    <form class="like-form" th:attr="data-form-id=${post.getPostId()}" th:action="@{'/posts/toggle-like/'+ ${post.getPostId()}} " method="post">
+                    <form class="like-form" method="post" th:action="@{'/posts/toggle-like/'+ ${post.getPostId()}} "
+                          th:attr="data-form-id=${post.getPostId()}">
 
-                        <i class="fa-solid fa-thumbs-up like-icon" th:attr="data-icon-id=${post.getPostId()}" th:classappend="${post.isPostLikedByUser(userName)} ? active : ''"></i>
+                        <i class="fa-solid fa-thumbs-up like-icon" th:attr="data-icon-id=${post.getPostId()}"
+                           th:classappend="${post.isPostLikedByUser(userName)} ? active : ''"></i>
                         <span th:text="${post.getLikes().size()}"></span>
                     </form>
 
@@ -49,9 +51,7 @@
                 <span class="post-time" th:text="${post.getSimpleTimeOfCreation()}"></span>
             </div>
         </div>
-
     </div>
-
 
     <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 </main>

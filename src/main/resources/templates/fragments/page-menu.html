@@ -4,21 +4,21 @@
 <div th:fragment="page-menu">
     <div class="page-menu" th:if="${totalPages > 1}">
 
-        <a th:if="${currentPage != 1}" th:href="@{${url} + 1}">First</a>
+        <a th:href="@{${url} + 1}" th:if="${currentPage != 1}">First</a>
         <span th:unless="${currentPage != 1}">First</span>
 
-        <a th:if="${currentPage > 1}" th:href="@{${url} + ${currentPage - 1}}">Previous</a>
+        <a th:href="@{${url} + ${currentPage - 1}}" th:if="${currentPage > 1}">Previous</a>
         <span th:unless="${currentPage > 1}">Previous</span>
 
         <div>
-            <span>Page <input class="page-input" type="number" th:value="${currentPage}"> of</span>
-            <span th:text="${totalPages}" class="page-max"></span>
+            <span>Page <input class="page-input" th:value="${currentPage}" type="number"> of</span>
+            <span class="page-max" th:text="${totalPages}"></span>
         </div>
 
-        <a th:if="${currentPage < totalPages}" th:href="@{${url} + ${currentPage + 1}}">Next</a>
+        <a th:href="@{${url} + ${currentPage + 1}}" th:if="${currentPage < totalPages}">Next</a>
         <span th:unless="${currentPage < totalPages}">Next</span>
 
-        <a th:if="${currentPage < totalPages}" th:href="@{${url} + ${totalPages}}">Last</a>
+        <a th:href="@{${url} + ${totalPages}}" th:if="${currentPage < totalPages}">Last</a>
         <span th:unless="${currentPage < totalPages}">Last</span>
 
         <script th:inline="javascript">

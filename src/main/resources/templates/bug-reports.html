@@ -1,13 +1,13 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title>Bug Reports</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <div class="report-success" th:if="${success}">Bug submitted successfully. Thank You!</div>
         <h1>Report a bug</h1>
         <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
-        <form class="bug-report-form" th:action="@{/bug-reports/save}" method="POST">
+        <form class="bug-report-form" method="POST" th:action="@{/bug-reports/save}">
             <textarea name="description" placeholder="Description"></textarea>
             <button type="submit">Report</button>
         </form>
@@ -29,11 +29,11 @@
         <div class="single-report" th:each="report : ${reports}">
             <div class="report-header">
                 <span th:text="'Issue #' + ${report.bugReportId}"></span>
-                <form th:action="'/bug-reports/change-status/' + ${report.bugReportId}" method="post">
-                    <select onchange="this.form.submit()" name="status">
+                <form method="post" th:action="'/bug-reports/change-status/' + ${report.bugReportId}">
+                    <select name="status" onchange="this.form.submit()">
                         <option th:each="status : ${reports.get(0).getStatus().values()}"
-                                th:value="${status}" th:text="${status}"
-                                th:selected="${status.equals(report.status)}"></option>
+                                th:selected="${status.equals(report.status)}" th:text="${status}"
+                                th:value="${status}"></option>
                     </select>
                 </form>
             </div>

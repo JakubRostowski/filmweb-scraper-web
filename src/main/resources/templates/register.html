@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title>Register Form</title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
@@ -17,18 +17,18 @@
         <span th:text="${registrationError}"></span>
     </div>
 
-    <form action="#" th:action="@{/register/save}" th:object="${user}" method="post">
-        <input type="text" th:field="*{username}" placeholder="Name">
-        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    <form method="post" th:action="@{/register/save}" th:object="${user}">
+        <input placeholder="Name" th:field="*{username}" type="text">
+        <div th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></div>
 
-        <input type="text" th:field="*{email}" placeholder="Email">
-        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <input placeholder="Email" th:field="*{email}" type="text">
+        <div th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></div>
 
-        <input type="password" th:field="*{password}" placeholder="Password">
-        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <input placeholder="Password" th:field="*{password}" type="password">
+        <div th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></div>
 
-        <input type="password" th:field="*{confirmPassword}" placeholder="Confirm password">
-        <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+        <input placeholder="Confirm password" th:field="*{confirmPassword}" type="password">
+        <div th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}"></div>
 
         <button type="submit">Save</button>
     </form>

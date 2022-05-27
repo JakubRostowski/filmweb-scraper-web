@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title th:text="${webpageTitle}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
@@ -27,9 +27,9 @@
         </thead>
         <tbody>
         <tr th:each="movie : ${movies}">
-            <td th:unless="${webpageTitle.equals('Inactive Movies')}" th:text="${movie.position}"/>
+            <td th:text="${movie.position}" th:unless="${webpageTitle.equals('Inactive Movies')}"/>
             <td>
-                <a th:text="${movie.title}" th:href="@{/movies/__${movie.movieId}__}"></a>
+                <a th:href="@{/movies/__${movie.movieId}__}" th:text="${movie.title}"></a>
             </td>
             <td th:text="${movie.year}"/>
             <td th:text="${movie.director}">

@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/26a506ddd8.js" crossorigin="anonymous"></script>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
     <title>Admin Panel</title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
@@ -31,7 +31,7 @@
             <td th:text="${user.email}"/>
             <td th:text="${user.role}">
             <td>
-                <form th:action="@{/change-role/__${user.userId}__}" method="POST">
+                <form method="POST" th:action="@{/change-role/__${user.userId}__}">
                     <button th:if="${user.role} == ROLE_USER" type="submit">promote</button>
                     <button th:if="${user.role} == ROLE_ADMIN and ${user.userId} != ${session.user.userId}"
                             type="submit">
@@ -44,7 +44,6 @@
     </table>
 
     <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
-
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
