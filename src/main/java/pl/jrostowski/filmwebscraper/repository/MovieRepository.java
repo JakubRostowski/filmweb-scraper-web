@@ -16,9 +16,6 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     @Query("select m from Movie m left join fetch m.archivedMovies")
     List<Movie> getAllMovies();
 
-    @Query("select m from Movie m left join fetch m.archivedMovies where m.position > 0 order by m.position")
-    List<Movie> getActiveMovies();
-
     @Query(value = "select m from Movie m where m.position > 0 order by m.position")
     Page<Movie> getActiveMovies(Pageable pageable);
 

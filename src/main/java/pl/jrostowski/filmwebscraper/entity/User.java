@@ -18,11 +18,16 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long userId;
 
-    @NonNull private String username;
-    @NonNull private String email;
-    @NonNull private String password;
-    @NonNull private boolean enabled = true;
-    @NonNull private String role = "ROLE_USER";
+    @NonNull
+    private String username;
+    @NonNull
+    private String email;
+    @NonNull
+    private String password;
+    @NonNull
+    private boolean enabled = true;
+    @NonNull
+    private String role = "ROLE_USER";
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 

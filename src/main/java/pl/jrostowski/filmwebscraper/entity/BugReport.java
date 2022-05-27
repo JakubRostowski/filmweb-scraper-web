@@ -16,7 +16,8 @@ public class BugReport {
     @Column(name = "id", nullable = false)
     private Long bugReportId;
 
-    @NonNull private String description;
+    @NonNull
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.NEW;

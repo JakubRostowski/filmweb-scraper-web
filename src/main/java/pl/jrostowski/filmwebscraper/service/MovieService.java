@@ -97,7 +97,7 @@ public class MovieService {
     }
 
     private void processInactiveMovie(List<Integer> newMoviesPositions, Movie databaseMovie) {
-        if(databaseMovie.getPosition() != -1) {
+        if (databaseMovie.getPosition() != -1) {
             newMoviesPositions.add(databaseMovie.getPosition());
         }
         databaseMovie.setPosition(-1);

@@ -36,7 +36,7 @@ public class MovieRestController {
     }
 
     @GetMapping("/movies")
-    public List<Movie> displayMovieContent(){
+    public List<Movie> displayMovieContent() {
         return movieService.getMovieContent();
     }
 

@@ -80,15 +80,6 @@ public class ExcelRepository {
         }
     }
 
-    private void setHeaders(Sheet sheet) {
-        Row rowHeader = sheet.createRow(0);
-        rowHeader.setHeightInPoints(30);
-        String[] headers = getHeaders();
-        for (int i = 0; i < 11; i++) {
-            rowHeader.createCell(i).setCellValue(headers[i]);
-        }
-    }
-
     private Workbook createWorkbookObject(boolean IsNewExcelFormat) {
         if (IsNewExcelFormat) {
             return new XSSFWorkbook();
@@ -110,5 +101,14 @@ public class ExcelRepository {
                 "Rank", "Title", "Year", "Original title", "Rate", "Critics' rate",
                 "Length", "Director", "Screenwriter", "Genre", "Country of origin"
         };
+    }
+
+    private void setHeaders(Sheet sheet) {
+        Row rowHeader = sheet.createRow(0);
+        rowHeader.setHeightInPoints(30);
+        String[] headers = getHeaders();
+        for (int i = 0; i < 11; i++) {
+            rowHeader.createCell(i).setCellValue(headers[i]);
+        }
     }
 }

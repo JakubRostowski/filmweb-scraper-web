@@ -19,11 +19,14 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long postId;
 
-    @NonNull private String title;
-    @NonNull private String content;
+    @NonNull
+    private String title;
+    @NonNull
+    private String content;
 
     @OneToOne
-    @NonNull private User author;
+    @NonNull
+    private User author;
 
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
