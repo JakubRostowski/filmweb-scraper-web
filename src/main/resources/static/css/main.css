@@ -60,7 +60,9 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 84vh;
-    padding: 12px;
+    max-width: 1024px;
+    margin: auto;
+    padding: 6px 0;
 }
 
 .footer {
@@ -74,10 +76,15 @@ body {
     color: var(--colour-green-light);
 }
 
-.welcome-text {
-    margin: 5px 0;
-    font-size: 22px;
+h1 {
+    margin-bottom: 10px;
+}
+
+.block-of-text {
+    padding: 5px 10px;
     text-align: justify;
+    font-size: 20px;
+
 }
 
 .table {
@@ -173,15 +180,6 @@ body {
 .like-icon:hover {
     color: var(--colour-green-light);
     cursor: pointer;
-}
-
-.main.author-content p {
-    margin: 2px 0;
-    text-align: justify;
-}
-
-.main.author-content h3 {
-    margin: 10px 0;
 }
 
 .socials {

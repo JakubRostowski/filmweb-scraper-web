@@ -13,6 +13,7 @@
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
+    <h1>Login</h1>
     <form method="POST" th:action="@{/login}">
 
         <div th:if="${param.error}">
