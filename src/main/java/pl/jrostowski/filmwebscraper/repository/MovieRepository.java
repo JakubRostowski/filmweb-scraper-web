@@ -25,6 +25,6 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     @Query(value = "select m from Movie m where m.countryOfOrigin like '%Polska%' order by nullif(m.position, -1), m.position")
     Page<Movie> getPolishMovies(Pageable pageable);
 
-    @Query("select m from Movie m where m.movieId = ?1")
+    @Query("select m from Movie m left join fetch m.archivedMovies where m.movieId = ?1")
     Optional<Movie> findById(Long movieId);
 }
