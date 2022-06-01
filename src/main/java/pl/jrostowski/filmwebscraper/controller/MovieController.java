@@ -60,7 +60,6 @@ public class MovieController {
         return new ModelAndView("redirect:/inactive-movies/page/1");
     }
 
-
     @GetMapping("/polish-movies/page/{pageNumber}")
     public String showPolishMovies(@PathVariable int pageNumber, Model model) {
         Page<Movie> page = movieService.getPolishMovies(pageNumber, 15);
