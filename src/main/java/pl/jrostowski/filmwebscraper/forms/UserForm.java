@@ -14,17 +14,17 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class UserForm {
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String username;
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String password;
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String confirmPassword;
 
-    @Email
-    @NotBlank(message = "is required")
+    @Email(message = "Wrong e-mail format")
+    @NotBlank(message = "This field is required")
     private String email;
 
     public UserForm() {

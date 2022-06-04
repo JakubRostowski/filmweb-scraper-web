@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class BugReportForm {
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String description;
 
     public BugReportForm() {

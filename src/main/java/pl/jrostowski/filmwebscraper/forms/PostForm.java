@@ -9,10 +9,10 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PostForm {
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String title;
 
-    @NotBlank(message = "is required")
+    @NotBlank(message = "This field is required")
     private String content;
 
     public PostForm() {
