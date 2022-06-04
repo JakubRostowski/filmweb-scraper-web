@@ -80,6 +80,17 @@ h1 {
     margin-bottom: 10px;
 }
 
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 130px;
+}
+
+.register-button {
+    height: 30px;
+}
+
 .block-of-text {
     padding: 5px 10px;
     text-align: justify;

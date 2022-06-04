@@ -18,7 +18,7 @@
     </div>
 
     <h1>Register</h1>
-    <form method="post" th:action="@{/register/save}" th:object="${user}">
+    <form class="register-form" method="post" th:action="@{/register/save}" th:object="${user}">
         <input placeholder="Name" th:field="*{username}" type="text">
         <div th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></div>
 
@@ -31,7 +31,7 @@
         <input placeholder="Confirm password" th:field="*{confirmPassword}" type="password">
         <div th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}"></div>
 
-        <button type="submit">Save</button>
+        <button class="register-button" type="submit">Save</button>
     </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
