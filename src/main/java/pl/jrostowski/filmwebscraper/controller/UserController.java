@@ -20,9 +20,9 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/change-role/{id}")
-    public ModelAndView changeRole(@PathVariable Long id) {
+    public String changeRole(@PathVariable Long id) {
         userService.toggleRole(id);
-        return new ModelAndView("redirect:/admin-panel");
+        return "redirect:/admin-panel";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -38,8 +38,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin-panel")
-    public ModelAndView redirect() {
-        return new ModelAndView("redirect:/admin-panel/page/1");
+    public String redirect() {
+        return "redirect:/admin-panel/page/1";
     }
 
 }
