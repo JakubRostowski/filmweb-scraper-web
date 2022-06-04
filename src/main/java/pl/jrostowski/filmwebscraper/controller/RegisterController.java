@@ -30,7 +30,7 @@ public class RegisterController {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "register";
         } else {
-            return "index";
+            return "redirect:/index";
         }
     }
 
@@ -53,6 +53,6 @@ public class RegisterController {
         userForm.setPassword(encodedPassword);
         User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
         userService.save(user);
-        return "login";
+        return "redirect:/login";
     }
 }
