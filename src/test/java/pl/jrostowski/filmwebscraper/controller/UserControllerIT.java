@@ -61,6 +61,6 @@ class UserControllerIT {
     void shouldRedirect() throws Exception {
         mockMvc.perform(get("/admin-panel"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/admin-panel"));
+                .andExpect(view().name("redirect:/admin-panel/page/1"));
     }
 }
