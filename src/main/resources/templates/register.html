@@ -13,25 +13,26 @@
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
+    <h1>Register</h1>
+
     <div th:if="${registrationError}">
-        <span th:text="${registrationError}"></span>
+        <span class="error" th:text="${registrationError}"></span>
     </div>
 
-    <h1>Register</h1>
-    <form class="register-form" method="post" th:action="@{/register/save}" th:object="${user}">
+    <form class="entry-form" method="post" th:action="@{/register/save}" th:object="${user}">
         <input placeholder="Name" th:field="*{username}" type="text">
-        <div th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></div>
+        <div class="error" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></div>
 
         <input placeholder="Email" th:field="*{email}" type="text">
-        <div th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></div>
+        <div class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></div>
 
         <input placeholder="Password" th:field="*{password}" type="password">
-        <div th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></div>
+        <div class="error" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></div>
 
         <input placeholder="Confirm password" th:field="*{confirmPassword}" type="password">
-        <div th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}"></div>
+        <div class="error" th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}"></div>
 
-        <button class="register-button" type="submit">Save</button>
+        <button class="entry-button" type="submit">Save</button>
     </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>

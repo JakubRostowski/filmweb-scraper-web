@@ -80,15 +80,22 @@ h1 {
     margin-bottom: 10px;
 }
 
-.register-form {
+.entry-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 130px;
 }
 
-.register-button {
+.entry-form * {
+    margin-bottom: 3px;
+}
+
+.entry-button {
     height: 30px;
+}
+
+.error {
+    color: red;
 }
 
 .block-of-text {
