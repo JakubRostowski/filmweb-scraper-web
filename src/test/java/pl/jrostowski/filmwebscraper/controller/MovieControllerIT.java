@@ -12,9 +12,10 @@ import org.springframework.web.context.WebApplicationContext;
 import pl.jrostowski.filmwebscraper.entity.Movie;
 import pl.jrostowski.filmwebscraper.repository.MovieRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -151,7 +152,7 @@ class MovieControllerIT {
                 .andExpect(view().name("movies-list"))
                 .andReturn();
 
-        assertTrue(result.getResponse().getContentAsString().contains("No data at the moment."));;
+        assertTrue(result.getResponse().getContentAsString().contains("No data at the moment."));
 
         movieRepository.delete(movie);
     }
