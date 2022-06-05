@@ -14,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
 
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -127,8 +128,7 @@ class RegisterControllerIT {
                         .param("password", "123")
                         .param("confirmPassword", "123"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/login"))
-                .andReturn();
+                .andExpect(view().name("redirect:/login"));
 
         User newUser = userRepository.findByUserId(user.getUserId() + 1);
         Assertions.assertEquals("test", newUser.getUsername());
