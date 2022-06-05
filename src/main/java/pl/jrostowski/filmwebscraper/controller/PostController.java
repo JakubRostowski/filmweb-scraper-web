@@ -51,7 +51,7 @@ public class PostController {
     public String savePost(@Valid @ModelAttribute("post") PostForm postForm, Errors errors, Model model, Authentication auth) {
         if (errors.hasErrors()) {
             model.addAttribute("nullFields", "Fields cannot be empty.");
-            return "redirect:/posts";
+            return "/posts";
         }
 
         User user = userService.findByUsername(auth.getName());
