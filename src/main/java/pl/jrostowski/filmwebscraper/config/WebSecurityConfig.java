@@ -39,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/register/**").permitAll()
+                .antMatchers("/**/*.{js,html,css}").permitAll()
                 .anyRequest().authenticated();
         http
                 .formLogin()
@@ -55,12 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/")
                 .permitAll();
-    }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers("/**/*.{js,html,css}");
     }
 
 }
