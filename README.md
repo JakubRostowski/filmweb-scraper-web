@@ -23,7 +23,3 @@ Password: 123
 ```text
 http://localhost:8080/api/update
 ```
-* You can run test by executing:
-```bash
-$ mvn clean test
-```
