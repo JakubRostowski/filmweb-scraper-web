@@ -13,10 +13,10 @@ $ docker compose up
 ## Additional info
 * At this point, project uses **Admin** and **User** roles, both with their own functionality. Their login credentials are:
 ```text
-Login: Admin
+Login: admin
 Password: 123
 
-Login: User
+Login: user
 Password: 123
 ```
 * There is no initial movie data, but you can force program to get it at endpoint:
