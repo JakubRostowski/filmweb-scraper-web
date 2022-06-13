@@ -8,7 +8,7 @@ $ cd filmweb-scraper-web
 ```
 * Build and run via Docker:
 ```bash
-$ docker compose up
+$ docker compose up -d
 ```
 ## Additional info
 * At this point, project uses **Admin** and **User** roles, both with their own functionality. Their login credentials are:
