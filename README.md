@@ -10,6 +10,7 @@ $ cd filmweb-scraper-web
 ```bash
 $ docker compose up -d
 ```
+Note: "-d" parameter is optional - it prevents generating logs.
 ## Additional info
 * At this point, project uses **Admin** and **User** roles, both with their own functionality. Their login credentials are:
 ```text
