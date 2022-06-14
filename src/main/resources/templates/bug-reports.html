@@ -26,6 +26,7 @@
 
     <div sec:authorize="hasRole('ADMIN')" th:remove="tag">
         <h1>Reported bugs</h1>
+        <h2 th:if="${reports.isEmpty()}">No data at the moment.</h2>
         <div class="single-report" th:each="report : ${reports}">
             <div class="report-header">
                 <span th:text="'Issue #' + ${report.bugReportId}"></span>
@@ -41,8 +42,14 @@
                 <p th:text="${report.getDescription()}"></p>
             </div>
             <div class="report-footer">
-                <span th:text="${report.timeOfModification}"></span>
-                <span th:text="${report.timeOfCreation}"></span>
+                <div>
+                    <span>Modified:</span>
+                    <span th:text="${report.getSimpleTimeOfModification()}"></span>
+                </div>
+                <div>
+                    <span>Created:</span>
+                    <span th:text="${report.getSimpleTimeOfCreation()}"></span>
+                </div>
             </div>
         </div>
 

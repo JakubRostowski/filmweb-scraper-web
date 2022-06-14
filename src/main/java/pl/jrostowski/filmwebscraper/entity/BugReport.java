@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Getter
@@ -29,5 +30,12 @@ public class BugReport {
         NEW, IN_PROGRESS, COMPLETED, REJECTED
     }
 
+    public String getSimpleTimeOfCreation() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.timeOfCreation);
+    }
+
+    public String getSimpleTimeOfModification() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.timeOfModification);
+    }
 
 }

@@ -229,6 +229,7 @@ h1 {
 
 .single-report {
     width: 100%;
+    min-width: 300px;
     margin: 8px 0;
 }
 
@@ -238,6 +239,10 @@ h1 {
     justify-content: space-between;
     padding: 3px 5px;
     background-color: var(--colour-green-dark);
+}
+
+.report-footer span {
+    display: block;
 }
 
 .report-content {
