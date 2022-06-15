@@ -13,28 +13,27 @@
                 <form class="tile" method="POST" th:action="@{/logout}" th:if="${session.user}">
                     <button type="submit">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        <p>logout</p>
+                        <p>Logout</p>
                     </button>
                 </form>
             </div>
-            <a class="tile" href="/login" th:unless="${session.user}"><i class="fa-solid fa-user"></i>login</a>
-            <a class="tile" href="/register" th:unless="${session.user}"><i class="fa-solid fa-address-card"></i>register</a>
+            <a class="tile" href="/login" th:unless="${session.user}"><i class="fa-solid fa-user"></i>Login</a>
+            <a class="tile" href="/register" th:unless="${session.user}"><i class="fa-solid fa-address-card"></i>Register</a>
             <a class="tile" href="/admin-panel" sec:authorize="hasRole('ADMIN')"><i
-                    class="fa-solid fa-screwdriver-wrench"></i>admin
-                panel</a>
-            <a class="tile" href="/top500"><i class="fa-solid fa-ranking-star"></i>top 500</a>
-            <a class="tile" href="/inactive-movies"><i class="fa-solid fa-list"></i>inactive movies</a>
+                    class="fa-solid fa-screwdriver-wrench"></i>Admin Panel</a>
+            <a class="tile" href="/top500"><i class="fa-solid fa-ranking-star"></i>Top 500</a>
+            <a class="tile" href="/inactive-movies"><i class="fa-solid fa-list"></i>Inactive Movies</a>
             <a class="tile" href="/polish-movies">
                 <div class="icons">
                     <i class="fa-solid fa-p"></i><i class="fa-solid fa-l"></i>
                 </div>
-                polish movies</a>
-            <a class="tile" href="/posts"><i class="fa-solid fa-newspaper"></i>news</a>
-            <a class="tile" href="/about-author"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
+                Polish Movies</a>
+            <a class="tile" href="/posts"><i class="fa-solid fa-newspaper"></i>News</a>
+            <a class="tile" href="/about-author"><i class="fa-solid fa-face-grin-beam"></i>About Author</a>
             <a sec:authorize="!hasRole('ADMIN')" class="tile bug-report" href="/bug-reports-form">
-                <i class="fa-solid fa-bug"></i>report a bug</a>
+                <i class="fa-solid fa-bug"></i>Report a Bug</a>
             <a sec:authorize="hasRole('ADMIN')" class="tile bug-report" href="/bug-reports">
-                <i class="fa-solid fa-bug"></i>bug reports</a>
+                <i class="fa-solid fa-bug"></i>Bug Reports</a>
         </nav>
     </aside>
 </aside>
