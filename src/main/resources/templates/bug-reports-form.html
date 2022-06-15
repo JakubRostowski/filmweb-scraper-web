@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
+    <title>Bug Reports</title>
+</head>
+<body>
+<header th:include="fragments/header :: header" th:remove="tag"></header>
+<main th:class="main">
+
+        <div class="report-success" th:if="${success}">Bug submitted successfully. Thank You!</div>
+        <h1>Report a bug</h1>
+        <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
+        <form class="bug-report-form" method="POST" th:action="@{/bug-reports/save}">
+            <textarea name="description" placeholder="Description"></textarea>
+            <button type="submit">Report</button>
+        </form>
+</main>
+<aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
+<footer th:include="fragments/footer :: footer" th:remove="tag"></footer>
+</body>
+<script th:src="@{/scripts/menu.js}"></script>
+</html>

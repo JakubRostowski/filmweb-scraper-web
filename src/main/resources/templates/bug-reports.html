@@ -14,17 +14,6 @@
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
 
-    <div sec:authorize="!hasRole('ADMIN')" th:remove="tag">
-        <div class="report-success" th:if="${success}">Bug submitted successfully. Thank You!</div>
-        <h1>Report a bug</h1>
-        <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
-        <form class="bug-report-form" method="POST" th:action="@{/bug-reports/save}">
-            <textarea name="description" placeholder="Description"></textarea>
-            <button type="submit">Report</button>
-        </form>
-    </div>
-
-    <div sec:authorize="hasRole('ADMIN')" th:remove="tag">
         <h1>Reported bugs</h1>
         <h2 th:if="${reports.isEmpty()}">No data at the moment.</h2>
         <div class="single-report" th:each="report : ${reports}">
@@ -54,7 +43,6 @@
         </div>
 
         <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
-    </div>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>

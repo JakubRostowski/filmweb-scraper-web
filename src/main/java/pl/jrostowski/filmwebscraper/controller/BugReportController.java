@@ -19,6 +19,7 @@ public class BugReportController {
 
     private final BugReportService bugReportService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/bug-reports/page/{pageNumber}")
     public String showBugReports(@PathVariable int pageNumber, Model model) {
         Page<BugReport> page = bugReportService.getBugReports(pageNumber, 5);
@@ -26,9 +27,6 @@ public class BugReportController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/bug-reports/page/");
-
-        BugReportForm bugReportForm = new BugReportForm();
-        model.addAttribute("bugReportForm", bugReportForm);
 
         return "bug-reports";
     }
@@ -38,18 +36,28 @@ public class BugReportController {
         return "redirect:/bug-reports/page/1";
     }
 
-    @PostMapping("/bug-reports/save")
-    public String saveBugReport(@Valid @ModelAttribute("bug-report") BugReportForm bugReportForm, RedirectAttributes redirectAttributes) {
-        BugReport bugReport = new BugReport(bugReportForm.getDescription());
-        bugReportService.save(bugReport);
-        redirectAttributes.addFlashAttribute("success", "success");
-        return "redirect:/bug-reports/page/1";
-    }
-
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/bug-reports/change-status/{reportId}")
     public String changeStatus(@PathVariable Long reportId, @RequestParam("status") BugReport.Status status) {
         bugReportService.changeStatus(reportId, status);
         return "redirect:/bug-reports";
     }
+
+    @PreAuthorize("!hasRole('ADMIN')")
+    @GetMapping("/bug-reports-form")
+    public String showBugReportForm(Model model) {
+        BugReportForm bugReportForm = new BugReportForm();
+        model.addAttribute("bugReportForm", bugReportForm);
+        return "bug-reports-form";
+    }
+
+    @PreAuthorize("!hasRole('ADMIN')")
+    @PostMapping("/bug-reports/save")
+    public String saveBugReport(@Valid @ModelAttribute("bug-report") BugReportForm bugReportForm, RedirectAttributes redirectAttributes) {
+        BugReport bugReport = new BugReport(bugReportForm.getDescription());
+        bugReportService.save(bugReport);
+        redirectAttributes.addFlashAttribute("success", "success");
+        return "redirect:/bug-reports-form";
+    }
+
 }

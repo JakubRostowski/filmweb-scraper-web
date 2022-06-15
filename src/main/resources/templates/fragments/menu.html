@@ -31,7 +31,10 @@
                 polish movies</a>
             <a class="tile" href="/posts"><i class="fa-solid fa-newspaper"></i>news</a>
             <a class="tile" href="/about-author"><i class="fa-solid fa-face-grin-beam"></i>about author</a>
-            <a class="tile bug-report" href="/bug-reports"><i class="fa-solid fa-bug"></i>report a bug</a>
+            <a sec:authorize="!hasRole('ADMIN')" class="tile bug-report" href="/bug-reports-form">
+                <i class="fa-solid fa-bug"></i>report a bug</a>
+            <a sec:authorize="hasRole('ADMIN')" class="tile bug-report" href="/bug-reports">
+                <i class="fa-solid fa-bug"></i>bug reports</a>
         </nav>
     </aside>
 </aside>
