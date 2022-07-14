@@ -14,7 +14,7 @@ public class UpdateScheduler {
 
     private final MovieService movieService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "${cron.update-value}")
     public void updateDatabase() throws IOException {
         System.out.println("Automatic database update at " + new Date());
         if (movieService.countMovies() == 0) {
