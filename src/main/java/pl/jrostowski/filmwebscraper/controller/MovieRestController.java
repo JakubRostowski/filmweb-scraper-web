@@ -37,13 +37,13 @@ public class MovieRestController {
         return movieService.getMovieContent();
     }
 
-    @GetMapping("/movies/{movieId}")
-    public Movie getMovieById(@PathVariable Long movieId) {
-        Optional<Movie> movie = movieService.findById(movieId);
+    @GetMapping("/movies/{id}")
+    public Movie getMovieById(@PathVariable Long id) {
+        Optional<Movie> movie = movieService.findById(id);
         if (movie.isPresent()) {
             return movie.get();
         } else {
-            throw new RuntimeException("Movie id (" + movieId + ") not found.");
+            throw new RuntimeException("Movie id (" + id + ") not found.");
         }
     }
 
