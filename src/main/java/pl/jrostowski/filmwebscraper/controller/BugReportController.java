@@ -27,7 +27,6 @@ public class BugReportController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/bug-reports/page/");
-
         return "bug-reports";
     }
 
@@ -46,8 +45,7 @@ public class BugReportController {
     @PreAuthorize("!hasRole('ADMIN')")
     @GetMapping("/bug-reports-form")
     public String showBugReportForm(Model model) {
-        BugReportForm bugReportForm = new BugReportForm();
-        model.addAttribute("bugReportForm", bugReportForm);
+        model.addAttribute("bugReportForm", new BugReportForm());
         return "bug-reports-form";
     }
 
