@@ -20,7 +20,10 @@ Password: 123
 Login: user
 Password: 123
 ```
-* There is no initial movie data, but you can force program to get it at endpoint:
+* There is no initial movie data, but program will update it on startup.
+You can disable it by setting ```scraper.update-after-startup``` in application.properties to ```false```.
+If you want to update movies manually, you can do it at endpoint:
 ```text
 http://localhost:8080/api/update
 ```
+* By default, program updates database every midnight. You can modify it by overwriting ```scraper.cron-update-value``` property.

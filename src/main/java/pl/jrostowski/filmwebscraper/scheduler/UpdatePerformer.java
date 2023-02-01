@@ -28,7 +28,7 @@ public class UpdatePerformer {
         }
     }
 
-    @Scheduled(cron = "${cron.update-value}")
+    @Scheduled(cron = "${scraper.cron-update-value}")
     public void updateDatabase() throws IOException {
         log.info("--- Update started. ---");
         if (movieService.countMovies() == 0) {
