@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import pl.jrostowski.filmwebscraper.service.MovieService;
 
 import java.io.IOException;
-import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
