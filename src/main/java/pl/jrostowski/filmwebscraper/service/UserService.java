@@ -1,11 +1,14 @@
 package pl.jrostowski.filmwebscraper.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.User;
+import pl.jrostowski.filmwebscraper.forms.UserForm;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
 
 @Service
@@ -13,6 +16,7 @@ import pl.jrostowski.filmwebscraper.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Page<User> findAllByOrderByIdAsc(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
@@ -27,7 +31,11 @@ public class UserService {
         return userRepository.findFirstByEmail(email);
     }
 
-    public void save(User user) {
+    public void save(UserForm userForm) {
+        String encodedPassword = passwordEncoder.encode(userForm.getPassword());
+        userForm.setPassword(encodedPassword);
+        User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
+
         userRepository.save(user);
     }
 
