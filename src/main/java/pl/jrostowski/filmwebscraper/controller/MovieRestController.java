@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jrostowski.filmwebscraper.entity.Movie;
+import pl.jrostowski.filmwebscraper.scheduler.UpdatePerformer;
 import pl.jrostowski.filmwebscraper.service.MovieService;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class MovieRestController {
 
     private final MovieService movieService;
+    private final UpdatePerformer updatePerformer;
 
     @GetMapping("/download")
     public Map<Integer, Movie> displayFilmwebData() throws IOException {
@@ -27,12 +29,7 @@ public class MovieRestController {
 
     @GetMapping("/update")
     public void forceUpdate() throws IOException {
-        if (movieService.countMovies() == 0) {
-            movieService.populateDatabase(movieService.downloadData());
-        } else {
-            movieService.checkDifferences(movieService.downloadData());
-        }
-        System.out.println("Done!");
+        updatePerformer.updateDatabase();
     }
 
     @GetMapping("/movies")

@@ -1,6 +1,7 @@
 package pl.jrostowski.filmwebscraper.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MovieService {
 
     private final MovieRepository movieRepository;
@@ -30,7 +32,7 @@ public class MovieService {
     private final ExcelRepository excelRepository;
 
     public Map<Integer, Movie> downloadData() throws IOException {
-        System.out.println("Downloading the data from Filmweb.pl...");
+        log.info("Downloading the data from Filmweb.pl...");
         return filmwebRepository.getTopList();
     }
 
@@ -75,7 +77,7 @@ public class MovieService {
     }
 
     private void processChangedMovie(Movie databaseMovie, Movie checkedMovie) {
-        System.out.println(checkedMovie.getPosition() + ". " +
+        log.info(checkedMovie.getPosition() + ". " +
                 checkedMovie.getTitle() + " changed.");
         databaseMovie.getArchivedMovies().add(checkedMovie.toArchivedMovie());
         addArchivedMovie(databaseMovie);
@@ -146,7 +148,7 @@ public class MovieService {
     }
 
     public void exportFile(Map<Integer, Movie> movieMap, boolean newExcelFormat) throws IOException {
-        System.out.println("Exporting the data to excel format...");
+        log.info("Exporting the data to excel format...");
         excelRepository.exportToExcel(movieMap, newExcelFormat);
     }
 
