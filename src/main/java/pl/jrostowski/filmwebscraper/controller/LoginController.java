@@ -10,10 +10,8 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage(Authentication authentication) {
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "login";
-        } else {
-            return "redirect:/";
-        }
+        boolean isNotLoggedIn = authentication == null || authentication instanceof AnonymousAuthenticationToken;
+
+        return isNotLoggedIn ? "login" : "redirect:/";
     }
 }
