@@ -34,10 +34,7 @@ public class PostController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/posts/page/");
         model.addAttribute("userName", (auth == null) ? null : auth.getName());
-
-        PostForm postForm = new PostForm();
-        model.addAttribute("postForm", postForm);
-
+        model.addAttribute("postForm", new PostForm());
         return "posts";
     }
 
@@ -55,8 +52,7 @@ public class PostController {
         }
 
         User user = userService.findByUsername(auth.getName());
-        Post post = new Post(postForm.getTitle(), postForm.getContent(), user);
-        postService.save(post);
+        postService.save(postForm, user);
         return "redirect:/posts";
     }
 

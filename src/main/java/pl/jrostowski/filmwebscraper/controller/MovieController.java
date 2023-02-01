@@ -19,7 +19,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping("/movies/{id}")
-    public String getMovie(@PathVariable Long id, Model model) {
+    public String getMovieById(@PathVariable Long id, Model model) {
         Optional<Movie> movie = movieService.findById(id);
         if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());
@@ -75,6 +75,5 @@ public class MovieController {
     public ModelAndView redirectPolishMovies() {
         return new ModelAndView("redirect:/polish-movies/page/1");
     }
-
 
 }

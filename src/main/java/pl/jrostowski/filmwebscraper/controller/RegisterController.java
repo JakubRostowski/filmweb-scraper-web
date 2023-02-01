@@ -24,14 +24,10 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String getRegisterForm(Model model, Authentication authentication) {
-        UserForm userForm = new UserForm();
-        model.addAttribute("user", userForm);
+        model.addAttribute("user", new UserForm());
+        boolean isNotLoggedIn = authentication == null || authentication instanceof AnonymousAuthenticationToken;
 
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "register";
-        } else {
-            return "redirect:/index";
-        }
+        return isNotLoggedIn ? "register" : "redirect:/index";
     }
 
     @PostMapping("register/save")
@@ -48,11 +44,7 @@ public class RegisterController {
             return "register";
         }
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(userForm.getPassword());
-        userForm.setPassword(encodedPassword);
-        User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
-        userService.save(user);
+        userService.save(userForm);
         return "redirect:/login";
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.Post;
 import pl.jrostowski.filmwebscraper.entity.User;
+import pl.jrostowski.filmwebscraper.forms.PostForm;
 import pl.jrostowski.filmwebscraper.repository.PostRepository;
 
 import javax.transaction.Transactional;
@@ -25,7 +26,8 @@ public class PostService {
         return postRepository.findAllByOrderByPostIdDesc(pageable);
     }
 
-    public void save(Post post) {
+    public void save(PostForm postForm, User user) {
+        Post post = new Post(postForm.getTitle(), postForm.getContent(), user);
         postRepository.save(post);
     }
 
