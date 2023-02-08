@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import pl.jrostowski.filmwebscraper.BaseDatabaseTest;
 import pl.jrostowski.filmwebscraper.entity.BugReport;
 import pl.jrostowski.filmwebscraper.repository.BugReportRepository;
 
@@ -17,10 +17,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static pl.jrostowski.filmwebscraper.entity.BugReport.Status.COMPLETED;
 
-@SpringBootTest
 @AutoConfigureMockMvc
-class BugReportControllerIT {
+class BugReportControllerIT extends BaseDatabaseTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -32,8 +32,7 @@ class BugReportControllerIT {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldReturnBugReports() throws Exception {
-        BugReport bugReport = new BugReport("test description");
-        bugReportRepository.save(bugReport);
+        bugReportRepository.save(new BugReport("test description"));
 
         MvcResult result = this.mockMvc.perform(get("/bug-reports/page/1"))
                 .andExpect(status().isOk())
@@ -53,7 +52,7 @@ class BugReportControllerIT {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "USER")
     void shouldSaveBugReport() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         BugReport sample = new BugReport("sample report");
@@ -62,7 +61,7 @@ class BugReportControllerIT {
         mockMvc.perform(post("/bug-reports/save")
                         .param("description", "test description"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/bug-reports/page/1"))
+                .andExpect(view().name("redirect:/bug-reports-form"))
                 .andReturn();
 
         BugReport bugReport = bugReportRepository.findById(sample.getBugReportId() + 1).get();
@@ -79,11 +78,11 @@ class BugReportControllerIT {
         bugReportRepository.save(bugReport);
 
         mockMvc.perform(post("/bug-reports/change-status/" + bugReport.getBugReportId())
-                        .param("status", String.valueOf(BugReport.Status.COMPLETED)))
+                        .param("status", String.valueOf(COMPLETED)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bug-reports"));
 
-        Assertions.assertEquals(BugReport.Status.COMPLETED, bugReportRepository.findById(bugReport.getBugReportId()).get().getStatus());
+        Assertions.assertEquals(COMPLETED, bugReportRepository.findById(bugReport.getBugReportId()).get().getStatus());
         bugReportRepository.deleteAll();
     }
 }
