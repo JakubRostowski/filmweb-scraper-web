@@ -28,7 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-
         auth.jdbcAuthentication().passwordEncoder(passwordEncoder)
                 .dataSource(dataSource)
                 .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")

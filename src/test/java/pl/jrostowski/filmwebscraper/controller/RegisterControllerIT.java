@@ -33,7 +33,7 @@ class RegisterControllerIT extends BaseDatabaseTest {
     void shouldNotAccessRegisterView() throws Exception {
         perform(get("/register"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/index"));
+                .andExpect(view().name("redirect:/"));
     }
 
     @Test

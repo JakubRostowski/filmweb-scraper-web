@@ -25,7 +25,7 @@ public class RegisterController {
         model.addAttribute("user", new UserForm());
         boolean isNotLoggedIn = authentication == null || authentication instanceof AnonymousAuthenticationToken;
 
-        return isNotLoggedIn ? "register" : "redirect:/index";
+        return isNotLoggedIn ? "register" : "redirect:/";
     }
 
     @PostMapping("register/save")
