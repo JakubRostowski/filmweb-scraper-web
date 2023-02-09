@@ -7,12 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.Post;
 import pl.jrostowski.filmwebscraper.entity.User;
+import pl.jrostowski.filmwebscraper.exception.PostNotFoundException;
 import pl.jrostowski.filmwebscraper.forms.PostForm;
 import pl.jrostowski.filmwebscraper.repository.PostRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +35,21 @@ public class PostService {
 
     @Transactional
     public void toggleLike(User user, Long postId) {
-        Post post = postRepository.findById(postId).get();
+        Optional<Post> post = postRepository.findById(postId);
+
+        if (post.isPresent()) {
+            toggleLikeForGivenUser(user, post.get());
+        } else {
+            throw new PostNotFoundException(postId);
+        }
+    }
+
+    private static void toggleLikeForGivenUser(User user, Post post) {
         List<User> likes = post.getLikes()
                 .stream()
-                .filter(like -> Objects.equals(like.getUserId(), user.getUserId())).collect(Collectors.toList());
+                .filter(like -> Objects.equals(like.getUserId(), user.getUserId()))
+                .collect(Collectors.toList());
+
         if (likes.isEmpty()) {
             post.getLikes().add(user);
         } else {

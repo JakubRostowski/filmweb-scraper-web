@@ -1,6 +1,7 @@
 package pl.jrostowski.filmwebscraper.forms;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.jrostowski.filmwebscraper.validation.PasswordMatch;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 })
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserForm {
 
     @NotBlank(message = "This field is required")
@@ -26,9 +28,5 @@ public class UserForm {
     @Email(message = "Wrong e-mail format")
     @NotBlank(message = "This field is required")
     private String email;
-
-    public UserForm() {
-
-    }
 }
 

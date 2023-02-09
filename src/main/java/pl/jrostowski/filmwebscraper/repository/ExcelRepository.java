@@ -16,14 +16,14 @@ import java.util.Map;
 @Repository
 public class ExcelRepository {
 
-    public void exportToExcel(Map<Integer, Movie> map, boolean IsNewExcelFormat) throws IOException {
-        Workbook workbook = createWorkbookObject(IsNewExcelFormat);
+    public void exportToExcel(Map<Integer, Movie> map, boolean isNewExcelFormat) throws IOException {
+        Workbook workbook = createWorkbookObject(isNewExcelFormat);
         Sheet sheet = workbook.createSheet("Toplist");
         setHeaders(sheet);
         writeRows(map, sheet);
         autoSizeColumns(sheet);
 
-        FileOutputStream fileOut = getFileExtension(IsNewExcelFormat);
+        FileOutputStream fileOut = getFileExtension(isNewExcelFormat);
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
@@ -80,16 +80,16 @@ public class ExcelRepository {
         }
     }
 
-    private Workbook createWorkbookObject(boolean IsNewExcelFormat) {
-        if (IsNewExcelFormat) {
+    private Workbook createWorkbookObject(boolean isNewExcelFormat) {
+        if (isNewExcelFormat) {
             return new XSSFWorkbook();
         } else {
             return new HSSFWorkbook();
         }
     }
 
-    private FileOutputStream getFileExtension(boolean IsNewExcelFormat) throws IOException {
-        if (IsNewExcelFormat) {
+    private FileOutputStream getFileExtension(boolean isNewExcelFormat) throws IOException {
+        if (isNewExcelFormat) {
             return new FileOutputStream("toplist.xlsx");
         } else {
             return new FileOutputStream("toplist.xls");
