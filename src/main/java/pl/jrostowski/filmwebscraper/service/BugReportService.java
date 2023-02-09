@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.jrostowski.filmwebscraper.entity.BugReport;
+import pl.jrostowski.filmwebscraper.entity.BugReport.Status;
+import pl.jrostowski.filmwebscraper.exception.BugReportNotFoundException;
 import pl.jrostowski.filmwebscraper.repository.BugReportRepository;
 
 import java.util.Optional;
@@ -25,11 +27,14 @@ public class BugReportService {
         bugReportRepository.save(bugReport);
     }
 
-    public void changeStatus(Long id, BugReport.Status status) {
+    public void changeStatus(Long id, Status status) {
         Optional<BugReport> bugReport = bugReportRepository.findById(id);
-        bugReport.ifPresent(report -> {
-            report.setStatus(status);
+
+        if (bugReport.isPresent()) {
+            bugReport.get().setStatus(status);
             save(bugReport.get());
-        });
+        } else {
+            throw new BugReportNotFoundException(id);
+        }
     }
 }

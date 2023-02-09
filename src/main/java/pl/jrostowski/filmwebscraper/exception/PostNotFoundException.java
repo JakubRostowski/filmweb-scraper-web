@@ -1,8 +1,8 @@
 package pl.jrostowski.filmwebscraper.exception;
 
-public class PostNotFoundException extends RuntimeException {
+public class PostNotFoundException extends NotFoundException {
 
     public PostNotFoundException(Long id) {
-        super("Post with id " + id + " not found.");
+        super("Post", id);
     }
 }
