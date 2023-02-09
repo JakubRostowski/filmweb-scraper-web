@@ -1,14 +1,9 @@
 package pl.jrostowski.filmwebscraper.controller;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import pl.jrostowski.filmwebscraper.BaseDatabaseTest;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
@@ -18,28 +13,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@AutoConfigureMockMvc
 class UserControllerIT extends BaseDatabaseTest {
 
     @Autowired
-    MockMvc mockMvc;
-    @Autowired
     UserRepository userRepository;
-    @Autowired
-    WebApplicationContext wac;
-
-    @BeforeEach
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldChangeRole() throws Exception {
+        refreshWebApplicationContext();
         User user = new User("test username", "test email", "test password");
         userRepository.save(user);
 
-        mockMvc.perform(post("/change-role/" + user.getUserId()))
+        perform(post("/change-role/" + user.getUserId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin-panel"));
 
@@ -50,7 +36,7 @@ class UserControllerIT extends BaseDatabaseTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldReturnUsers() throws Exception {
-        this.mockMvc.perform(get("/admin-panel/page/1"))
+        perform(get("/admin-panel/page/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin-panel"));
     }
@@ -58,7 +44,7 @@ class UserControllerIT extends BaseDatabaseTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldRedirect() throws Exception {
-        mockMvc.perform(get("/admin-panel"))
+        perform(get("/admin-panel"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin-panel/page/1"));
     }

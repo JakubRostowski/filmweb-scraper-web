@@ -3,12 +3,8 @@ package pl.jrostowski.filmwebscraper.controller;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import pl.jrostowski.filmwebscraper.BaseDatabaseTest;
 import pl.jrostowski.filmwebscraper.entity.BugReport;
 import pl.jrostowski.filmwebscraper.repository.BugReportRepository;
@@ -19,22 +15,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static pl.jrostowski.filmwebscraper.entity.BugReport.Status.COMPLETED;
 
-@AutoConfigureMockMvc
 class BugReportControllerIT extends BaseDatabaseTest {
 
     @Autowired
-    MockMvc mockMvc;
-    @Autowired
     BugReportRepository bugReportRepository;
-    @Autowired
-    WebApplicationContext wac;
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldReturnBugReports() throws Exception {
         bugReportRepository.save(new BugReport("test description"));
 
-        MvcResult result = this.mockMvc.perform(get("/bug-reports/page/1"))
+        MvcResult result = perform(get("/bug-reports/page/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("bug-reports"))
                 .andReturn();
@@ -46,7 +37,7 @@ class BugReportControllerIT extends BaseDatabaseTest {
 
     @Test
     void shouldRedirect() throws Exception {
-        mockMvc.perform(get("/bug-reports"))
+        perform(get("/bug-reports"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bug-reports/page/1"));
     }
@@ -54,12 +45,12 @@ class BugReportControllerIT extends BaseDatabaseTest {
     @Test
     @WithMockUser(roles = "USER")
     void shouldSaveBugReport() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         BugReport sample = new BugReport("sample report");
         bugReportRepository.save(sample);
 
-        mockMvc.perform(post("/bug-reports/save")
-                        .param("description", "test description"))
+        perform(post("/bug-reports/save")
+                .param("description", "test description"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bug-reports-form"))
                 .andReturn();
@@ -73,12 +64,12 @@ class BugReportControllerIT extends BaseDatabaseTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldChangeStatus() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         BugReport bugReport = new BugReport("test description");
         bugReportRepository.save(bugReport);
 
-        mockMvc.perform(post("/bug-reports/change-status/" + bugReport.getBugReportId())
-                        .param("status", String.valueOf(COMPLETED)))
+        perform(post("/bug-reports/change-status/" + bugReport.getBugReportId())
+                .param("status", String.valueOf(COMPLETED)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bug-reports"));
 

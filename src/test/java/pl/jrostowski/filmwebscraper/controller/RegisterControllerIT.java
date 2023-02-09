@@ -3,13 +3,9 @@ package pl.jrostowski.filmwebscraper.controller;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import pl.jrostowski.filmwebscraper.BaseDatabaseTest;
 import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
@@ -19,20 +15,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@AutoConfigureMockMvc
 class RegisterControllerIT extends BaseDatabaseTest {
 
     @Autowired
-    MockMvc mockMvc;
-    @Autowired
     UserRepository userRepository;
-    @Autowired
-    WebApplicationContext wac;
 
     @Test
     @WithAnonymousUser
     void shouldAccessRegisterView() throws Exception {
-        mockMvc.perform(get("/register"))
+        perform(get("/register"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("register"));
     }
@@ -40,16 +31,15 @@ class RegisterControllerIT extends BaseDatabaseTest {
     @Test
     @WithMockUser
     void shouldNotAccessRegisterView() throws Exception {
-        mockMvc.perform(get("/register"))
+        perform(get("/register"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/index"));
     }
 
     @Test
     void shouldDetectNullFields() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-
-        MvcResult result = mockMvc.perform(post("/register/save"))
+        refreshWebApplicationContext();
+        MvcResult result = perform(post("/register/save"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("register"))
                 .andReturn();
@@ -59,15 +49,15 @@ class RegisterControllerIT extends BaseDatabaseTest {
 
     @Test
     void shouldDetectExistingUsername() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         User user = new User("test", "test@test.com", "test");
         userRepository.save(user);
 
-        MvcResult result = mockMvc.perform(post("/register/save")
-                        .param("username", "test")
-                        .param("email", "test@test.com")
-                        .param("password", "123")
-                        .param("confirmPassword", "123"))
+        MvcResult result = perform(post("/register/save")
+                .param("username", "test")
+                .param("email", "test@test.com")
+                .param("password", "123")
+                .param("confirmPassword", "123"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("register"))
                 .andReturn();
@@ -78,15 +68,15 @@ class RegisterControllerIT extends BaseDatabaseTest {
 
     @Test
     void shouldDetectExistingEmail() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         User user = new User("test username", "test@test.com", "test");
         userRepository.save(user);
 
-        MvcResult result = mockMvc.perform(post("/register/save")
-                        .param("username", "test")
-                        .param("email", "test@test.com")
-                        .param("password", "123")
-                        .param("confirmPassword", "123"))
+        MvcResult result = perform(post("/register/save")
+                .param("username", "test")
+                .param("email", "test@test.com")
+                .param("password", "123")
+                .param("confirmPassword", "123"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("register"))
                 .andReturn();
@@ -97,15 +87,15 @@ class RegisterControllerIT extends BaseDatabaseTest {
 
     @Test
     void shouldDetectNotMatchingPasswords() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         User user = new User("test username", "test@test.com", "test");
         userRepository.save(user);
 
-        MvcResult result = mockMvc.perform(post("/register/save")
-                        .param("username", "test")
-                        .param("email", "newtest@test.com")
-                        .param("password", "123")
-                        .param("confirmPassword", "1234"))
+        MvcResult result = perform(post("/register/save")
+                .param("username", "test")
+                .param("email", "newtest@test.com")
+                .param("password", "123")
+                .param("confirmPassword", "1234"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("register"))
                 .andReturn();
@@ -116,15 +106,15 @@ class RegisterControllerIT extends BaseDatabaseTest {
 
     @Test
     void shouldAddNewUserAndRedirect() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        refreshWebApplicationContext();
         User user = new User("test username", "test@test.com", "test");
         userRepository.save(user);
 
-        mockMvc.perform(post("/register/save")
-                        .param("username", "test")
-                        .param("email", "newtest@test.com")
-                        .param("password", "123")
-                        .param("confirmPassword", "123"))
+        perform(post("/register/save")
+                .param("username", "test")
+                .param("email", "newtest@test.com")
+                .param("password", "123")
+                .param("confirmPassword", "123"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/login"));
 
