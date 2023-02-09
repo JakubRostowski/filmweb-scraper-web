@@ -15,14 +15,14 @@ import java.util.TreeMap;
 @Repository
 public class FilmwebRepository {
 
-    private final String URL = "https://www.filmweb.pl";
+    private static final String URL = "https://www.filmweb.pl";
 
     public Map<Integer, Movie> getTopList() throws IOException {
         Elements urls = getUrls();
         Elements ranks = getRanks();
 
         Map<Integer, Movie> listOfMovies = new TreeMap<>();
-        urls.parallelStream().forEach((href) -> {
+        urls.parallelStream().forEach(href -> {
             int rankOfMovie = Integer.parseInt(ranks.get(urls.indexOf(href)).text());
             try {
                 listOfMovies.put(rankOfMovie, getMovieData(rankOfMovie, href));

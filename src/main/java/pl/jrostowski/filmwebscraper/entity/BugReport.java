@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.IDENTITY;
+import static pl.jrostowski.filmwebscraper.entity.BugReport.Status.NEW;
+
 @Entity
 @Getter
 @Setter
@@ -13,15 +17,15 @@ import java.text.SimpleDateFormat;
 @NoArgsConstructor
 public class BugReport {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", nullable = false)
     private Long bugReportId;
 
     @NonNull
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private Status status = Status.NEW;
+    @Enumerated(STRING)
+    private Status status = NEW;
 
     private Timestamp timeOfCreation = new Timestamp(System.currentTimeMillis());
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());

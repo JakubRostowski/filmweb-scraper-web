@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "users")
 @RequiredArgsConstructor
@@ -14,7 +16,7 @@ import java.sql.Timestamp;
 @ToString
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", nullable = false)
     private Long userId;
 

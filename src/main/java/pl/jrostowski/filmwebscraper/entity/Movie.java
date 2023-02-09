@@ -8,6 +8,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Getter
 @Setter
@@ -16,7 +19,7 @@ import java.util.Objects;
 @ToString
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", nullable = false)
     private Long movieId;
 
@@ -48,7 +51,7 @@ public class Movie {
     private Timestamp timeOfModification = new Timestamp(System.currentTimeMillis());
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie")
+    @OneToMany(fetch = EAGER, mappedBy = "movie")
     private List<ArchivedMovie> archivedMovies;
 
     public ArchivedMovie toArchivedMovie() {

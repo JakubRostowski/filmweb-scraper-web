@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jrostowski.filmwebscraper.entity.Movie;
+import pl.jrostowski.filmwebscraper.exception.MovieNotFoundException;
 import pl.jrostowski.filmwebscraper.scheduler.UpdatePerformer;
 import pl.jrostowski.filmwebscraper.service.MovieService;
 
@@ -43,7 +44,7 @@ public class MovieRestController {
         if (movie.isPresent()) {
             return movie.get();
         } else {
-            throw new RuntimeException("Movie id (" + id + ") not found.");
+            throw new MovieNotFoundException(id);
         }
     }
 
