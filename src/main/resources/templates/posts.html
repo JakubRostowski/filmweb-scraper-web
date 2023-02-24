@@ -31,7 +31,7 @@
     <div class="single-post" th:each="post : ${posts}">
 
         <div class="post-header">
-            <div class="post-title" th:text="'#' + ${post.postId} + ' ' + ${post.title}"></div>
+            <div class="post-title" th:text="'#' + ${post.postId} + ' ' + ${post.title} + ' '"></div>
             <div class="post-author" th:text="'by ' + ${post.author.username}"></div>
         </div>
 
