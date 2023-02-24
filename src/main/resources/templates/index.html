@@ -7,23 +7,20 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>Homepage</title>
+    <title data-th-text="#{index.title}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
 
-    <h1>Welcome!</h1>
+    <h1 data-th-text="#{index.welcome}"></h1>
     <div class="block-of-text">
-        <p>&emsp; This is a website I've written for educational purposes. My goal was to use Spring Boot and its
-            modules to provide a modern web application based on the most efficient technologies.</p>
-        <p>&emsp; I decided to combine this goal with my second passion - cinematography. The idea was simple - a web
-            application designed to download, store and display data from Filmweb website.</p>
-        <p>&emsp; The project isn't finished yet, but if you can see it, it means I've decided it's ready to show to the
-            world.</p>
+        <p data-th-text="'&emsp;&emsp;' + #{index.paragraph1}"></p>
+        <p data-th-text="'&emsp;&emsp;' + #{index.paragraph2}"></p>
+        <p data-th-text="'&emsp;&emsp;' + #{index.paragraph3}"></p>
     </div>
-    <h2>Enjoy :)</h2>
+    <h2 data-th-text="#{index.enjoy}"></h2>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>
 <footer th:include="fragments/footer :: footer" th:remove="tag"></footer>

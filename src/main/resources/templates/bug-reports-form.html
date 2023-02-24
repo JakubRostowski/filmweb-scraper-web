@@ -8,18 +8,18 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>Bug Reports</title>
+    <title data-th-text="#{menu.bug}"></title>
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
 
-        <div class="report-success" th:if="${success}">Bug submitted successfully. Thank You!</div>
-        <h1>Report a bug</h1>
-        <h3>Have you witnessed an error? Please describe it below - I'll take care of it :)</h3>
+        <div class="report-success" th:if="${success}" data-th-text="#{bug.sent}"></div>
+        <h1 data-th-text="#{menu.bug}"></h1>
+        <h3 data-th-text="#{bug.encourage}"></h3>
         <form class="bug-report-form" method="POST" th:action="@{/bug-reports/save}">
-            <textarea name="description" placeholder="Description"></textarea>
-            <button type="submit">Report</button>
+            <textarea name="description" th:placeholder="#{bug.description}"></textarea>
+            <button type="submit" data-th-text="#{bug.report}"></button>
         </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>

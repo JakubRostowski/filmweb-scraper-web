@@ -7,25 +7,25 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>Login Page</title>
+    <title data-th-text="#{login.title}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
-    <h1>Login</h1>
+    <h1 data-th-text="#{menu.log-in}"></h1>
     <form class="entry-form" method="POST" th:action="@{/login}">
 
         <div th:if="${param.error}">
-            <span class="error">Invalid username or password.</span>
+            <span class="error" data-th-text="#{login.invalid}"></span>
         </div>
         <div th:if="${param.logout}">
-            <span>You have been logged out.</span>
+            <span data-th-text="#{login.logout}"></span>
         </div>
 
-        <input name="username" placeholder="username" type="text">
-        <input name="password" placeholder="password" type="password">
-        <button class="entry-button" type="submit">Login</button>
+        <input name="username" th:placeholder="#{login.username}" type="text">
+        <input name="password" th:placeholder="#{login.password}" type="password">
+        <button class="entry-button" type="submit" data-th-text="#{menu.log-in}"></button>
     </form>
 </main>
 <aside th:include="fragments/menu :: menu" th:remove="tag"></aside>

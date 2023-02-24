@@ -8,17 +8,17 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>Bug Reports</title>
+    <title data-th-text="#{bug.reports}"></title>
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main th:class="main">
 
-        <h1>Reported bugs</h1>
-        <h2 th:if="${reports.isEmpty()}">No data at the moment.</h2>
+        <h1 data-th-text="#{bug.reports}"></h1>
+        <h2 th:if="${reports.isEmpty()}" data-th-text="#{common.no-data}"></h2>
         <div class="single-report" th:each="report : ${reports}">
             <div class="report-header">
-                <span th:text="'Issue #' + ${report.bugReportId}"></span>
+                <span th:text="#{bug.issue} + ' #' + ${report.bugReportId}"></span>
                 <form method="post" th:action="'/bug-reports/change-status/' + ${report.bugReportId}">
                     <select name="status" onchange="this.form.submit()">
                         <option th:each="status : ${reports.get(0).getStatus().values()}"
@@ -32,11 +32,11 @@
             </div>
             <div class="report-footer">
                 <div>
-                    <span>Modified:</span>
+                    <span data-th-text="#{bug.modified}"></span>
                     <span th:text="${report.getSimpleTimeOfModification()}"></span>
                 </div>
                 <div>
-                    <span>Created:</span>
+                    <span data-th-text="#{bug.created}"></span>
                     <span th:text="${report.getSimpleTimeOfCreation()}"></span>
                 </div>
             </div>
