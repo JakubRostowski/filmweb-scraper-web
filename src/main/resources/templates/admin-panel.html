@@ -7,21 +7,21 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>Admin Panel</title>
+    <title data-th-text="#{menu.admin-panel}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main class="main">
-    <h1>User List</h1>
+    <h1 data-th-text="#{admin-panel.users}"></h1>
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Promote/Demote</th>
+            <th data-th-text="#{admin-panel.id}"></th>
+            <th data-th-text="#{admin-panel.name}"></th>
+            <th data-th-text="#{admin-panel.email}"></th>
+            <th data-th-text="#{admin-panel.role}"></th>
+            <th data-th-text="#{admin-panel.promote-demote}"></th>
         </tr>
         </thead>
         <tbody>
@@ -32,10 +32,9 @@
             <td th:text="${user.role}">
             <td>
                 <form method="POST" th:action="@{/change-role/__${user.userId}__}">
-                    <button th:if="${user.role} == ROLE_USER" type="submit">promote</button>
+                    <button th:if="${user.role} == ROLE_USER" type="submit" data-th-text="#{admin-panel.promote}"></button>
                     <button th:if="${user.role} == ROLE_ADMIN and ${user.userId} != ${session.user.userId}"
-                            type="submit">
-                        demote
+                            type="submit" data-th-text="#{admin-panel.demote}">
                     </button>
                 </form>
             </td>

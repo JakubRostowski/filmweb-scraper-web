@@ -7,27 +7,29 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title th:text="${webpageTitle}"></title>
+    <title th:if="${rankType.equals('Top 500')}" th:text="#{rank-type.top500}"></title>
+    <title th:if="${rankType.equals('Inactive Movies')}" th:text="#{rank-type.inactive}"></title>
+    <title th:if="${rankType.equals('Polish Movies')}" th:text="#{rank-type.polish}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
 <header th:include="fragments/header :: header" th:remove="tag"></header>
 <main class="main">
-    <h1 th:text="${webpageTitle}"></h1>
+    <h1 th:text="${rankType}"></h1>
     <table class="table">
         <thead>
         <tr>
-            <th th:unless="${webpageTitle.equals('Inactive Movies')}">Rank</th>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Director</th>
-            <th>Overall Rate</th>
-            <th>Critics Rate</th>
+            <th th:unless="${rankType.equals('Inactive Movies')}" data-th-text="#{movie-info.rank}"></th>
+            <th data-th-text="#{movie-info.title}"></th>
+            <th data-th-text="#{movie-info.year}"></th>
+            <th data-th-text="#{movie-info.director2}"></th>
+            <th data-th-text="#{movie-info.overall-rate}"></th>
+            <th data-th-text="#{movie-info.critics-rate}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="movie : ${movies}">
-            <td th:text="${movie.position}" th:unless="${webpageTitle.equals('Inactive Movies')}"/>
+            <td th:text="${movie.position}" th:unless="${rankType.equals('Inactive Movies')}"/>
             <td>
                 <a th:href="@{/movies/__${movie.movieId}__}" th:text="${movie.title}"></a>
             </td>
@@ -38,7 +40,7 @@
         </tr>
         </tbody>
     </table>
-    <h2 th:if="${movies.isEmpty()}">No data at the moment.</h2>
+    <h2 th:if="${movies.isEmpty()}" data-th-text="#{common.no-data}"></h2>
 
     <div th:include="fragments/page-menu :: page-menu" th:remove="tag"></div>
 </main>

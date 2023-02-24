@@ -25,44 +25,44 @@
         </div>
     </div>
     <div class="movie-details">
-        <h2>Details</h2>
+        <h2 data-th-text="#{movie-info.details}"></h2>
         <table>
             <tbody>
             <tr>
-                <th>Director:</th>
+                <th data-th-text="#{movie-info.director}"></th>
                 <td th:text="${movie.director}"></td>
             </tr>
             <tr>
-                <th>Screenwriter:</th>
+                <th data-th-text="#{movie-info.screenwriter}"></th>
                 <td th:text="${movie.screenwriter}"></td>
             </tr>
             <tr>
-                <th>Country of Origin:</th>
+                <th data-th-text="#{movie-info.country-of-origin}"></th>
                 <td th:text="${movie.countryOfOrigin}"></td>
             </tr>
             <tr>
-                <th>Duration:</th>
+                <th data-th-text="#{movie-info.duration}"></th>
                 <td th:text="${movie.length}"></td>
             </tr>
             <tr>
-                <th>Genre:</th>
+                <th data-th-text="#{movie-info.genre}"></th>
                 <td th:text="${movie.genre}"></td>
             </tr>
             </tbody>
         </table>
 
-        <h2>Rating</h2>
+        <h2 data-th-text="#{movie-info.rating}"></h2>
         <table class="table-with-charts">
             <tbody>
             <tr>
-                <th>Overall:</th>
+                <th data-th-text="#{movie-info.overall}"></th>
                 <td>
                     <span class="rate-value" th:text="${movie.rate}"></span>
                     <canvas class="chart-rate rate"></canvas>
                 </td>
             </tr>
             <tr th:unless="${movie.criticsRate} == -1">
-                <th>Critics Only:</th>
+                <th data-th-text="#{movie-info.critics-only}"></th>
                 <td>
                     <span class="critics-rate-value" th:text="${movie.criticsRate}"></span>
                     <canvas class="chart-rate critics-rate"></canvas>
@@ -70,7 +70,7 @@
             </tr>
             </tbody>
         </table>
-        <h2>Statistics</h2>
+        <h2 data-th-text="#{movie-info.statistics}"></h2>
         <div class="chart-container">
             <canvas class="chart-history-rank"></canvas>
         </div>

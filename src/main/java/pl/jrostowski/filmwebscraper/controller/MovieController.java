@@ -35,7 +35,7 @@ public class MovieController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/top500/page/");
-        model.addAttribute("webpageTitle", "Top 500");
+        model.addAttribute("rankType", "Top 500");
         return "movies-list";
     }
 
@@ -51,7 +51,7 @@ public class MovieController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/inactive-movies/page/");
-        model.addAttribute("webpageTitle", "Inactive Movies");
+        model.addAttribute("rankType", "Inactive Movies");
         return "movies-list";
     }
 
@@ -67,7 +67,7 @@ public class MovieController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("url", "/polish-movies/page/");
-        model.addAttribute("webpageTitle", "Polish Movies");
+        model.addAttribute("rankType", "Polish Movies");
         return "movies-list";
     }
 

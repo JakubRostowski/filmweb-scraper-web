@@ -4,22 +4,24 @@
 <div th:fragment="page-menu">
     <div class="page-menu" th:if="${totalPages > 1}">
 
-        <a th:href="@{${url} + 1}" th:if="${currentPage != 1}">First</a>
-        <span th:unless="${currentPage != 1}">First</span>
+        <a th:href="@{${url} + 1}" th:if="${currentPage != 1}" data-th-text="#{page-menu.first}"></a>
+        <span th:unless="${currentPage != 1}" data-th-text="#{page-menu.first}"></span>
 
-        <a th:href="@{${url} + ${currentPage - 1}}" th:if="${currentPage > 1}">Previous</a>
-        <span th:unless="${currentPage > 1}">Previous</span>
+        <a th:href="@{${url} + ${currentPage - 1}}" th:if="${currentPage > 1}" data-th-text="#{page-menu.previous}"></a>
+        <span th:unless="${currentPage > 1}" data-th-text="#{page-menu.previous}"></span>
 
         <div>
-            <span>Page <input class="page-input" th:value="${currentPage}" type="number"> of</span>
+            <span data-th-text="#{page-menu.page}"></span>
+            <input class="page-input" th:value="${currentPage}" type="number">
+            <span data-th-text="#{page-menu.of}"></span>
             <span class="page-max" th:text="${totalPages}"></span>
         </div>
 
-        <a th:href="@{${url} + ${currentPage + 1}}" th:if="${currentPage < totalPages}">Next</a>
-        <span th:unless="${currentPage < totalPages}">Next</span>
+        <a th:href="@{${url} + ${currentPage + 1}}" th:if="${currentPage < totalPages}" data-th-text="#{page-menu.next}"></a>
+        <span th:unless="${currentPage < totalPages}" data-th-text="#{page-menu.next}"></span>
 
-        <a th:href="@{${url} + ${totalPages}}" th:if="${currentPage < totalPages}">Last</a>
-        <span th:unless="${currentPage < totalPages}">Last</span>
+        <a th:href="@{${url} + ${totalPages}}" th:if="${currentPage < totalPages}" data-th-text="#{page-menu.last}"></a>
+        <span th:unless="${currentPage < totalPages}" data-th-text="#{page-menu.last}"></span>
 
         <script th:inline="javascript">
             const url = [[${url}]];

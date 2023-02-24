@@ -8,7 +8,7 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/26a506ddd8.js"></script>
-    <title>News</title>
+    <title data-th-text="#{menu.news}"></title>
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 <body>
@@ -16,17 +16,17 @@
 <main th:class="main">
     <div sec:authorize="hasRole('ADMIN')" th:remove="tag">
 
-        <h1 class="news-header">Add post</h1>
+        <h1 class="news-header" data-th-text="#{news.add}"></h1>
         <form class="post-form" method="POST" th:action="@{/posts/save}">
             <div th:text="${nullFields}" th:unless="${nullFields == null}"></div>
 
-            <input name="title" placeholder="Title" type="text">
-            <textarea class="content-box" name="content" placeholder="Content"></textarea>
-            <button type="submit">Publish</button>
+            <input name="title" th:placeholder="#{movie-info.title}" type="text">
+            <textarea class="content-box" name="content" th:placeholder="#{news.content}"></textarea>
+            <button type="submit" data-th-text="#{news.publish}"></button>
         </form>
     </div>
-    <h1 class="news-header">Posts</h1>
-    <h2 th:if="${posts.isEmpty()}">No data at the moment.</h2>
+    <h1 class="news-header" data-th-text="#{news.posts}"></h1>
+    <h2 th:if="${posts.isEmpty()}" data-th-text="#{common.no-data}"></h2>
 
     <div class="single-post" th:each="post : ${posts}">
 
