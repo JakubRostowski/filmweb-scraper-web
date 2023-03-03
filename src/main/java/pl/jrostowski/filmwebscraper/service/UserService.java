@@ -11,12 +11,15 @@ import pl.jrostowski.filmwebscraper.entity.User;
 import pl.jrostowski.filmwebscraper.forms.UserForm;
 import pl.jrostowski.filmwebscraper.repository.UserRepository;
 
+import javax.mail.MessagingException;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final EmailService emailService;
 
     public Page<User> findAllByOrderByIdAsc(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
@@ -37,6 +40,7 @@ public class UserService {
         User user = new User(userForm.getUsername(), userForm.getEmail(), userForm.getPassword());
 
         userRepository.save(user);
+        emailService.sendWelcomeEmail(user.getEmail(), user.getUsername());
     }
 
     public void toggleRole(Long id) {
